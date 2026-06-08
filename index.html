@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammad Abutalha - Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="dark">
+  <header>
+    <nav class="nav">
+      <div class="nav__left">
+        <a href="#home" class="nav__logo">Portfolio</a>
+      </div>
+
+      <ul class="nav__list">
+        <li><a href="#home" class="nav__link">Home</a></li>
+        <li><a href="#about" class="nav__link">About</a></li>
+        <li><a href="#skills" class="nav__link">Skills</a></li>
+        <li><a href="#experience" class="nav__link">Experience</a></li>
+        <li><a href="#achievements" class="nav__link">Academic Achievements</a></li>
+        <li><a href="#certificate" class="nav__link">Certificates</a></li>
+        <li><a href="#work" class="nav__link">Projects</a></li>
+        <li><a href="#contact" class="nav__link">Contact</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <div class="theme-menu" id="theme-menu">
+          <button type="button" class="theme-menu__toggle" id="theme-toggle" aria-haspopup="true" aria-expanded="false"
+            aria-controls="theme-panel" aria-label="Change theme, current Dark">
+            <i class='bx bxs-moon theme-menu__toggle-icon' id="theme-toggle-icon"></i>
+          </button>
+
+          <div class="theme-menu__panel" id="theme-panel" hidden>
+            <button type="button" class="theme-option" data-theme="light">
+              <span class="theme-option__icon theme-option__icon--light"><i class='bx bxs-sun'></i></span>
+              <span class="theme-option__content">
+                <span class="theme-option__name">Light</span>
+                <span class="theme-option__desc">White clean UI</span>
+              </span>
+            </button>
+            <button type="button" class="theme-option" data-theme="dark">
+              <span class="theme-option__icon theme-option__icon--dark"><i class='bx bxs-moon'></i></span>
+              <span class="theme-option__content">
+                <span class="theme-option__name">Dark</span>
+                <span class="theme-option__desc">Current dark vibe</span>
+              </span>
+            </button>
+            <button type="button" class="theme-option" data-theme="abusha">
+              <span class="theme-option__icon theme-option__icon--abusha"><i class='bx bxs-heart'></i></span>
+              <span class="theme-option__content">
+                <span class="theme-option__name">Abusha</span>
+                <span class="theme-option__desc">Light pink + red mix</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="nav__toggle" id="nav-toggle" aria-label="Open navigation menu">
+          <i class='bx bx-menu'></i>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="home" id="home">
+      <div class="home__data">
+        <h1>Hi I'm Mohammad Abutalha</h1>
+        <h3>I'm a web developer who loves building clean, modern and user-friendly websites.</h3>
+        <h4>Turning ideas into interactive experiences.</h4>
+
+        <div class="home__buttons">
+          <a href="mohammad_abutalha  resume.docx" download class="button">Download Resume</a>
+          <a href="#contact" class="button">Contact Me</a>
+        </div>
+      </div>
+
+      <div class="home__img">
+        <img src="talha's pic.jpg" alt="Mohammad Abutalha portrait" class="home__photo">
+        <div class="home__social">
+          <a href="https://www.linkedin.com/in/mohammad-abutalha-932771363/" class="home__social-icon"
+            target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"><i class='bx bxl-linkedin'></i></a>
+          <a href="https://www.instagram.com/tallllllhhhaa/" class="home__social-icon" target="_blank"
+            rel="noopener noreferrer" aria-label="Instagram profile"><i class='bx bxl-instagram'></i></a>
+          <a href="https://github.com/Abutalha09" class="home__social-icon" target="_blank" rel="noopener noreferrer"
+            aria-label="GitHub profile"><i class='bx bxl-github'></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <h2 class="section-title">About</h2>
+      <div class="about__container">
+        <div class="about__img">
+          <img src="talha2.jpg" alt="About Mohammad Abutalha">
+        </div>
+        <div>
+          <h3 class="about__subtitle">Hi, I'm Mohammad Abutalha</h3>
+          <p class="about__text">
+            I completed my Bachelor's degree in Computer Applications (BCA).
+            I have a strong command of front-end technologies like HTML, CSS, and JavaScript,
+            and I also work with Python.
+            I completed training at EDUBUDDY, where I contributed to a school management software project,
+            learning teamwork, real-world development, and problem-solving skills.
+            <br><br>
+            I'm passionate about learning, clean design, and smooth user interfaces.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills__container">
+        <div>
+          <div class="skills__data">
+            <div class="skills__names"><i class='bx bxl-html5'></i> HTML</div>
+            <div class="skills__bar"><i style="width: 95%; --width: 95%;"></i></div>
+          </div>
+          <div class="skills__data">
+            <div class="skills__names"><i class='bx bxl-css3'></i> CSS</div>
+            <div class="skills__bar"><i style="width: 90%; --width: 90%;"></i></div>
+          </div>
+          <div class="skills__data">
+            <div class="skills__names"><i class='bx bxl-javascript'></i> JavaScript</div>
+            <div class="skills__bar"><i style="width: 85%; --width: 85%;"></i></div>
+          </div>
+          <div class="skills__data">
+            <div class="skills__names">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"
+                style="width: 22px; height: 22px; vertical-align: middle; margin-right: 6px;">
+              Python
+            </div>
+            <div class="skills__bar"><i style="width: 80%; --width: 80%;"></i></div>
+          </div>
+        </div>
+
+        <div>
+          <img src="abu.jpg" alt="Skills showcase" class="skills__img">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <h2 class="section-title">Experience</h2>
+      <div class="experience__shell">
+        <div class="experience__hero">
+          <div class="experience__intro">
+            <div class="experience__eyebrow">
+              <span class="experience__eyebrow-dot"></span>
+              Premium Product Ecosystem
+            </div>
+            <div class="experience__pills">
+              <span class="experience__pill"><i class='bx bx-briefcase-alt-2'></i> Management Software Company</span>
+              <span class="experience__pill"><i class='bx bx-user-check'></i> Product Support Associate</span>
+            </div>
+            <h3 class="experience__headline">Polar Bear Tech</h3>
+            <p class="experience__summary">
+              Polar Bear Tech is a management software company that manages two focused platforms:
+              <strong>EduBuddy</strong> for smart school operations and <strong>HotelBuddy</strong> for modern hotel workflows.
+              I started here with a <strong>2-month internship</strong> and now I am currently working full-time as a
+              <strong>Product Support Associate</strong>, helping with product support, smoother user experience, and platform understanding across both products.
+            </p>
+
+            <div class="experience__metrics">
+              <article class="experience__metric">
+                <span class="experience__metric-value">Current</span>
+                <span class="experience__metric-label">Working at Polar Bear Tech</span>
+              </article>
+              <article class="experience__metric">
+                <span class="experience__metric-value">2 Months</span>
+                <span class="experience__metric-label">Internship Journey</span>
+              </article>
+              <article class="experience__metric">
+                <span class="experience__metric-value">Support</span>
+                <span class="experience__metric-label">Product Support Associate</span>
+              </article>
+            </div>
+          </div>
+
+          <aside class="experience__spotlight">
+            <div class="experience__spotlight-card">
+              <span class="experience__spotlight-kicker">Inside Polar Bear Tech</span>
+              <h4 class="experience__spotlight-title">Started as an intern and now working as a Product Support Associate.</h4>
+              <p class="experience__spotlight-text">
+                My work connects product understanding with user needs across school and hotel management software,
+                supporting smoother workflows, issue handling, and better platform usability.
+              </p>
+              <div class="experience__brand-row">
+                <span class="experience__brand-chip experience__brand-chip--edubuddy"><i class='bx bx-book-reader'></i> EduBuddy</span>
+                <span class="experience__brand-chip experience__brand-chip--hotelbuddy"><i class='bx bx-building-house'></i> HotelBuddy</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="experience__products">
+          <article class="experience-product experience-product--edubuddy">
+            <div class="experience-product__content">
+              <div class="experience-product__top">
+                <span class="experience-product__label">School Management</span>
+                <span class="experience-product__status"><i class='bx bxs-bolt-circle'></i> Product Showcase</span>
+              </div>
+              <h3 class="experience-product__title">EduBuddy</h3>
+              <p class="experience-product__about">
+                A smart school management solution built to simplify attendance, academics, fees, communication,
+                and performance tracking in one modern interface.
+              </p>
+              <div class="experience-product__tags">
+                <span class="experience-product__tag">Attendance</span>
+                <span class="experience-product__tag">Academics</span>
+                <span class="experience-product__tag">Fees</span>
+                <span class="experience-product__tag">Communication</span>
+              </div>
+              <ul class="experience-product__features">
+                <li class="experience-product__feature">Clean feature presentation with a strong call-to-action flow.</li>
+                <li class="experience-product__feature">Built for schools that need a responsive and easy-to-use dashboard experience.</li>
+              </ul>
+            </div>
+
+            <div class="experience-product__media">
+              <div class="experience-product__frame">
+                <div class="experience-product__frame-bar">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <img src="edubuddy-showcase.png" alt="EduBuddy platform showcase" class="experience-product__image" loading="lazy">
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-product experience-product--hotelbuddy">
+            <div class="experience-product__content">
+              <div class="experience-product__top">
+                <span class="experience-product__label">Hotel Operations</span>
+                <span class="experience-product__status"><i class='bx bxs-bolt-circle'></i> Product Showcase</span>
+              </div>
+              <h3 class="experience-product__title">HotelBuddy</h3>
+              <p class="experience-product__about">
+                A modern hotel operations suite covering reservations, billing, housekeeping, POS, inventory,
+                and hotel workflow management with a premium enterprise feel.
+              </p>
+              <div class="experience-product__tags">
+                <span class="experience-product__tag">Reservations</span>
+                <span class="experience-product__tag">Billing</span>
+                <span class="experience-product__tag">Housekeeping</span>
+                <span class="experience-product__tag">Inventory</span>
+              </div>
+              <ul class="experience-product__features">
+                <li class="experience-product__feature">Enterprise-style layout with modern visual hierarchy and clarity.</li>
+                <li class="experience-product__feature">Focused on polished UI blocks, conversion-driven sections, and smooth readability.</li>
+              </ul>
+            </div>
+
+            <div class="experience-product__media">
+              <div class="experience-product__frame">
+                <div class="experience-product__frame-bar">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <img src="hotelbuddy-showcase.png" alt="HotelBuddy platform showcase" class="experience-product__image" loading="lazy">
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="achievements">
+      <h2 class="section-title">Academic Achievements</h2>
+      <div class="showcase__shell showcase__shell--academics">
+        <div class="showcase__hero">
+          <div class="showcase__intro">
+            <div class="showcase__eyebrow">
+              <span class="showcase__eyebrow-dot"></span>
+              Academic Journey
+            </div>
+            <div class="showcase__pills">
+              <span class="showcase__pill"><i class='bx bx-book-open'></i> Structured Learning Path</span>
+              <span class="showcase__pill"><i class='bx bx-medal'></i> BCA Background</span>
+            </div>
+            <h3 class="showcase__headline">A steady education path built on discipline, consistency, and technical growth.</h3>
+            <p class="showcase__summary">
+              From school education to Bachelor's level studies, each step strengthened learning habits,
+              confidence, and a sharper direction toward technology and development.
+            </p>
+
+            <div class="showcase__metrics">
+              <article class="showcase__metric">
+                <span class="showcase__metric-value">3</span>
+                <span class="showcase__metric-label">Academic milestones</span>
+              </article>
+              <article class="showcase__metric">
+                <span class="showcase__metric-value">2020 - 2026</span>
+                <span class="showcase__metric-label">Learning journey</span>
+              </article>
+              <article class="showcase__metric">
+                <span class="showcase__metric-value">BCA</span>
+                <span class="showcase__metric-label">Graduation focus</span>
+              </article>
+            </div>
+          </div>
+
+          <aside class="showcase__spotlight">
+            <div class="showcase__spotlight-card">
+              <span class="showcase__spotlight-kicker">Education Snapshot</span>
+              <h4 class="showcase__spotlight-title">From school foundation to a Bachelor's degree in Computer Applications.</h4>
+              <p class="showcase__spotlight-text">
+                This journey reflects steady progress across high school, intermediate studies, and higher education
+                with growing interest in practical computer knowledge.
+              </p>
+              <div class="showcase__chip-row">
+                <span class="showcase__chip"><i class='bx bx-buildings'></i> High School</span>
+                <span class="showcase__chip"><i class='bx bx-notepad'></i> Intermediate</span>
+                <span class="showcase__chip"><i class='bx bx-laptop'></i> BCA</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="showcase__grid">
+          <article class="showcase-card showcase-card--emerald">
+            <div class="showcase-card__top">
+              <span class="showcase-card__label">Schooling</span>
+              <span class="showcase-card__status"><i class='bx bxs-graduation'></i> Academic Stage</span>
+            </div>
+            <div class="showcase-card__frame">
+              <div class="showcase-card__frame-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <img src="high school.png" alt="High school academic certificate" class="showcase-card__image" loading="lazy">
+            </div>
+            <h3 class="showcase-card__title">High School Education</h3>
+            <p class="showcase-card__date">SU Memorial | 2020 - 2021</p>
+            <p class="showcase-card__about">
+              The first important milestone that built discipline, consistency, and the academic base needed for future studies.
+            </p>
+            <div class="showcase-card__tags">
+              <span class="showcase-card__tag">Foundation</span>
+              <span class="showcase-card__tag">Discipline</span>
+              <span class="showcase-card__tag">Growth</span>
+            </div>
+            <ul class="showcase-card__features">
+              <li class="showcase-card__feature">Built confidence for the next stages of learning.</li>
+              <li class="showcase-card__feature">Created a focused base for consistent academic progress.</li>
+            </ul>
+          </article>
+
+          <article class="showcase-card showcase-card--sky">
+            <div class="showcase-card__top">
+              <span class="showcase-card__label">Intermediate</span>
+              <span class="showcase-card__status"><i class='bx bxs-graduation'></i> Academic Stage</span>
+            </div>
+            <div class="showcase-card__frame">
+              <div class="showcase-card__frame-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <img src="inter meediate.png" alt="Intermediate academic certificate" class="showcase-card__image" loading="lazy">
+            </div>
+            <h3 class="showcase-card__title">Intermediate Education</h3>
+            <p class="showcase-card__date">Harjinder Nagar Inter College | 2022 - 2023</p>
+            <p class="showcase-card__about">
+              A transition stage that improved maturity, academic understanding, and readiness before moving into higher studies.
+            </p>
+            <div class="showcase-card__tags">
+              <span class="showcase-card__tag">Progress</span>
+              <span class="showcase-card__tag">Preparation</span>
+              <span class="showcase-card__tag">Learning</span>
+            </div>
+            <ul class="showcase-card__features">
+              <li class="showcase-card__feature">Strengthened consistency and study structure.</li>
+              <li class="showcase-card__feature">Prepared the path for professional technical education.</li>
+            </ul>
+          </article>
+
+          <article class="showcase-card showcase-card--amber">
+            <div class="showcase-card__top">
+              <span class="showcase-card__label">Graduation</span>
+              <span class="showcase-card__status"><i class='bx bxs-graduation'></i> Academic Stage</span>
+            </div>
+            <div class="showcase-card__frame">
+              <div class="showcase-card__frame-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <img src="college.jpeg" alt="Bachelor of Computer Applications academic milestone" class="showcase-card__image" loading="lazy">
+            </div>
+            <h3 class="showcase-card__title">Bachelor of Computer Applications</h3>
+            <p class="showcase-card__date">Vision College of Management | 2023 - 2026</p>
+            <p class="showcase-card__about">
+              The main academic phase that connected studies more closely with technology, development thinking, and practical digital work.
+            </p>
+            <div class="showcase-card__tags">
+              <span class="showcase-card__tag">BCA</span>
+              <span class="showcase-card__tag">Technology</span>
+              <span class="showcase-card__tag">Career Path</span>
+            </div>
+            <ul class="showcase-card__features">
+              <li class="showcase-card__feature">Supported stronger technical understanding and direction.</li>
+              <li class="showcase-card__feature">Aligned learning with frontend and modern web development goals.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="certificate">
+      <h2 class="section-title">Certificates</h2>
+      <div class="showcase__shell showcase__shell--certificates">
+        <div class="showcase__hero">
+          <div class="showcase__intro">
+            <div class="showcase__eyebrow">
+              <span class="showcase__eyebrow-dot"></span>
+              Skill Validation
+            </div>
+            <div class="showcase__pills">
+              <span class="showcase__pill"><i class='bx bx-certification'></i> Workshops & Training</span>
+              <span class="showcase__pill"><i class='bx bx-trending-up'></i> Continuous Learning</span>
+            </div>
+            <h3 class="showcase__headline">Certificates that reflect extra learning, workshops, and practical exposure beyond academics.</h3>
+            <p class="showcase__summary">
+              These certificates strengthen the portfolio by showing initiative in learning outside the classroom
+              and building real-world understanding through workshops and technical programs.
+            </p>
+
+            <div class="showcase__metrics">
+              <article class="showcase__metric">
+                <span class="showcase__metric-value">3</span>
+                <span class="showcase__metric-label">Completed certificates</span>
+              </article>
+              <article class="showcase__metric">
+                <span class="showcase__metric-value">45 Hours</span>
+                <span class="showcase__metric-label">Training workshop</span>
+              </article>
+              <article class="showcase__metric">
+                <span class="showcase__metric-value">TechSkills</span>
+                <span class="showcase__metric-label">Program highlight</span>
+              </article>
+            </div>
+          </div>
+
+          <aside class="showcase__spotlight">
+            <div class="showcase__spotlight-card">
+              <span class="showcase__spotlight-kicker">Achievement Stack</span>
+              <h4 class="showcase__spotlight-title">A growing set of certificates built through workshops, training, and skill development.</h4>
+              <p class="showcase__spotlight-text">
+                Together, these achievements show extra effort in improving practical knowledge and building a stronger professional profile.
+              </p>
+              <div class="showcase__chip-row">
+                <span class="showcase__chip"><i class='bx bx-line-chart'></i> Digital Marketing</span>
+                <span class="showcase__chip"><i class='bx bx-data'></i> Data Analytics</span>
+                <span class="showcase__chip"><i class='bx bx-code-curly'></i> Advanced BCA</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="showcase__grid">
+          <article class="showcase-card showcase-card--amber">
+            <div class="showcase-card__top">
+              <span class="showcase-card__label">Training Workshop</span>
+              <span class="showcase-card__status"><i class='bx bx-award'></i> Certified</span>
+            </div>
+            <div class="showcase-card__frame">
+              <div class="showcase-card__frame-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <img src="certificate 1.jpg" alt="Certificate of training workshop in digital marketing and data analytics" class="showcase-card__image" loading="lazy">
+            </div>
+            <h3 class="showcase-card__title">Digital Marketing & Data Analytics</h3>
+            <p class="showcase-card__date">Certificate of Training Workshop | 45 Hours</p>
+            <p class="showcase-card__about">
+              A focused workshop certificate that added practical exposure through marketing and analytics concepts.
+            </p>
+            <div class="showcase-card__tags">
+              <span class="showcase-card__tag">Marketing</span>
+              <span class="showcase-card__tag">Analytics</span>
+              <span class="showcase-card__tag">Training</span>
+            </div>
+            <ul class="showcase-card__features">
+              <li class="showcase-card__feature">Shows learning effort beyond the regular curriculum.</li>
+              <li class="showcase-card__feature">Added practical exposure through a structured workshop format.</li>
+            </ul>
+          </article>
+
+          <article class="showcase-card showcase-card--rose">
+            <div class="showcase-card__top">
+              <span class="showcase-card__label">Workshop</span>
+              <span class="showcase-card__status"><i class='bx bx-award'></i> Certified</span>
+            </div>
+            <div class="showcase-card__frame">
+              <div class="showcase-card__frame-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <img src="certificate 2.jpg" alt="Workshop completion certificate" class="showcase-card__image" loading="lazy">
+            </div>
+            <h3 class="showcase-card__title">Workshop Completion Certificate</h3>
+            <p class="showcase-card__date">Completion Milestone</p>
+            <p class="showcase-card__about">
+              A completion certificate that reflects consistency in learning, participation, and active engagement.
+            </p>
+            <div class="showcase-card__tags">
+              <span class="showcase-card__tag">Workshop</span>
+              <span class="showcase-card__tag">Completion</span>
+              <span class="showcase-card__tag">Learning</span>
+            </div>
+            <ul class="showcase-card__features">
+              <li class="showcase-card__feature">Represents dedication to finishing structured sessions.</li>
+              <li class="showcase-card__feature">Adds another proof point to the overall growth journey.</li>
+            </ul>
+          </article>
+
+          <article class="showcase-card showcase-card--blue">
+            <div class="showcase-card__top">
+              <span class="showcase-card__label">TechSkills Program</span>
+              <span class="showcase-card__status"><i class='bx bx-award'></i> Certified</span>
+            </div>
+            <div class="showcase-card__frame">
+              <div class="showcase-card__frame-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <img src="certificate 3.jpg" alt="Certificate of completion for advanced BCA TechSkills program" class="showcase-card__image" loading="lazy">
+            </div>
+            <h3 class="showcase-card__title">Advanced BCA TechSkills Program</h3>
+            <p class="showcase-card__date">Certificate of Completion</p>
+            <p class="showcase-card__about">
+              A technical completion certificate that supports the academic path with stronger skill-based value.
+            </p>
+            <div class="showcase-card__tags">
+              <span class="showcase-card__tag">BCA</span>
+              <span class="showcase-card__tag">TechSkills</span>
+              <span class="showcase-card__tag">Advanced</span>
+            </div>
+            <ul class="showcase-card__features">
+              <li class="showcase-card__feature">Highlights commitment to improving technical capability.</li>
+              <li class="showcase-card__feature">Adds stronger relevance to a tech-focused portfolio.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects__shell">
+        <div class="projects__hero">
+          <div class="projects__intro">
+            <div class="projects__eyebrow">
+              <span class="projects__eyebrow-dot"></span>
+              Featured Live Builds
+            </div>
+            <div class="projects__pills">
+              <span class="projects__pill"><i class='bx bx-globe'></i> Live Project Collection</span>
+              <span class="projects__pill"><i class='bx bx-layout'></i> Modern Frontend Showcase</span>
+            </div>
+            <h3 class="projects__headline">Three practical projects that combine utility, presentation, and clean interface design.</h3>
+            <p class="projects__summary">
+              This section highlights three live builds that stay focused and useful:
+              <strong>Video Downloader</strong>, <strong>Portfolio</strong>, and <strong>Calculator</strong>.
+            </p>
+
+            <div class="projects__metrics">
+              <article class="projects__metric">
+                <span class="projects__metric-value">3</span>
+                <span class="projects__metric-label">Highlighted projects</span>
+              </article>
+              <article class="projects__metric">
+                <span class="projects__metric-value">Live</span>
+                <span class="projects__metric-label">Ready to explore</span>
+              </article>
+              <article class="projects__metric">
+                <span class="projects__metric-value">UI</span>
+                <span class="projects__metric-label">Clean visual presentation</span>
+              </article>
+            </div>
+          </div>
+
+          <aside class="projects__spotlight">
+            <div class="projects__spotlight-card">
+              <span class="projects__spotlight-kicker">Project Focus</span>
+              <h4 class="projects__spotlight-title">A small but polished set of projects with real links and practical use cases.</h4>
+              <p class="projects__spotlight-text">
+                Each card below follows the same visual language as the Experience section with stronger hierarchy,
+                richer details, and direct live access.
+              </p>
+              <div class="projects__brand-row">
+                <a class="projects__brand-chip projects__brand-chip--downloader" href="https://abusha.onrender.com" target="_blank" rel="noopener noreferrer"><i class='bx bx-download'></i> Video Downloader</a>
+                <a class="projects__brand-chip projects__brand-chip--portfolio" href="https://abutalha09.github.io/portfolio/" target="_blank" rel="noopener noreferrer"><i class='bx bx-id-card'></i> Portfolio</a>
+                <a class="projects__brand-chip projects__brand-chip--calculator" href="https://abutalha09.github.io/calculator/" target="_blank" rel="noopener noreferrer"><i class='bx bx-calculator'></i> Calculator</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="projects__list">
+          <article class="project-card project-card--downloader">
+            <div class="project-card__content">
+              <div class="project-card__top">
+                <span class="project-card__label">Utility Tool</span>
+                <span class="project-card__status"><i class='bx bxs-bolt-circle'></i> Live Project</span>
+              </div>
+              <h3 class="project-card__title">Video Downloader</h3>
+              <p class="project-card__about">
+                A practical downloader interface designed for quick access, smooth interaction, and a clean user journey from link input to download flow.
+              </p>
+              <div class="project-card__tags">
+                <span class="project-card__tag">Media</span>
+                <span class="project-card__tag">Downloader</span>
+                <span class="project-card__tag">Responsive</span>
+                <span class="project-card__tag">Utility</span>
+              </div>
+              <ul class="project-card__features">
+                <li class="project-card__feature">Focused on a clear action-first layout for fast usability.</li>
+                <li class="project-card__feature">Designed to feel direct, simple, and accessible across screen sizes.</li>
+              </ul>
+              <div class="project-card__actions">
+                <a class="button project-card__button" href="https://abusha.onrender.com" target="_blank" rel="noopener noreferrer">Open Project</a>
+              </div>
+            </div>
+
+            <div class="project-card__media">
+              <a class="project-card__frame" href="https://abusha.onrender.com" target="_blank" rel="noopener noreferrer" aria-label="Open Video Downloader project">
+                <div class="project-card__frame-bar">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <img src="abusha.png" alt="Video Downloader project preview" class="project-card__image" loading="lazy">
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card project-card--portfolio">
+            <div class="project-card__content">
+              <div class="project-card__top">
+                <span class="project-card__label">Personal Brand</span>
+                <span class="project-card__status"><i class='bx bxs-bolt-circle'></i> Live Project</span>
+              </div>
+              <h3 class="project-card__title">Portfolio</h3>
+              <p class="project-card__about">
+                A personal portfolio created to present skills, experience, and achievements with stronger visual identity and polished section flow.
+              </p>
+              <div class="project-card__tags">
+                <span class="project-card__tag">Portfolio</span>
+                <span class="project-card__tag">Branding</span>
+                <span class="project-card__tag">Frontend</span>
+                <span class="project-card__tag">Showcase</span>
+              </div>
+              <ul class="project-card__features">
+                <li class="project-card__feature">Built to communicate personality and work in a more premium format.</li>
+                <li class="project-card__feature">Uses visual storytelling to make each section more engaging and memorable.</li>
+              </ul>
+              <div class="project-card__actions">
+                <a class="button project-card__button" href="https://abutalha09.github.io/portfolio/" target="_blank" rel="noopener noreferrer">Open Project</a>
+              </div>
+            </div>
+
+            <div class="project-card__media">
+              <a class="project-card__frame" href="https://abutalha09.github.io/portfolio/" target="_blank" rel="noopener noreferrer" aria-label="Open Portfolio project">
+                <div class="project-card__frame-bar">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <img src="portfolio.png" alt="Portfolio project preview" class="project-card__image" loading="lazy">
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card project-card--calculator">
+            <div class="project-card__content">
+              <div class="project-card__top">
+                <span class="project-card__label">Everyday Utility</span>
+                <span class="project-card__status"><i class='bx bxs-bolt-circle'></i> Live Project</span>
+              </div>
+              <h3 class="project-card__title">Calculator</h3>
+              <p class="project-card__about">
+                A lightweight calculator build that keeps the experience simple, responsive, and familiar with clear controls and balanced spacing.
+              </p>
+              <div class="project-card__tags">
+                <span class="project-card__tag">Calculator</span>
+                <span class="project-card__tag">UI</span>
+                <span class="project-card__tag">Responsive</span>
+                <span class="project-card__tag">Utility</span>
+              </div>
+              <ul class="project-card__features">
+                <li class="project-card__feature">Keeps interaction straightforward so users can calculate without friction.</li>
+                <li class="project-card__feature">Maintains clean readability and mobile-friendly behavior.</li>
+              </ul>
+              <div class="project-card__actions">
+                <a class="button project-card__button" href="https://abutalha09.github.io/calculator/" target="_blank" rel="noopener noreferrer">Open Project</a>
+              </div>
+            </div>
+
+            <div class="project-card__media">
+              <a class="project-card__frame" href="https://abutalha09.github.io/calculator/" target="_blank" rel="noopener noreferrer" aria-label="Open Calculator project">
+                <div class="project-card__frame-bar">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <img src="Calculator1.png" alt="Calculator project preview" class="project-card__image" loading="lazy">
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2 class="section-title">Contact</h2>
+      <form class="contact__form" action="https://formsubmit.co/mdsaif2357@gmail.com" method="POST">
+        <div class="contact__group">
+          <label for="name" class="contact__label"><i class='bx bx-user'></i> Name</label>
+          <input type="text" id="name" name="name" class="contact__input" placeholder="Enter your name" required>
+        </div>
+        <div class="contact__group">
+          <label for="email" class="contact__label"><i class='bx bx-envelope'></i> Email</label>
+          <input type="email" id="email" name="email" class="contact__input" placeholder="Enter your email" required>
+        </div>
+        <div class="contact__group">
+          <label for="message" class="contact__label"><i class='bx bx-message-detail'></i> Message</label>
+          <textarea id="message" name="message" class="contact__input" placeholder="Enter your message"
+            required></textarea>
+        </div>
+        <button type="submit" class="contact__button">Contact me</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <h3>Thank you for visiting my portfolio</h3>
+    <nav class="footer__social" aria-label="Social links">
+      <a href="https://www.linkedin.com/in/mohammad-abutalha-932771363/" class="footer__social-link footer__social-link--linkedin"
+        target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+        <i class='bx bxl-linkedin'></i>
+      </a>
+      <a href="https://www.instagram.com/tallllllhhhaa/" class="footer__social-link footer__social-link--instagram"
+        target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
+        <i class='bx bxl-instagram'></i>
+      </a>
+      <a href="https://github.com/Abutalha09" class="footer__social-link footer__social-link--github" target="_blank"
+        rel="noopener noreferrer" aria-label="GitHub profile">
+        <i class='bx bxl-github'></i>
+      </a>
+      <a href="https://www.facebook.com/mdtalha.a.777" class="footer__social-link footer__social-link--facebook"
+        target="_blank" rel="noopener noreferrer" aria-label="Facebook profile">
+        <i class='bx bxl-facebook'></i>
+      </a>
+      <a href="https://www.snapchat.com/@tallllhhaa?share_id=tfld9cm2ahs&locale=en-IN"
+        class="footer__social-link footer__social-link--snapchat" target="_blank" rel="noopener noreferrer"
+        aria-label="Snapchat profile">
+        <i class='bx bxl-snapchat'></i>
+      </a>
+      <a href="https://x.com/abusha0923" class="footer__social-link footer__social-link--x" target="_blank"
+        rel="noopener noreferrer" aria-label="X profile">
+        <span class="footer__social-symbol" aria-hidden="true">X</span>
+      </a>
+    </nav>
+    <p>&copy; 2025 All rights reserved</p>
+  </footer>
+
+  <script>
+    const availableThemes = ['dark', 'light', 'abusha'];
+    const themeLabels = {
+      dark: 'Dark',
+      light: 'Light',
+      abusha: 'Abusha'
+    };
+    const themeIcons = {
+      dark: 'bx bxs-moon',
+      light: 'bx bxs-sun',
+      abusha: 'bx bxs-heart'
+    };
+    const themeMenu = document.getElementById('theme-menu');
+    const themeToggle = document.getElementById('theme-toggle');
+    const themePanel = document.getElementById('theme-panel');
+    const themeToggleIcon = document.getElementById('theme-toggle-icon');
+    const themeOptions = document.querySelectorAll('.theme-option');
+
+    const setThemePanelState = (isOpen) => {
+      themeMenu.classList.toggle('is-open', isOpen);
+      themeToggle.setAttribute('aria-expanded', String(isOpen));
+      themePanel.hidden = !isOpen;
+    };
+
+    const applyTheme = (theme) => {
+      const selectedTheme = availableThemes.includes(theme) ? theme : 'dark';
+      document.body.setAttribute('data-theme', selectedTheme);
+      themeToggleIcon.className = `${themeIcons[selectedTheme]} theme-menu__toggle-icon`;
+      themeToggle.setAttribute('aria-label', `Change theme, current ${themeLabels[selectedTheme]}`);
+      themeOptions.forEach(option => {
+        option.classList.toggle('is-active', option.dataset.theme === selectedTheme);
+      });
+
+      try {
+        localStorage.setItem('portfolio-theme', selectedTheme);
+      } catch (error) {
+        // Ignore storage issues and still apply the theme visually.
+      }
+    };
+
+    try {
+      const savedTheme = localStorage.getItem('portfolio-theme');
+      applyTheme(savedTheme || document.body.dataset.theme);
+    } catch (error) {
+      applyTheme(document.body.dataset.theme);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isOpen = !themeMenu.classList.contains('is-open');
+      setThemePanelState(isOpen);
+    });
+
+    themeOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        applyTheme(option.dataset.theme);
+        setThemePanelState(false);
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!themeMenu.contains(event.target)) {
+        setThemePanelState(false);
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setThemePanelState(false);
+      }
+    });
+
+    const sections = document.querySelectorAll('.home, .section');
+    const showcaseCards = document.querySelectorAll('.showcase-card');
+    const projectItems = document.querySelectorAll('.project-card');
+
+    const observer = new IntersectionObserver((entries, observerInstance) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observerInstance.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    showcaseCards.forEach(item => {
+      observer.observe(item);
+    });
+
+    projectItems.forEach(item => {
+      observer.observe(item);
+    });
+
+    const navToggle = document.getElementById('nav-toggle');
+    const navList = document.querySelector('.nav__list');
+    const navLinks = document.querySelectorAll('.nav__link');
+    const textTargets = document.querySelectorAll(
+      'main h1, main h2, main h3, main h4, main p, main li, .skills__names, .contact__label, .experience__eyebrow, .experience__pill, .experience__metric-value, .experience__metric-label, .experience__spotlight-kicker, .experience__brand-chip, .experience-product__label, .experience-product__status, .experience-product__tag, .showcase__eyebrow, .showcase__pill, .showcase__metric-value, .showcase__metric-label, .showcase__spotlight-kicker, .showcase__chip, .showcase-card__label, .showcase-card__status, .showcase-card__date, .showcase-card__tag, .projects__eyebrow, .projects__pill, .projects__metric-value, .projects__metric-label, .projects__spotlight-kicker, .projects__brand-chip, .project-card__label, .project-card__status, .project-card__tag, footer h3, footer p, .nav__logo, .nav__link'
+    );
+
+    const setActiveLink = (sectionId) => {
+      navLinks.forEach(link => {
+        const isActive = link.getAttribute('href') === `#${sectionId}`;
+        link.classList.toggle('active-link', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    const updateActiveLink = () => {
+      const scrollPosition = window.scrollY + 150;
+      let currentSectionId = sections[0]?.id || 'home';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          currentSectionId = section.id;
+        }
+      });
+
+      setActiveLink(currentSectionId);
+    };
+
+    const textGroups = new Map();
+    textTargets.forEach(target => {
+      const group = target.closest('.home, .section, header, footer') || document.body;
+      const order = textGroups.get(group) || 0;
+      textGroups.set(group, order + 1);
+      target.classList.add('text-reveal');
+      target.style.setProperty('--text-delay', `${Math.min(order * 90, 540)}ms`);
+    });
+
+    const headerTextTargets = document.querySelectorAll('.nav__logo, .nav__link');
+    requestAnimationFrame(() => {
+      headerTextTargets.forEach(target => {
+        target.classList.add('is-visible');
+      });
+    });
+
+    const textObserver = new IntersectionObserver((entries, observerInstance) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observerInstance.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    textTargets.forEach(target => {
+      if (!target.closest('header')) {
+        textObserver.observe(target);
+      }
+    });
+
+    navToggle.addEventListener('click', () => {
+      navList.classList.toggle('show');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const targetId = link.getAttribute('href').replace('#', '');
+        setActiveLink(targetId);
+        navList.classList.remove('show');
+      });
+    });
+
+    window.addEventListener('scroll', updateActiveLink, { passive: true });
+    window.addEventListener('load', updateActiveLink);
+    window.addEventListener('resize', updateActiveLink);
+    window.addEventListener('hashchange', () => {
+      const sectionId = window.location.hash.replace('#', '') || 'home';
+      setActiveLink(sectionId);
+    });
+
+    updateActiveLink();
+  </script>
+</body>
+
+</html>
