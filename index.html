@@ -11,6 +11,9 @@
 </head>
 
 <body>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress"><div class="scroll-progress__bar" id="scrollProgressBar"></div></div>
+
   <!-- Canvas Background for Starfield & Particles -->
   <canvas id="starfield"></canvas>
   <div class="nebula-overlay"></div>
@@ -35,9 +38,9 @@
         <li><a href="#contact" class="nav__link">Contact</a></li>
       </ul>
 
-      <div class="nav__toggle" id="nav-toggle">
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation menu">
         <i class='bx bx-menu'></i>
-      </div>
+      </button>
     </nav>
   </header>
 
@@ -67,15 +70,15 @@
         </div>
         <div class="hero__stats">
           <div class="stat-item">
-            <span class="stat-num">6+</span>
+            <span class="stat-num" data-count="6" data-suffix="+">0</span>
             <span class="stat-label">Featured Builds</span>
           </div>
           <div class="stat-item">
-            <span class="stat-num">3+</span>
+            <span class="stat-num" data-count="3" data-suffix="+">0</span>
             <span class="stat-label">Academic Milestones</span>
           </div>
           <div class="stat-item">
-            <span class="stat-num">2</span>
+            <span class="stat-num" data-count="2" data-suffix="">0</span>
             <span class="stat-label">Platforms Supported</span>
           </div>
         </div>
@@ -506,143 +509,172 @@
       </div>
     </section>
 
-    <!-- ==================== EDUCATION SECTION ==================== -->
+    <!-- ==================== EDUCATION SECTION (Orbital Timeline) ==================== -->
     <section class="section fade-up-reveal" id="education">
-      <h2 class="section-title">Academic Achievements</h2>
-      <div class="academics-grid">
+      <div class="section-eyebrow">Mission Trajectory</div>
+      <h2 class="section-title has-eyebrow">Academic Achievements</h2>
 
-        <!-- Academics Card 1 -->
-        <div class="glass-card academic-card">
-          <div class="academic-card__frame">
-            <img src="high school.png" alt="High School">
+      <div class="orbit-timeline" id="orbitTimeline">
+        <div class="orbit-timeline__fill" id="orbitFill"></div>
+
+        <!-- Node 1 -->
+        <div class="orbit-node">
+          <div class="orbit-node__marker"></div>
+          <div class="glass-card orbit-card">
+            <div class="orbit-card__frame">
+              <img src="high school.png" alt="High School">
+            </div>
+            <div class="orbit-card__body">
+              <div class="orbit-card__top">
+                <span class="orbit-card__badge">SU Memorial</span>
+                <span class="orbit-card__status"><i class='bx bx-check-double'></i> Completed</span>
+              </div>
+              <h3 class="orbit-card__title">High School Education</h3>
+              <span class="orbit-card__meta">2020 — 2021</span>
+              <p class="orbit-card__desc">
+                Primary academic baseline highlighting consistent coursework participation, team dynamics, and
+                structured studies.
+              </p>
+              <div class="orbit-card__tags">
+                <span class="orbit-card__tag">Study Methodology</span>
+                <span class="orbit-card__tag">Academic Focus</span>
+              </div>
+            </div>
           </div>
-          <div class="card-top-tag">
-            <span class="card-badge">SU Memorial</span>
-            <span class="card-status"><i class='bx bx-check-double'></i> Completed</span>
-          </div>
-          <h3 class="card-title">High School Education</h3>
-          <span class="card-meta">Academic Year: 2020 - 2021</span>
-          <p class="card-desc">
-            Primary academic baseline highlighting consistent coursework participation, team dynamics, and structured
-            studies.
-          </p>
-          <ul class="card-features">
-            <li>Refined study methodologies.</li>
-            <li>Promoted academic focus.</li>
-          </ul>
         </div>
 
-        <!-- Academics Card 2 -->
-        <div class="glass-card academic-card">
-          <div class="academic-card__frame">
-            <img src="inter meediate.png" alt="Intermediate">
+        <!-- Node 2 -->
+        <div class="orbit-node">
+          <div class="orbit-node__marker"></div>
+          <div class="glass-card orbit-card">
+            <div class="orbit-card__frame">
+              <img src="inter meediate.png" alt="Intermediate">
+            </div>
+            <div class="orbit-card__body">
+              <div class="orbit-card__top">
+                <span class="orbit-card__badge">Harjinder Nagar College</span>
+                <span class="orbit-card__status"><i class='bx bx-check-double'></i> Completed</span>
+              </div>
+              <h3 class="orbit-card__title">Intermediate Education</h3>
+              <span class="orbit-card__meta">2022 — 2023</span>
+              <p class="orbit-card__desc">
+                Transitional learning phase preparing path directions towards computer science logic, coding
+                foundations, and logical math structures.
+              </p>
+              <div class="orbit-card__tags">
+                <span class="orbit-card__tag">Algebraic Analysis</span>
+                <span class="orbit-card__tag">Career Pathing</span>
+              </div>
+            </div>
           </div>
-          <div class="card-top-tag">
-            <span class="card-badge">Harjinder Nagar College</span>
-            <span class="card-status"><i class='bx bx-check-double'></i> Completed</span>
-          </div>
-          <h3 class="card-title">Intermediate Education</h3>
-          <span class="card-meta">Academic Year: 2022 - 2023</span>
-          <p class="card-desc">
-            Transitional learning phase preparing path directions towards computer science logic, coding foundations,
-            and logical math structures.
-          </p>
-          <ul class="card-features">
-            <li>Strengthened algebraic analysis.</li>
-            <li>Prepared professional tracks.</li>
-          </ul>
         </div>
 
-        <!-- Academics Card 3 -->
-        <div class="glass-card academic-card">
-          <div class="academic-card__frame">
-            <img src="college.jpeg" alt="College">
+        <!-- Node 3 -->
+        <div class="orbit-node">
+          <div class="orbit-node__marker"></div>
+          <div class="glass-card orbit-card">
+            <div class="orbit-card__frame">
+              <img src="college.jpeg" alt="College">
+            </div>
+            <div class="orbit-card__body">
+              <div class="orbit-card__top">
+                <span class="orbit-card__badge">Vision Management College</span>
+                <span class="orbit-card__status"><i class='bx bxs-graduation'></i> Graduated</span>
+              </div>
+              <h3 class="orbit-card__title">Bachelor of Computer Applications</h3>
+              <span class="orbit-card__meta">2023 — 2026</span>
+              <p class="orbit-card__desc">
+                Focused degree program in computer applications (BCA), covering relational databases, software design
+                cycles, web development, and algorithms.
+              </p>
+              <div class="orbit-card__tags">
+                <span class="orbit-card__tag">Application Logic</span>
+                <span class="orbit-card__tag">Frontend Paradigms</span>
+              </div>
+            </div>
           </div>
-          <div class="card-top-tag">
-            <span class="card-badge">Vision Management College</span>
-            <span class="card-status"><i class='bx bxs-graduation'></i> Graduated</span>
-          </div>
-          <h3 class="card-title">Bachelor of Computer Applications</h3>
-          <span class="card-meta">Degree Phase: 2023 - 2026</span>
-          <p class="card-desc">
-            Focused degree program in computer applications (BCA), covering relational databases, software design
-            cycles, web development, and algorithms.
-          </p>
-          <ul class="card-features">
-            <li>Solid application coding logic.</li>
-            <li>In-depth web frontend paradigms.</li>
-          </ul>
         </div>
 
       </div>
     </section>
 
-    <!-- ==================== CERTIFICATES SECTION ==================== -->
+    <!-- ==================== CERTIFICATES SECTION (Credential Deck) ==================== -->
     <section class="section fade-up-reveal" id="certificates">
-      <h2 class="section-title">Credentials & Workshop Certifications</h2>
-      <div class="certificates-grid">
+      <div class="section-eyebrow">Verified Credentials</div>
+      <h2 class="section-title has-eyebrow">Workshop Certifications</h2>
+
+      <div class="credential-deck">
 
         <!-- Cert Card 1 -->
-        <div class="glass-card certificate-card">
-          <div class="certificate-card__frame">
+        <div class="glass-card credential-card">
+          <div class="credential-card__frame">
             <img src="certificate 1.jpg" alt="Certificate 1">
+            <div class="credential-card__seal"><i class='bx bx-medal'></i></div>
           </div>
-          <div class="card-top-tag">
-            <span class="card-badge">Workshop Credentials</span>
-            <span class="card-status"><i class='bx bx-award'></i> Certified</span>
+          <div class="credential-card__body">
+            <div class="credential-card__top">
+              <span class="credential-card__badge">Workshop Credentials</span>
+              <span class="credential-card__status"><i class='bx bx-award'></i> Certified</span>
+            </div>
+            <h3 class="credential-card__title">Digital Marketing & Data Analytics</h3>
+            <span class="credential-card__meta">45 Hours Training</span>
+            <p class="credential-card__desc">
+              Professional development session resolving analytics flows, metrics logging, content optimization, and
+              performance tracking.
+            </p>
+            <div class="credential-card__tags">
+              <span class="credential-card__tag">Data Insights</span>
+              <span class="credential-card__tag">Growth Analysis</span>
+            </div>
           </div>
-          <h3 class="card-title">Digital Marketing & Data Analytics</h3>
-          <span class="card-meta">Duration: 45 Hours Training</span>
-          <p class="card-desc">
-            Professional development session resolving analytics flows, metrics logging, content optimization, and
-            performance tracking.
-          </p>
-          <ul class="card-features">
-            <li>Data insights configuration.</li>
-            <li>Strategic growth analysis.</li>
-          </ul>
         </div>
 
         <!-- Cert Card 2 -->
-        <div class="glass-card certificate-card">
-          <div class="certificate-card__frame">
+        <div class="glass-card credential-card">
+          <div class="credential-card__frame">
             <img src="certificate 2.jpg" alt="Certificate 2">
+            <div class="credential-card__seal"><i class='bx bx-code-alt'></i></div>
           </div>
-          <div class="card-top-tag">
-            <span class="card-badge">Technical Training</span>
-            <span class="card-status"><i class='bx bx-award'></i> Certified</span>
+          <div class="credential-card__body">
+            <div class="credential-card__top">
+              <span class="credential-card__badge">Technical Training</span>
+              <span class="credential-card__status"><i class='bx bx-award'></i> Certified</span>
+            </div>
+            <h3 class="credential-card__title">Workshop Completion Certificate</h3>
+            <span class="credential-card__meta">Development Workshop</span>
+            <p class="credential-card__desc">
+              Technical program verification indicating session completion, development logs contribution, and
+              interface reviews.
+            </p>
+            <div class="credential-card__tags">
+              <span class="credential-card__tag">Workshop Drills</span>
+              <span class="credential-card__tag">Code Reviews</span>
+            </div>
           </div>
-          <h3 class="card-title">Workshop Completion Certificate</h3>
-          <span class="card-meta">Development Workshop</span>
-          <p class="card-desc">
-            Technical program verification indicating session completion, development logs contribution, and interface
-            reviews.
-          </p>
-          <ul class="card-features">
-            <li>Practical workshop drills.</li>
-            <li>Code reviews exposure.</li>
-          </ul>
         </div>
 
         <!-- Cert Card 3 -->
-        <div class="glass-card certificate-card">
-          <div class="certificate-card__frame">
+        <div class="glass-card credential-card">
+          <div class="credential-card__frame">
             <img src="certificate 3.jpg" alt="Certificate 3">
+            <div class="credential-card__seal"><i class='bx bxs-graduation'></i></div>
           </div>
-          <div class="card-top-tag">
-            <span class="card-badge">Advanced BCA Suite</span>
-            <span class="card-status"><i class='bx bx-award'></i> Certified</span>
+          <div class="credential-card__body">
+            <div class="credential-card__top">
+              <span class="credential-card__badge">Advanced BCA Suite</span>
+              <span class="credential-card__status"><i class='bx bx-award'></i> Certified</span>
+            </div>
+            <h3 class="credential-card__title">BCA TechSkills Program</h3>
+            <span class="credential-card__meta">Advanced Skills Badge</span>
+            <p class="credential-card__desc">
+              Validation of advanced tech skills, confirming practical application knowledge in responsive layouts and
+              script builds.
+            </p>
+            <div class="credential-card__tags">
+              <span class="credential-card__tag">Layout Coding</span>
+              <span class="credential-card__tag">Scripting</span>
+            </div>
           </div>
-          <h3 class="card-title">BCA TechSkills Program</h3>
-          <span class="card-meta">Advanced Skills Badge</span>
-          <p class="card-desc">
-            Validation of advanced tech skills, confirming practical application knowledge in responsive layouts and
-            script builds.
-          </p>
-          <ul class="card-features">
-            <li>Advanced layouts coding.</li>
-            <li>Logical scripting milestones.</li>
-          </ul>
         </div>
 
       </div>
@@ -739,7 +771,6 @@
     let shootingStars = [];
     let clickParticles = [];
 
-    // Star class (Twinkling)
     class Star {
       constructor(w, h) {
         this.x = Math.random() * w;
@@ -779,7 +810,6 @@
       }
     }
 
-    // Shooting Star class
     class ShootingStar {
       constructor(w, h) {
         this.w = w;
@@ -789,10 +819,10 @@
 
       reset() {
         this.x = Math.random() * this.w;
-        this.y = Math.random() * (this.h * 0.4); // Start in top 40% of page
+        this.y = Math.random() * (this.h * 0.4);
         this.length = Math.random() * 70 + 40;
         this.speed = Math.random() * 5 + 3;
-        this.angle = Math.PI / 6 + Math.random() * (Math.PI / 15); // Slope angle
+        this.angle = Math.PI / 6 + Math.random() * (Math.PI / 15);
         this.opacity = 1;
         this.fadeSpeed = Math.random() * 0.02 + 0.008;
         this.active = true;
@@ -832,7 +862,6 @@
       }
     }
 
-    // Physics click particles
     class Particle {
       constructor(x, y) {
         this.x = x;
@@ -842,7 +871,7 @@
         this.vx = Math.cos(angle) * speed;
         this.vy = Math.sin(angle) * speed;
         this.size = Math.random() * 2.8 + 0.8;
-        this.color = Math.random() > 0.5 ? '#7c3aed' : '#06b6d4'; // violet or cyan
+        this.color = Math.random() > 0.5 ? '#7c3aed' : '#06b6d4';
         this.opacity = 1;
         this.fade = Math.random() * 0.018 + 0.012;
       }
@@ -850,7 +879,7 @@
       update() {
         this.x += this.vx;
         this.y += this.vy;
-        this.vy += 0.035; // Soft space gravity
+        this.vy += 0.035;
         this.opacity -= this.fade;
       }
 
@@ -868,7 +897,7 @@
     function initBackground() {
       stars = [];
       const density = Math.floor((canvas.width * canvas.height) / 8000);
-      const count = Math.max(density, 200); // minimum 200 twinkling stars
+      const count = Math.max(density, 200);
       for (let i = 0; i < count; i++) {
         stars.push(new Star(canvas.width, canvas.height));
       }
@@ -878,7 +907,6 @@
       if (shootingStars.length < 3) {
         shootingStars.push(new ShootingStar(canvas.width, canvas.height));
       }
-      // Trigger new star in 2 to 3 seconds range
       setTimeout(triggerShootingStar, Math.random() * 1000 + 2000);
     }
 
@@ -892,17 +920,14 @@
     resizeCanvas();
     triggerShootingStar();
 
-    // Canvas animation loop
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Twinkle Stars
       stars.forEach(star => {
         star.update();
         star.draw();
       });
 
-      // Shooting Stars
       for (let i = shootingStars.length - 1; i >= 0; i--) {
         const ss = shootingStars[i];
         ss.update();
@@ -913,7 +938,6 @@
         }
       }
 
-      // Click Particles
       for (let i = clickParticles.length - 1; i >= 0; i--) {
         const p = clickParticles[i];
         p.update();
@@ -928,7 +952,6 @@
     }
     animate();
 
-    // Trigger burst on mouse clicks
     window.addEventListener('click', (e) => {
       const burstCount = 16 + Math.floor(Math.random() * 10);
       for (let i = 0; i < burstCount; i++) {
@@ -950,7 +973,6 @@
       cursorDot.style.top = mouse.y + 'px';
     });
 
-    // Spring tracking ring animation
     function animateRing() {
       const spring = 0.14;
       ringPos.x += (mouse.x - ringPos.x) * spring;
@@ -963,18 +985,20 @@
     }
     animateRing();
 
-    // Interactive mouse state modifiers
     window.addEventListener('mousedown', () => cursorRing.classList.add('clicking'));
     window.addEventListener('mouseup', () => cursorRing.classList.remove('clicking'));
 
-    // Delegate hover listeners on interactive nodes
     document.addEventListener('mouseover', (e) => {
-      if (e.target.closest('a, button, .glass-card, .skill-pill, input, textarea, [role="button"]')) {
+      if (e.target.closest('.orbit-card, .credential-card, .credential-card__seal')) {
+        cursorRing.classList.add('hovering-gold');
+      } else if (e.target.closest('a, button, .glass-card, .skill-pill, input, textarea, [role="button"]')) {
         cursorRing.classList.add('hovering');
       }
     });
     document.addEventListener('mouseout', (e) => {
-      if (e.target.closest('a, button, .glass-card, .skill-pill, input, textarea, [role="button"]')) {
+      if (e.target.closest('.orbit-card, .credential-card, .credential-card__seal')) {
+        cursorRing.classList.remove('hovering-gold');
+      } else if (e.target.closest('a, button, .glass-card, .skill-pill, input, textarea, [role="button"]')) {
         cursorRing.classList.remove('hovering');
       }
     });
@@ -1010,20 +1034,20 @@
       if (isDeleting) {
         typingElement.textContent = currentWord.substring(0, charIndex - 1);
         charIndex--;
-        typingSpeed = 50; // Deletes faster
+        typingSpeed = 50;
       } else {
         typingElement.textContent = currentWord.substring(0, charIndex + 1);
         charIndex++;
-        typingSpeed = 100; // Normal writing speed
+        typingSpeed = 100;
       }
 
       if (!isDeleting && charIndex === currentWord.length) {
-        typingSpeed = 2000; // Hold at the end of word
+        typingSpeed = 2000;
         isDeleting = true;
       } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
         wordIndex = (wordIndex + 1) % words.length;
-        typingSpeed = 500; // Brief pause before typing next
+        typingSpeed = 500;
       }
 
       setTimeout(typeEffect, typingSpeed);
@@ -1034,7 +1058,7 @@
     }
 
     /* ==================== 3D TILT EFFECT ON CARDS ==================== */
-    const interactiveCards = document.querySelectorAll('.project-card, .academic-card, .certificate-card, .product-card');
+    const interactiveCards = document.querySelectorAll('.project-card, .product-card');
 
     interactiveCards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
@@ -1045,7 +1069,6 @@
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        // Tilt coefficient
         const rotateX = -((y - centerY) / centerY) * 10;
         const rotateY = ((x - centerX) / centerX) * 10;
 
@@ -1064,7 +1087,6 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          // Optional: unobserve after showing once
           revealObserver.unobserve(entry.target);
         }
       });
@@ -1075,12 +1097,90 @@
 
     reveals.forEach(el => revealObserver.observe(el));
 
-    /* ==================== ACTIVE LINK ON SCROLL ==================== */
+    /* ==================== ORBIT NODES & CREDENTIAL CARDS REVEAL ==================== */
+    const orbitNodes = document.querySelectorAll('.orbit-node');
+    const credentialCards = document.querySelectorAll('.credential-card');
+
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -60px 0px'
+    });
+
+    orbitNodes.forEach(el => cardObserver.observe(el));
+    credentialCards.forEach((el, i) => {
+      el.classList.add(`delay-${(i % 3) + 1}`);
+      cardObserver.observe(el);
+    });
+
+    /* ==================== ORBIT TIMELINE FILL ON SCROLL ==================== */
+    const orbitTimeline = document.getElementById('orbitTimeline');
+    const orbitFill = document.getElementById('orbitFill');
+
+    function updateOrbitFill() {
+      if (!orbitTimeline || !orbitFill) return;
+      const rect = orbitTimeline.getBoundingClientRect();
+      const viewportH = window.innerHeight;
+
+      const total = rect.height;
+      const visibleTop = Math.min(Math.max(viewportH * 0.75 - rect.top, 0), total);
+
+      const percent = total > 0 ? (visibleTop / total) * 100 : 0;
+      orbitFill.style.height = percent + '%';
+    }
+
+    /* ==================== ANIMATED STAT COUNTERS ==================== */
+    const statNums = document.querySelectorAll('.stat-num');
+    let countersAnimated = false;
+
+    function animateCounters() {
+      if (countersAnimated) return;
+      countersAnimated = true;
+
+      statNums.forEach(el => {
+        const target = parseInt(el.getAttribute('data-count'), 10) || 0;
+        const suffix = el.getAttribute('data-suffix') || '';
+        const duration = 1200;
+        const startTime = performance.now();
+
+        function tick(now) {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const value = Math.round(eased * target);
+          el.textContent = value + suffix;
+          if (progress < 1) {
+            requestAnimationFrame(tick);
+          }
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+
+    const heroStats = document.querySelector('.hero__stats');
+    if (heroStats) {
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      statsObserver.observe(heroStats);
+    }
+
+    /* ==================== ACTIVE LINK ON SCROLL + HEADER + PROGRESS ==================== */
     const sections = document.querySelectorAll('section[id]');
     const headerEl = document.getElementById('header');
+    const scrollProgressBar = document.getElementById('scrollProgressBar');
 
-    window.addEventListener('scroll', () => {
-      // Header blur scrolling feedback
+    function onScroll() {
       if (window.scrollY > 40) {
         headerEl.classList.add('scrolled');
       } else {
@@ -1103,7 +1203,19 @@
           }
         }
       });
-    });
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+      if (scrollProgressBar) {
+        scrollProgressBar.style.width = Math.min(progress, 100) + '%';
+      }
+
+      updateOrbitFill();
+    }
+
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('resize', updateOrbitFill);
+    updateOrbitFill();
   </script>
 </body>
 
