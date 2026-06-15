@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abutalha09.github.io/portfolio/sitemap.xml
