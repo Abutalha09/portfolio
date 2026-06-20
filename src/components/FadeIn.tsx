@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 
 interface FadeInProps {
@@ -22,8 +22,11 @@ export const FadeIn: React.FC<FadeInProps> = ({
   className = '',
   id,
 }) => {
-  // Create motion component dynamically
-  const MotionComponent = motion.create(as as any);
+  // Memoize so motion.create() is NOT called on every re-render.
+  // Without this, every parent state change (e.g. isPlaying) would create a
+  // brand-new component type, causing Framer Motion to reset the animation
+  // to opacity:0 — producing the "blink / flash black" bug.
+  const MotionComponent = useMemo(() => motion.create(as as any), [as]);
 
   return (
     <MotionComponent

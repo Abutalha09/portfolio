@@ -155,7 +155,7 @@ export const HeroSection: React.FC = () => {
           <div className="absolute w-64 h-64 sm:w-80 sm:h-80 bg-cyan-600/20 blur-[80px] rounded-full -bottom-10 -right-10 z-0"></div>
 
           {/* Portrait with Magnet */}
-          <FadeIn delay={0.6} y={30} className="z-10 w-[240px] sm:w-[300px] md:w-[350px] lg:w-[380px] aspect-square relative">
+          <FadeIn delay={0.6} y={30} className="z-10 w-[220px] sm:w-[270px] md:w-[310px] lg:w-[340px] aspect-square relative">
             <Magnet
               padding={150}
               strength={3}
@@ -163,13 +163,13 @@ export const HeroSection: React.FC = () => {
               inactiveTransition="transform 0.6s ease-in-out"
               className="w-full h-full"
             >
-              <div className="w-full h-full rounded-[40px] border-2 border-[#D7E2EA]/30 bg-[#0C0C0C] p-4 relative group overflow-hidden shadow-2xl flex items-center justify-center">
+              <div className="w-full h-full rounded-[40px] border-2 border-[#D7E2EA]/30 bg-[#0C0C0C] p-3 relative group overflow-hidden shadow-2xl flex items-center justify-center">
                 {/* Glow ring */}
                 <div className="absolute inset-0 border border-purple-500/20 rounded-[38px] group-hover:border-cyan-500/40 transition-all duration-300"></div>
                 <img
                   src="/talha's pic.jpg"
                   alt="Mohammad Abutalha"
-                  className="w-full h-full object-cover rounded-[30px] pointer-events-none"
+                  className="w-full h-full object-cover object-top rounded-[30px] pointer-events-none"
                 />
               </div>
             </Magnet>

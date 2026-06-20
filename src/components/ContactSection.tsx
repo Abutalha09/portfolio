@@ -186,15 +186,13 @@ export const ContactSection: React.FC = () => {
                     <span className="text-[9px] font-bold text-cyan-400 uppercase tracking-widest block leading-none mb-1">Hi there! 👋</span>
                     <h4 className="text-xs font-bold text-white uppercase tracking-wide leading-none">Voice Intro Note</h4>
                   </div>
-                  {isPlaying && (
-                    <div className="flex items-end gap-0.5 h-3 select-none pr-1">
-                      <span className="w-0.5 bg-cyan-400 rounded-full animate-bar-1 h-2"></span>
-                      <span className="w-0.5 bg-cyan-400 rounded-full animate-bar-2 h-3"></span>
-                      <span className="w-0.5 bg-cyan-400 rounded-full animate-bar-3 h-1"></span>
-                      <span className="w-0.5 bg-cyan-400 rounded-full animate-bar-4 h-3"></span>
-                      <span className="w-0.5 bg-cyan-400 rounded-full animate-bar-5 h-2"></span>
-                    </div>
-                  )}
+                  <div className={`flex items-end gap-0.5 h-3 select-none pr-1 transition-opacity duration-300 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}>
+                    <span className="w-0.5 bg-cyan-400 rounded-full animate-bar-1 h-2"></span>
+                    <span className="w-0.5 bg-cyan-400 rounded-full animate-bar-2 h-3"></span>
+                    <span className="w-0.5 bg-cyan-400 rounded-full animate-bar-3 h-1"></span>
+                    <span className="w-0.5 bg-cyan-400 rounded-full animate-bar-4 h-3"></span>
+                    <span className="w-0.5 bg-cyan-400 rounded-full animate-bar-5 h-2"></span>
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-3">
