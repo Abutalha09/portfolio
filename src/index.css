@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body, #root {
+    background-color: #0C0C0C;
+    color: #D7E2EA;
+    font-family: 'Kanit', sans-serif;
+    min-height: 100vh;
+    overflow-x: clip;
+  }
+}
+
+.hero-heading {
+  background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float 4.5s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(-3deg); }
+}
+@keyframes float3 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+@keyframes float4 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(-2deg); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.8; box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), 0 0 40px rgba(34, 211, 238, 0.2); }
+  50% { opacity: 1; box-shadow: 0 0 30px rgba(168, 85, 247, 0.6), 0 0 60px rgba(34, 211, 238, 0.4); }
+}
+
+.animate-float-1 { animation: float1 4s ease-in-out infinite; }
+.animate-float-2 { animation: float2 5s ease-in-out infinite; }
+.animate-float-3 { animation: float3 3.5s ease-in-out infinite; }
+.animate-float-4 { animation: float4 4.5s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 12s linear infinite; }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+/* Holographic project beam trapezoid clip path */
+.clip-path-beam {
+  clip-path: polygon(30% 100%, 70% 100%, 100% 0, 0 0);
+}
+
+/* Hologram glitch flickering keyframes */
+@keyframes holo-flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 0.95;
+    filter: hue-rotate(0deg) saturate(1) brightness(1);
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.55;
+    filter: hue-rotate(120deg) saturate(1.8) contrast(1.3) brightness(1.2);
+  }
+}
+.animate-holo-flicker {
+  animation: holo-flicker 9s linear infinite;
+}
+
+/* Voice notes bouncing equalizer bars keyframes */
+@keyframes bounce-bar {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+.animate-bar-1 { animation: bounce-bar 0.8s ease-in-out infinite; transform-origin: bottom; }
+.animate-bar-2 { animation: bounce-bar 0.5s ease-in-out infinite; transform-origin: bottom; }
+.animate-bar-3 { animation: bounce-bar 0.7s ease-in-out infinite; transform-origin: bottom; }
+.animate-bar-4 { animation: bounce-bar 0.6s ease-in-out infinite; transform-origin: bottom; }
+.animate-bar-5 { animation: bounce-bar 0.9s ease-in-out infinite; transform-origin: bottom; }
