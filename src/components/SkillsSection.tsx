@@ -137,14 +137,18 @@ const SkillCard: React.FC<{ skill: SkillData; index: number }> = ({ skill, index
     <FadeIn
       delay={index * 0.06}
       y={30}
-      className="group relative flex flex-col rounded-2xl p-[1px] transition-all duration-500 hover:scale-[1.025]"
-      style={{
-        background: `linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.08) 100%)`,
-      }}
+      className="group relative flex flex-col rounded-2xl transition-all duration-500 hover:scale-[1.025]"
     >
+      {/* Gradient border wrapper */}
+      <div
+        className="flex flex-col rounded-2xl p-[1px] h-full"
+        style={{
+          background: `linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.08) 100%)`,
+        }}
+      >
       {/* Card body */}
       <div
-        className={`flex flex-col gap-4 rounded-2xl p-5 h-full bg-gradient-to-br ${skill.gradient} bg-[#111111] relative overflow-hidden`}
+        className={`flex flex-col gap-4 rounded-2xl p-5 h-full bg-gradient-to-br ${skill.gradient} relative overflow-hidden`}
         style={{ backgroundColor: '#111111' }}
       >
         {/* Glow blob on hover */}
@@ -195,6 +199,7 @@ const SkillCard: React.FC<{ skill: SkillData; index: number }> = ({ skill, index
             />
           </div>
         </div>
+      </div>
       </div>
     </FadeIn>
   );
