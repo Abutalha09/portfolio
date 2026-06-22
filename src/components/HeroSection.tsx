@@ -5,34 +5,8 @@ import Magnet from './Magnet';
 import FadeIn from './FadeIn';
 import SpaceBackground from './SpaceBackground';
 
-const ISTClock: React.FC = () => {
-  const [time, setTime] = useState('');
 
-  useEffect(() => {
-    const updateClock = () => {
-      const options: Intl.DateTimeFormatOptions = {
-        timeZone: 'Asia/Kolkata',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
-      };
-      const formatter = new Intl.DateTimeFormat('en-US', options);
-      setTime(formatter.format(new Date()));
-    };
 
-    updateClock();
-    const interval = setInterval(updateClock, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 w-fit text-xs sm:text-sm text-[#D7E2EA]">
-      <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
-      <span>{time ? `${time} IST 🇮🇳` : 'IST Time'}</span>
-    </div>
-  );
-};
 
 const TypingText: React.FC = () => {
   const words = ["Web Developer", "BCA Graduate", "Space Enthusiast", "Product Support Associate"];
@@ -97,14 +71,6 @@ export const HeroSection: React.FC = () => {
       <div className="w-full max-w-7xl mx-auto px-6 md:px-10 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8 items-center z-20 mt-4 lg:mt-0">
         {/* Left Side text content */}
         <div className="lg:col-span-7 flex flex-col text-left justify-center gap-4 sm:gap-6">
-          {/* Availability & Clock row */}
-          <FadeIn delay={0.1} y={20} className="flex flex-wrap gap-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 w-fit text-xs sm:text-sm text-[#D7E2EA]">
-              <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-ping"></span>
-              Available for Freelance & Full-time
-            </div>
-            <ISTClock />
-          </FadeIn>
 
           {/* Heading */}
           <div className="overflow-hidden w-full">

@@ -1,12 +1,12 @@
-import React from 'react';
-import { 
-  Code2, 
-  Terminal, 
-  GitBranch, 
-  Database, 
-  Laptop, 
-  TrendingUp, 
-  BarChart3, 
+import React, { useRef, useEffect, useState } from 'react';
+import {
+  Code2,
+  Terminal,
+  GitBranch,
+  Database,
+  Laptop,
+  TrendingUp,
+  BarChart3,
   Headphones,
   Cpu
 } from 'lucide-react';
@@ -17,74 +17,188 @@ interface SkillData {
   category: string;
   description: string;
   icon: React.ReactNode;
-  color: string;
+  gradient: string;
+  iconBg: string;
+  glow: string;
+  level: number;
 }
 
 const skills: SkillData[] = [
   {
     name: 'HTML5 & CSS3',
     category: 'Frontend Core',
-    description: 'Structuring and styling semantic, high-performance user interfaces and responsive web layouts.',
-    icon: <Code2 className="w-6 h-6" />,
-    color: 'from-orange-500/20 to-red-500/10',
+    description: 'Semantic, high-performance user interfaces and responsive web layouts built for every viewport.',
+    icon: <Code2 className="w-5 h-5" />,
+    gradient: 'from-orange-500/15 via-red-500/8 to-transparent',
+    iconBg: 'from-orange-500 to-red-500',
+    glow: 'rgba(249,115,22,0.35)',
+    level: 88,
   },
   {
     name: 'JavaScript',
     category: 'Interactivity',
-    description: 'Dynamic scripting, state control, DOM adjustments, and modern ES6+ frontend architectures.',
-    icon: <Laptop className="w-6 h-6" />,
-    color: 'from-yellow-500/20 to-amber-500/10',
+    description: 'Dynamic scripting, state control, DOM manipulation, and modern ES6+ frontend architectures.',
+    icon: <Laptop className="w-5 h-5" />,
+    gradient: 'from-yellow-500/15 via-amber-500/8 to-transparent',
+    iconBg: 'from-yellow-400 to-amber-500',
+    glow: 'rgba(234,179,8,0.35)',
+    level: 78,
   },
   {
-    name: 'Python Coding',
+    name: 'Python',
     category: 'Programming',
-    description: 'Foundational algorithmic logic, data processing scripts, and automation tasks.',
-    icon: <Terminal className="w-6 h-6" />,
-    color: 'from-blue-500/20 to-cyan-500/10',
+    description: 'Algorithmic logic, data processing scripts, and automation for real-world problem solving.',
+    icon: <Terminal className="w-5 h-5" />,
+    gradient: 'from-blue-500/15 via-cyan-500/8 to-transparent',
+    iconBg: 'from-blue-500 to-cyan-400',
+    glow: 'rgba(59,130,246,0.35)',
+    level: 72,
   },
   {
     name: 'Git & Version Control',
     category: 'Workflow',
     description: 'Branch management, code merges, repository audits, and deployment flows using GitHub.',
-    icon: <GitBranch className="w-6 h-6" />,
-    color: 'from-purple-500/20 to-pink-500/10',
+    icon: <GitBranch className="w-5 h-5" />,
+    gradient: 'from-purple-500/15 via-pink-500/8 to-transparent',
+    iconBg: 'from-purple-500 to-pink-500',
+    glow: 'rgba(168,85,247,0.35)',
+    level: 82,
   },
   {
     name: 'Database Queries',
     category: 'Backend',
     description: 'Configuring and querying relational database tables and optimizing record alignment.',
-    icon: <Database className="w-6 h-6" />,
-    color: 'from-emerald-500/20 to-teal-500/10',
+    icon: <Database className="w-5 h-5" />,
+    gradient: 'from-emerald-500/15 via-teal-500/8 to-transparent',
+    iconBg: 'from-emerald-400 to-teal-500',
+    glow: 'rgba(16,185,129,0.35)',
+    level: 68,
   },
   {
-    name: 'SaaS Platform Support',
+    name: 'SaaS Support',
     category: 'Operations',
-    description: 'Helping clients resolve workflow gaps, operational bottlenecks, and optimizing configuration values.',
-    icon: <Headphones className="w-6 h-6" />,
-    color: 'from-rose-500/20 to-indigo-500/10',
+    description: 'Resolving workflow gaps, operational bottlenecks, and optimizing client configuration setups.',
+    icon: <Headphones className="w-5 h-5" />,
+    gradient: 'from-rose-500/15 via-indigo-500/8 to-transparent',
+    iconBg: 'from-rose-400 to-indigo-400',
+    glow: 'rgba(244,63,94,0.35)',
+    level: 90,
   },
   {
     name: 'Responsive Design',
     category: 'Interface',
     description: 'Fluid layout adjustments across mobile, tablet, and desktop viewports using CSS flex/grid.',
-    icon: <Cpu className="w-6 h-6" />,
-    color: 'from-indigo-500/20 to-purple-500/10',
+    icon: <Cpu className="w-5 h-5" />,
+    gradient: 'from-indigo-500/15 via-purple-500/8 to-transparent',
+    iconBg: 'from-indigo-400 to-purple-500',
+    glow: 'rgba(99,102,241,0.35)',
+    level: 85,
   },
   {
     name: 'Digital Marketing',
     category: 'Strategy',
-    description: 'Understanding campaign metrics, web traffic channels, and content positioning.',
-    icon: <TrendingUp className="w-6 h-6" />,
-    color: 'from-teal-500/20 to-emerald-500/10',
+    description: 'Campaign metrics, web traffic channels, SEO strategy, and content positioning for growth.',
+    icon: <TrendingUp className="w-5 h-5" />,
+    gradient: 'from-teal-500/15 via-emerald-500/8 to-transparent',
+    iconBg: 'from-teal-400 to-emerald-400',
+    glow: 'rgba(20,184,166,0.35)',
+    level: 74,
   },
   {
     name: 'Data Analytics',
     category: 'Insights',
-    description: 'Extracting data performance tables, charts, and translating numbers into clear insights.',
-    icon: <BarChart3 className="w-6 h-6" />,
-    color: 'from-cyan-500/20 to-blue-500/10',
+    description: 'Extracting performance tables, charts, and translating raw numbers into actionable insights.',
+    icon: <BarChart3 className="w-5 h-5" />,
+    gradient: 'from-cyan-500/15 via-blue-500/8 to-transparent',
+    iconBg: 'from-cyan-400 to-blue-500',
+    glow: 'rgba(6,182,212,0.35)',
+    level: 70,
   },
 ];
+
+const SkillCard: React.FC<{ skill: SkillData; index: number }> = ({ skill, index }) => {
+  const barRef = useRef<HTMLDivElement>(null);
+  const [animated, setAnimated] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setAnimated(true), index * 60);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (barRef.current) observer.observe(barRef.current);
+    return () => observer.disconnect();
+  }, [index]);
+
+  return (
+    <FadeIn
+      delay={index * 0.06}
+      y={30}
+      className="group relative flex flex-col rounded-2xl p-[1px] transition-all duration-500 hover:scale-[1.025]"
+      style={{
+        background: `linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.08) 100%)`,
+      }}
+    >
+      {/* Card body */}
+      <div
+        className={`flex flex-col gap-4 rounded-2xl p-5 h-full bg-gradient-to-br ${skill.gradient} bg-[#111111] relative overflow-hidden`}
+        style={{ backgroundColor: '#111111' }}
+      >
+        {/* Glow blob on hover */}
+        <div
+          className="absolute -top-10 -right-10 w-40 h-40 rounded-full blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+          style={{ background: skill.glow }}
+        />
+
+        {/* Top row: icon + category */}
+        <div className="flex items-start justify-between">
+          <div
+            className={`w-10 h-10 rounded-xl bg-gradient-to-br ${skill.iconBg} flex items-center justify-center text-white shadow-lg flex-shrink-0`}
+            style={{ boxShadow: `0 4px 20px ${skill.glow}` }}
+          >
+            {skill.icon}
+          </div>
+          <span className="text-[9px] uppercase tracking-[0.15em] text-[#D7E2EA]/35 font-medium mt-1">
+            {skill.category}
+          </span>
+        </div>
+
+        {/* Skill name */}
+        <div>
+          <h3 className="text-base font-bold text-[#D7E2EA] leading-tight uppercase tracking-wide">
+            {skill.name}
+          </h3>
+        </div>
+
+        {/* Description */}
+        <p className="text-[11px] sm:text-xs text-[#D7E2EA]/55 leading-relaxed flex-1">
+          {skill.description}
+        </p>
+
+        {/* Skill level bar */}
+        <div ref={barRef} className="mt-auto">
+          <div className="flex justify-between items-center mb-1.5">
+            <span className="text-[9px] uppercase tracking-[0.12em] text-[#D7E2EA]/30">Proficiency</span>
+            <span className="text-[10px] font-semibold text-[#D7E2EA]/60">{skill.level}%</span>
+          </div>
+          <div className="h-[3px] w-full rounded-full bg-white/10 overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all duration-1000 ease-out"
+              style={{
+                width: animated ? `${skill.level}%` : '0%',
+                background: `linear-gradient(90deg, ${skill.glow.replace('0.35', '0.9')}, ${skill.glow.replace('0.35', '0.5')})`,
+                boxShadow: `0 0 8px ${skill.glow}`,
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    </FadeIn>
+  );
+};
 
 export const SkillsSection: React.FC = () => {
   return (
@@ -92,42 +206,37 @@ export const SkillsSection: React.FC = () => {
       id="skills"
       className="bg-[#0C0C0C] text-[#D7E2EA] px-5 sm:px-8 md:px-10 py-24 sm:py-32 w-full z-20 relative border-t border-white/5"
     >
-      <div className="max-w-5xl mx-auto flex flex-col gap-16 md:gap-24">
-        {/* Title */}
-        <FadeIn delay={0} y={40}>
+      <div className="max-w-6xl mx-auto flex flex-col gap-16 md:gap-20">
+
+        {/* Section Header */}
+        <FadeIn delay={0} y={40} className="flex flex-col items-center gap-4 text-center">
+          {/* Label pill */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-[0.2em] text-[#D7E2EA]/50">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            Capabilities
+          </div>
+
           <h2
-            style={{ fontSize: 'clamp(2.5rem, 8vw, 100px)' }}
-            className="hero-heading font-black uppercase text-center leading-none tracking-tight"
+            className="hero-heading font-black uppercase leading-none tracking-tight"
+            style={{
+              fontSize: 'clamp(2.2rem, 7vw, 80px)',
+              background: 'linear-gradient(135deg, #ffffff 30%, rgba(255,255,255,0.45) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
           >
             Tech Arsenal
           </h2>
+
+          <p className="text-sm sm:text-base text-[#D7E2EA]/45 max-w-xl leading-relaxed">
+            A curated set of tools, languages, and disciplines I use to build, ship, and support digital products.
+          </p>
         </FadeIn>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 w-full">
           {skills.map((skill, index) => (
-            <FadeIn
-              key={skill.name}
-              delay={index * 0.05}
-              y={30}
-              className={`flex flex-col bg-gradient-to-br ${skill.color} border border-white/10 hover:border-white/25 transition-all duration-300 rounded-3xl p-6 text-left shadow-lg justify-between hover:scale-[1.02]`}
-            >
-              <div>
-                {/* Icon wrapper */}
-                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 mb-4 text-[#D7E2EA]">
-                  {skill.icon}
-                </div>
-                <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[#D7E2EA] opacity-40 block mb-1">
-                  {skill.category}
-                </span>
-                <h3 className="text-lg sm:text-xl font-bold uppercase text-[#D7E2EA] mb-2">
-                  {skill.name}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#D7E2EA]/75 font-light leading-relaxed">
-                  {skill.description}
-                </p>
-              </div>
-            </FadeIn>
+            <SkillCard key={skill.name} skill={skill} index={index} />
           ))}
         </div>
       </div>
