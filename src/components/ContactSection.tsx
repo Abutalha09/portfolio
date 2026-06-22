@@ -397,6 +397,27 @@ export const ContactSection: React.FC = () => {
                 </button>
               </form>
 
+              {/* WhatsApp Direct Contact Button */}
+              <a
+                href="https://wa.me/919120038438"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative z-10 w-full mt-4 flex items-center justify-center gap-3 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 hover:border-[#25D366]/60 text-[#25D366] font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(37,211,102,0.08)] hover:shadow-[0_0_30px_rgba(37,211,102,0.2)] hover:scale-[1.01] active:scale-[0.99] group/wa"
+                aria-label="Contact on WhatsApp +91 9120038438"
+              >
+                {/* WhatsApp SVG Icon */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 32 32"
+                  className="w-5 h-5 fill-[#25D366] flex-shrink-0 group-hover/wa:scale-110 transition-transform duration-300"
+                >
+                  <path d="M16.003 2.667C8.637 2.667 2.667 8.637 2.667 16c0 2.37.635 4.59 1.745 6.51L2.667 29.333l6.993-1.713A13.28 13.28 0 0 0 16.003 29.333c7.363 0 13.33-5.97 13.33-13.333S23.366 2.667 16.003 2.667zm0 24.4a11.02 11.02 0 0 1-5.617-1.54l-.403-.24-4.153 1.017 1.053-3.87-.263-.397A11.04 11.04 0 0 1 4.933 16c0-6.11 4.96-11.067 11.07-11.067S27.07 9.89 27.07 16 22.113 27.067 16.003 27.067zm6.07-8.283c-.333-.167-1.97-.973-2.277-1.083-.307-.11-.53-.167-.753.167-.223.333-.863 1.083-1.06 1.307-.197.22-.393.25-.727.083-.333-.167-1.407-.52-2.68-1.653-.99-.883-1.66-1.973-1.853-2.307-.193-.333-.02-.513.147-.68.15-.15.333-.39.5-.587.167-.197.223-.333.333-.557.11-.22.057-.417-.027-.583-.083-.167-.753-1.817-1.033-2.487-.273-.65-.55-.563-.753-.573l-.64-.01c-.223 0-.583.083-.89.417s-1.167 1.14-1.167 2.78 1.193 3.227 1.36 3.45c.167.223 2.35 3.587 5.693 5.03.797.343 1.42.548 1.903.7.8.253 1.527.217 2.103.133.64-.097 1.97-.807 2.247-1.587.277-.78.277-1.447.193-1.587-.083-.14-.307-.223-.64-.39z"/>
+                </svg>
+                <span className="text-sm uppercase tracking-widest">
+                  WhatsApp Me · +91 91200 38438
+                </span>
+              </a>
+
               {/* Social divider */}
               <div className="flex items-center justify-center my-5 w-full gap-4 z-10">
                 <div className="h-[1px] bg-white/10 flex-grow"></div>
@@ -425,11 +446,11 @@ export const ContactSection: React.FC = () => {
                   <Github className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://www.instagram.com/abutalha09/"
+                  href="https://www.instagram.com/tallllllhhhaa/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-11 h-11 rounded-xl bg-[#0C0C0C] border border-white/10 text-[#D7E2EA]/70 hover:border-pink-400/40 hover:text-pink-400 transition-all flex items-center justify-center shadow-md hover:shadow-[0_0_15px_rgba(236,72,153,0.15)]"
-                  aria-label="Instagram @abutalha09"
+                  aria-label="Instagram @tallllllhhhaa"
                 >
                   <Instagram className="w-5 h-5" />
                 </a>
@@ -474,11 +495,11 @@ export const ContactSection: React.FC = () => {
               <Github className="w-5 h-5" />
             </a>
             <a
-              href="https://www.instagram.com/abutalha09/"
+              href="https://www.instagram.com/tallllllhhhaa/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-[#D7E2EA] hover:bg-pink-500/10 hover:border-pink-400/40 hover:text-pink-400 transition-all flex items-center justify-center"
-              aria-label="Instagram @abutalha09"
+              aria-label="Instagram @tallllllhhhaa"
             >
               <Instagram className="w-5 h-5" />
             </a>
