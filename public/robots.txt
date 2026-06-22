@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Sitemaps
 Sitemap: https://abutalha09.vercel.app/sitemap.xml
+
+# Block irrelevant paths
+Disallow: /node_modules/
+Disallow: /.git/

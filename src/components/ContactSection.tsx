@@ -425,8 +425,17 @@ export const ContactSection: React.FC = () => {
                   <Github className="w-5 h-5" />
                 </a>
                 <a
-                  href="mailto:mdsaif2357@gmail.com"
+                  href="https://www.instagram.com/abutalha09/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-11 h-11 rounded-xl bg-[#0C0C0C] border border-white/10 text-[#D7E2EA]/70 hover:border-pink-400/40 hover:text-pink-400 transition-all flex items-center justify-center shadow-md hover:shadow-[0_0_15px_rgba(236,72,153,0.15)]"
+                  aria-label="Instagram @abutalha09"
+                >
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a
+                  href="mailto:mdsaif2357@gmail.com"
+                  className="w-11 h-11 rounded-xl bg-[#0C0C0C] border border-white/10 text-[#D7E2EA]/70 hover:border-orange-400/40 hover:text-orange-400 transition-all flex items-center justify-center shadow-md hover:shadow-[0_0_15px_rgba(251,146,60,0.15)]"
                   aria-label="Email"
                 >
                   <Mail className="w-5 h-5" />
@@ -465,11 +474,11 @@ export const ContactSection: React.FC = () => {
               <Github className="w-5 h-5" />
             </a>
             <a
-              href="https://www.instagram.com/tallllllhhhaa/"
+              href="https://www.instagram.com/abutalha09/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-[#D7E2EA] hover:bg-pink-500/10 hover:border-pink-400/40 hover:text-pink-400 transition-all flex items-center justify-center"
-              aria-label="Instagram"
+              aria-label="Instagram @abutalha09"
             >
               <Instagram className="w-5 h-5" />
             </a>
