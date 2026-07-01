@@ -105,7 +105,7 @@ export const AboutSection: React.FC = () => {
           {/* Description Right (7 cols) */}
           <div className="md:col-span-7 flex flex-col gap-8 text-center md:text-left">
             <AnimatedText
-              text="I am a passionate Web Developer who graduated with a Bachelor's degree in Computer Applications (BCA). I love building fast, clean, and interactive user interfaces using modern web methodologies. During my structured training, I contributed actively to school management portals and administrative backends, reinforcing my knowledge of database alignment, frontend state flow, and teamwork. I am continuously learning, and currently working as a Product Support Associate, helping clients configure and optimize complex enterprise operations across school and hotel management spaces. Let's build something incredible together!"
+              text="I am a passionate Web Developer and BCA graduate, widely known online as Abutalha09 (abutalha09). I love building fast, clean, and interactive user interfaces using modern web methodologies. During my structured training, I contributed actively to school management portals and administrative backends, reinforcing my knowledge of database alignment, frontend state flow, and teamwork. I am continuously learning, and currently working as a Product Support Associate, helping clients configure and optimize complex enterprise operations across school and hotel management spaces. Let's build something incredible together!"
               className="text-[#D7E2EA] font-medium leading-relaxed select-none text-[clamp(0.95rem,1.8vw,1.25rem)] text-center md:text-left"
             />
 

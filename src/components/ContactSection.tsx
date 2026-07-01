@@ -430,34 +430,37 @@ export const ContactSection: React.FC = () => {
                 <a
                   href="https://www.linkedin.com/in/mohammad-abutalha-932771363/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer me"
+                  title="Mohammad Abutalha on LinkedIn"
                   className="w-11 h-11 rounded-xl bg-[#0C0C0C] border border-white/10 text-[#D7E2EA]/70 hover:border-cyan-400/40 hover:text-cyan-400 transition-all flex items-center justify-center shadow-md hover:shadow-[0_0_15px_rgba(34,211,238,0.15)]"
-                  aria-label="LinkedIn"
+                  aria-label="LinkedIn profile of Mohammad Abutalha"
                 >
                   <Linkedin className="w-5 h-5" />
                 </a>
                 <a
                   href="https://github.com/Abutalha09"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer me"
+                  title="Mohammad Abutalha (Abutalha09) on GitHub"
                   className="w-11 h-11 rounded-xl bg-[#0C0C0C] border border-white/10 text-[#D7E2EA]/70 hover:border-purple-400/40 hover:text-purple-400 transition-all flex items-center justify-center shadow-md hover:shadow-[0_0_15px_rgba(168,85,247,0.15)]"
-                  aria-label="GitHub"
+                  aria-label="GitHub profile of Mohammad Abutalha (Abutalha09)"
                 >
                   <Github className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://www.instagram.com/tallllllhhhaa/"
+                  href="https://www.instagram.com/abutalha0923/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer me"
+                  title="Mohammad Abutalha (abutalha0923) on Instagram"
                   className="w-11 h-11 rounded-xl bg-[#0C0C0C] border border-white/10 text-[#D7E2EA]/70 hover:border-pink-400/40 hover:text-pink-400 transition-all flex items-center justify-center shadow-md hover:shadow-[0_0_15px_rgba(236,72,153,0.15)]"
-                  aria-label="Instagram @tallllllhhhaa"
+                  aria-label="Instagram profile of Mohammad Abutalha (@abutalha0923)"
                 >
                   <Instagram className="w-5 h-5" />
                 </a>
                 <a
                   href="mailto:mdsaif2357@gmail.com"
                   className="w-11 h-11 rounded-xl bg-[#0C0C0C] border border-white/10 text-[#D7E2EA]/70 hover:border-orange-400/40 hover:text-orange-400 transition-all flex items-center justify-center shadow-md hover:shadow-[0_0_15px_rgba(251,146,60,0.15)]"
-                  aria-label="Email"
+                  aria-label="Email Mohammad Abutalha"
                 >
                   <Mail className="w-5 h-5" />
                 </a>
@@ -479,27 +482,30 @@ export const ContactSection: React.FC = () => {
             <a
               href="https://www.linkedin.com/in/mohammad-abutalha-932771363/"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer me"
+              title="Mohammad Abutalha on LinkedIn"
               className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-[#D7E2EA] hover:bg-cyan-500/10 hover:border-cyan-400/40 hover:text-cyan-400 transition-all flex items-center justify-center"
-              aria-label="LinkedIn"
+              aria-label="LinkedIn profile of Mohammad Abutalha"
             >
               <Linkedin className="w-5 h-5" />
             </a>
             <a
               href="https://github.com/Abutalha09"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer me"
+              title="Mohammad Abutalha (Abutalha09) on GitHub"
               className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-[#D7E2EA] hover:bg-purple-500/10 hover:border-purple-400/40 hover:text-purple-400 transition-all flex items-center justify-center"
-              aria-label="GitHub"
+              aria-label="GitHub profile of Mohammad Abutalha (Abutalha09)"
             >
               <Github className="w-5 h-5" />
             </a>
             <a
-              href="https://www.instagram.com/tallllllhhhaa/"
+              href="https://www.instagram.com/abutalha0923/"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer me"
+              title="Mohammad Abutalha (abutalha0923) on Instagram"
               className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-[#D7E2EA] hover:bg-pink-500/10 hover:border-pink-400/40 hover:text-pink-400 transition-all flex items-center justify-center"
-              aria-label="Instagram @tallllllhhhaa"
+              aria-label="Instagram profile of Mohammad Abutalha (@abutalha0923)"
             >
               <Instagram className="w-5 h-5" />
             </a>
