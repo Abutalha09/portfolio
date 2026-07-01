@@ -77,9 +77,6 @@ export const HeroSection: React.FC = () => {
             <FadeIn delay={0.2} y={40} as="h1" className="hero-heading font-black uppercase tracking-tight leading-none text-[8vw] sm:text-[7vw] lg:text-[5.5vw]">
               Hi, I&apos;m <br />
               Mohammad Abutalha
-              <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 font-bold tracking-wider mt-3 lowercase normal-case">
-                (@abutalha09)
-              </span>
             </FadeIn>
           </div>
 
