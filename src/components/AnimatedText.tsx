@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 interface AnimatedTextProps {
   text: string;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 interface CharacterProps {
@@ -24,7 +25,7 @@ const Character: React.FC<CharacterProps> = ({ char, progress, range }) => {
   );
 };
 
-export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = '' }) => {
+export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = '', style }) => {
   const containerRef = useRef<HTMLParagraphElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -37,7 +38,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = ''
   let charIndexOffset = 0;
 
   return (
-    <p ref={containerRef} className={`${className} flex flex-wrap justify-center`}>
+    <p ref={containerRef} className={`${className} flex flex-wrap justify-center`} style={style}>
       {words.map((word, wordIdx) => {
         const chars = word.split('');
         const renderedWord = (

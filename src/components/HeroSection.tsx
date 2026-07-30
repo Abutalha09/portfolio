@@ -45,7 +45,6 @@ interface HeroSectionProps {
 /* ─── Component ─────────────────────────────────── */
 export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => {
   const [activeNav, setActiveNav] = useState('HOME');
-  const [scrolled, setScrolled] = useState(false);
   const [countersStarted, setCountersStarted] = useState(false);
 
   /* Refs for GSAP targets */
@@ -139,12 +138,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
     return () => { tl.kill(); };
   }, [animate]);
 
-  /* ── Scroll: sidebar trigger ─────────────────── */
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+
 
   /* ── Smooth scroll helper ─────────────────────── */
   const scrollTo = (id: string | null, label: string) => {
