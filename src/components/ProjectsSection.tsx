@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import LiveProjectButton from './LiveProjectButton';
 import FadeIn from './FadeIn';
 
 interface ProjectData {
@@ -9,9 +8,7 @@ interface ProjectData {
   category: string;
   description: string;
   techTags: string[];
-  col1Img1: string;
-  col1Img2: string;
-  col2Img: string;
+  img: string;
   liveLink: string;
 }
 
@@ -20,44 +17,36 @@ const featuredProjects: ProjectData[] = [
     id: '01',
     name: 'Cosmic Portfolio',
     category: 'Brand Showcase',
-    description: 'This interactive portfolio, designed with deep space dynamics, canvas particle flows, custom spring delay ring cursor, and extreme glassmorphism panels.',
+    description: 'An interactive portfolio with deep space dynamics, canvas particle flows, custom cursor, and glassmorphism panels.',
     techTags: ['Canvas API', 'CSS variables', 'GitHub Pages'],
-    col1Img1: '/portfolio.png',
-    col1Img2: '/talha2.jpg',
-    col2Img: '/portfolio.png',
+    img: '/portfolio.png',
     liveLink: 'https://abutalha09.github.io/portfolio/',
   },
   {
     id: '02',
     name: 'Video Downloader',
-    category: 'Media Downloader',
-    description: 'A clean, high-performance media downloader utility optimized for rapid client link parsing and download queues.',
-    techTags: ['HTML/CSS', 'JavaScript', 'Render Deployment'],
-    col1Img1: '/abusha.png',
-    col1Img2: '/download.jpg',
-    col2Img: '/abusha.png',
+    category: 'Media Tool',
+    description: 'A high-performance media downloader utility optimized for rapid client link parsing and download queues.',
+    techTags: ['HTML/CSS', 'JavaScript', 'Render'],
+    img: '/abusha.png',
     liveLink: 'https://abusha.onrender.com',
   },
   {
     id: '03',
     name: 'Al-Madina Telecom',
     category: 'Repair Shop Studio',
-    description: 'A premium mobile and watch repair studio landing page featuring trusted device care, diagnostic details, and a booking workflow.',
-    techTags: ['HTML5 & CSS3', 'JavaScript', 'Netlify Host'],
-    col1Img1: '/almadina.png',
-    col1Img2: '/calculator.png',
-    col2Img: '/almadina.png',
+    description: 'Premium mobile and watch repair studio landing page with diagnostic details and a booking workflow.',
+    techTags: ['HTML5', 'CSS3', 'JavaScript', 'Netlify'],
+    img: '/almadina.png',
     liveLink: 'https://almadina1.netlify.app/',
   },
   {
     id: '04',
     name: 'Sleek Calculator',
-    category: 'Everyday Utility',
-    description: 'A light-weight calculator application providing prompt evaluations, tactile clicking, and advanced dark/light responsive layout.',
-    techTags: ['HTML5', 'Flexbox CSS', 'Calculations'],
-    col1Img1: '/Calculator1.png',
-    col1Img2: '/calculator.png',
-    col2Img: '/Calculator1.png',
+    category: 'Utility App',
+    description: 'A lightweight calculator with prompt evaluations, tactile click feedback, and dark/light responsive layout.',
+    techTags: ['HTML5', 'CSS Flexbox', 'Vanilla JS'],
+    img: '/Calculator1.png',
     liveLink: 'https://abutalha09.github.io/calculator/',
   },
 ];
@@ -66,7 +55,7 @@ const otherProjects = [
   {
     name: 'Tic Tac Toe',
     category: 'Interactive Game',
-    description: 'A tactile and responsive Tic Tac Toe game with smooth game resets, score logging, and an elegant UI.',
+    description: 'A tactile Tic Tac Toe game with smooth resets, score logging, and elegant UI.',
     techTags: ['Vanilla JS', 'CSS variables', 'State Tracking'],
     img: '/Tic tac toe.png',
     link: 'https://github.com/Abutalha09',
@@ -74,107 +63,111 @@ const otherProjects = [
   {
     name: 'Rock Paper Scissors',
     category: 'Interactive Game',
-    description: 'Classic interactive game incorporating score logs, animation resets on select, and responsive layouts for mobile screens.',
+    description: 'Classic game with animation resets, score tracking, and responsive layouts for mobile.',
     techTags: ['Vanilla JS', 'Web Animations', 'Score Tracker'],
     img: '/rock paper.png',
     link: 'https://github.com/Abutalha09',
   },
 ];
 
-interface CardProps {
+interface StickyCardProps {
   project: ProjectData;
   index: number;
   totalCards: number;
 }
 
-const Card: React.FC<CardProps> = ({ project, index, totalCards }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
+const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) => {
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
   });
-
   const targetScale = 1 - (totalCards - 1 - index) * 0.03;
   const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale]);
 
   return (
     <div
       ref={containerRef}
-      style={{
-        top: `calc(${index * 28}px + 6rem)`,
-      }}
-      className="sticky h-[85vh] w-full origin-top"
+      style={{ top: `calc(${index * 24}px + 5rem)` }}
+      className="sticky h-[82vh] w-full origin-top"
     >
       <motion.div
-        style={{
-          scale,
-        }}
-        className="w-full h-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-5 sm:p-7 md:p-9 flex flex-col justify-between overflow-hidden shadow-[0_-20px_50px_rgba(0,0,0,0.8)]"
+        style={{ scale }}
+        className="w-full h-full overflow-hidden shadow-xl"
       >
-        {/* Top Row */}
-        <div className="flex flex-row items-center justify-between w-full">
-          <div className="flex flex-row items-center gap-4 sm:gap-6 md:gap-8">
-            {/* Number */}
-            <div
-              style={{ fontSize: 'clamp(2rem, 6vw, 75px)' }}
-              className="font-black text-[#D7E2EA] leading-none select-none"
-            >
-              {project.id}
-            </div>
-            {/* Category and Name */}
-            <div className="flex flex-col text-left">
-              <span className="text-xs sm:text-sm uppercase tracking-widest text-[#D7E2EA] opacity-60">
-                {project.category}
-              </span>
+        <div
+          style={{
+            borderRadius: '32px',
+            border: '2px solid rgba(17,17,17,0.15)',
+            background: index % 2 === 0 ? '#F0EDE6' : '#E8E4DC',
+            width: '100%',
+            height: '100%',
+          }}
+          className="flex flex-col p-6 sm:p-8 md:p-10"
+        >
+          {/* Top row */}
+          <div className="flex items-start justify-between mb-5 sm:mb-6">
+            <div className="flex items-center gap-4 sm:gap-6">
               <span
-                style={{ fontSize: 'clamp(1rem, 2.2vw, 1.8rem)' }}
-                className="font-semibold uppercase text-[#D7E2EA] leading-tight"
+                className="font-black leading-none select-none"
+                style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', fontFamily: "'Inter'", color: 'rgba(17,17,17,0.1)' }}
               >
-                {project.name}
+                {project.id}
               </span>
+              <div>
+                <p className="text-[0.6rem] uppercase tracking-[0.18em] text-[#888] font-semibold mb-0.5">
+                  {project.category}
+                </p>
+                <h3
+                  className="font-black uppercase text-[#111] leading-none"
+                  style={{ fontSize: 'clamp(1rem, 2.5vw, 2rem)', fontFamily: "'Inter'" }}
+                >
+                  {project.name}
+                </h3>
+              </div>
+            </div>
+            <a
+              href={project.liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-yellow text-[0.65rem] py-2 px-4 flex-shrink-0"
+              id={`project-link-${project.id}`}
+            >
+              Live ↗
+            </a>
+          </div>
+
+          {/* Description and tags */}
+          <div className="mb-5">
+            <p className="text-sm sm:text-base text-[#444] leading-relaxed max-w-2xl mb-3">
+              {project.description}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {project.techTags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-[0.6rem] px-2.5 py-1 rounded-full font-bold uppercase tracking-wide"
+                  style={{ background: 'rgba(17,17,17,0.08)', color: '#333', border: '1px solid rgba(17,17,17,0.12)' }}
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
-          {/* Live Button */}
-          <LiveProjectButton href={project.liveLink} />
-        </div>
 
-        {/* Mid description & tags */}
-        <div className="text-left mt-2 flex flex-col gap-2">
-          <p className="text-xs sm:text-sm md:text-base text-[#D7E2EA]/80 font-light leading-relaxed max-w-3xl">
-            {project.description}
-          </p>
-          <div className="flex flex-wrap gap-2 mt-1">
-            {project.techTags.map((tech) => (
-              <span key={tech} className="text-[10px] sm:text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-[#D7E2EA]/70">
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom Row: Two column image grid */}
-        <div className="flex flex-row gap-4 sm:gap-6 md:gap-8 flex-grow mt-4 sm:mt-6 overflow-hidden items-stretch h-0">
-          {/* Left Column (40% width) */}
-          <div className="w-[40%] flex flex-col gap-4 sm:gap-6 md:gap-8 justify-between h-full">
+          {/* Project image */}
+          <div
+            className="flex-1 overflow-hidden"
+            style={{
+              borderRadius: '20px',
+              border: '1px solid rgba(17,17,17,0.1)',
+              minHeight: 0,
+            }}
+          >
             <img
-              src={project.col1Img1}
-              alt={`${project.name} mockup 1`}
-              className="w-full h-[45%] object-cover rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border border-white/5"
-            />
-            <img
-              src={project.col1Img2}
-              alt={`${project.name} mockup 2`}
-              className="w-full h-[45%] object-cover rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border border-white/5 flex-grow"
-            />
-          </div>
-
-          {/* Right Column (60% width) */}
-          <div className="w-[60%] flex h-full">
-            <img
-              src={project.col2Img}
-              alt={`${project.name} design rendering`}
-              className="w-full h-full object-cover rounded-[30px] sm:rounded-[40px] md:rounded-[55px] border border-white/5"
+              src={project.img}
+              alt={project.name}
+              className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
             />
           </div>
         </div>
@@ -186,120 +179,130 @@ const Card: React.FC<CardProps> = ({ project, index, totalCards }) => {
 export const ProjectsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<'All' | 'Apps' | 'Games'>('All');
   const filters: ('All' | 'Apps' | 'Games')[] = ['All', 'Apps', 'Games'];
-
   const showApps = activeFilter === 'All' || activeFilter === 'Apps';
   const showGames = activeFilter === 'All' || activeFilter === 'Games';
 
   return (
     <section
       id="projects"
-      className="bg-[#0C0C0C] text-[#D7E2EA] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 px-5 sm:px-8 md:px-10 py-24 sm:py-32 md:py-40 z-20 relative flex flex-col gap-16 md:gap-24"
+      className="w-full px-4 sm:px-8 md:px-10 py-20 sm:py-28 relative"
+      style={{ background: '#CAC5BA' }}
     >
-      {/* Title & Filters */}
-      <div className="flex flex-col gap-6 sm:gap-8 items-center w-full">
-        <FadeIn delay={0} y={40}>
+      <div className="max-w-5xl mx-auto">
+        {/* Label */}
+        <FadeIn delay={0} y={20} className="flex justify-center mb-4">
+          <span className="tag-yellow">03 — Projects</span>
+        </FadeIn>
+
+        {/* Title */}
+        <FadeIn delay={0.1} y={40} className="text-center mb-10">
           <h2
-            style={{ fontSize: 'clamp(2.5rem, 8vw, 100px)' }}
-            className="hero-heading font-black uppercase text-center leading-none tracking-tight"
+            className="section-heading"
+            style={{ fontSize: 'clamp(2.2rem, 6vw, 5rem)' }}
           >
             My Creations
           </h2>
         </FadeIn>
 
-        {/* Filters Tabs */}
-        <FadeIn delay={0.1} y={20}>
-          <div className="flex bg-white/5 border border-white/10 p-1 rounded-full backdrop-blur-md">
-            {filters.map((filter) => (
+        {/* Filters */}
+        <FadeIn delay={0.15} y={20} className="flex justify-center mb-14 sm:mb-20">
+          <div
+            className="flex p-1 rounded-full"
+            style={{ background: 'rgba(17,17,17,0.08)', border: '1px solid rgba(17,17,17,0.12)' }}
+          >
+            {filters.map((f) => (
               <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`px-5 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-widest cursor-pointer transition-all duration-300 ${
-                  activeFilter === filter
-                    ? 'bg-[#D7E2EA] text-[#0C0C0C] shadow-lg font-bold'
-                    : 'text-[#D7E2EA]/60 hover:text-white'
-                }`}
+                key={f}
+                onClick={() => setActiveFilter(f)}
+                className="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer"
+                style={{
+                  background: activeFilter === f ? '#E8FF2A' : 'transparent',
+                  color: activeFilter === f ? '#111' : '#666',
+                  boxShadow: activeFilter === f ? '0 2px 12px rgba(232,255,42,0.3)' : 'none',
+                  fontFamily: "'Inter'",
+                }}
               >
-                {filter}
+                {f}
               </button>
             ))}
           </div>
         </FadeIn>
-      </div>
 
-      {/* Cards stack (Apps) */}
-      {showApps && (
-        <div className="max-w-5xl mx-auto w-full flex flex-col gap-12 relative">
-          {featuredProjects.map((project, index) => (
-            <Card
-              key={project.id}
-              project={project}
-              index={index}
-              totalCards={featuredProjects.length}
-            />
-          ))}
-        </div>
-      )}
+        {/* Sticky cards */}
+        {showApps && (
+          <div className="flex flex-col gap-10 relative mb-16">
+            {featuredProjects.map((project, index) => (
+              <StickyCard
+                key={project.id}
+                project={project}
+                index={index}
+                totalCards={featuredProjects.length}
+              />
+            ))}
+          </div>
+        )}
 
-      {/* Other Projects Grid (Games) */}
-      {showGames && (
-        <div className="max-w-5xl mx-auto w-full flex flex-col gap-10 mt-16 sm:mt-24">
-          <FadeIn delay={0} y={30}>
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase text-center tracking-wider text-[#D7E2EA]">
-              Interactive Game Builds
-            </h3>
-          </FadeIn>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
-            {otherProjects.map((project, idx) => (
-              <FadeIn
-                key={project.name}
-                delay={idx * 0.1}
-                y={30}
-                className="group flex flex-col bg-[#0F0F0F] rounded-[30px] border border-white/10 p-5 text-left hover:border-white/20 transition-all duration-300 shadow-lg justify-between"
+        {/* Games grid */}
+        {showGames && (
+          <div className="mt-20 sm:mt-28">
+            <FadeIn delay={0} y={25}>
+              <h3
+                className="font-black uppercase text-center mb-10 tracking-wider"
+                style={{ fontSize: 'clamp(1.2rem, 3vw, 2rem)', fontFamily: "'Inter'", color: '#111' }}
               >
-                <div>
-                  {/* Image frame */}
-                  <div className="w-full aspect-[16/10] overflow-hidden rounded-[20px] mb-4 bg-[#0C0C0C] border border-white/5">
+                Interactive Games
+              </h3>
+            </FadeIn>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {otherProjects.map((proj, idx) => (
+                <FadeIn
+                  key={proj.name}
+                  delay={idx * 0.1}
+                  y={30}
+                  className="group card-light p-5 hover:scale-[1.01] transition-all duration-300"
+                >
+                  <div
+                    className="w-full aspect-[16/10] overflow-hidden rounded-xl mb-4"
+                    style={{ border: '1px solid rgba(17,17,17,0.08)' }}
+                  >
                     <img
-                      src={project.img}
-                      alt={project.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      src={proj.img}
+                      alt={proj.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  {/* Meta */}
-                  <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[#D7E2EA] opacity-50 block mb-1">
-                    {project.category}
+                  <span className="text-[0.6rem] font-bold uppercase tracking-widest text-[#888] block mb-1">
+                    {proj.category}
                   </span>
-                  <h4 className="text-lg sm:text-xl font-bold uppercase text-[#D7E2EA] mb-2 group-hover:text-[#BBCCD7] transition-colors">
-                    {project.name}
+                  <h4 className="font-black uppercase text-[#111] text-lg mb-2" style={{ fontFamily: "'Inter'" }}>
+                    {proj.name}
                   </h4>
-                  <p className="text-xs sm:text-sm text-[#D7E2EA]/70 font-light leading-relaxed mb-4">
-                    {project.description}
-                  </p>
-                </div>
-
-                <div>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.techTags.map((tech) => (
-                      <span key={tech} className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[#D7E2EA]/60">
-                        {tech}
+                  <p className="text-xs text-[#555] leading-relaxed mb-4">{proj.description}</p>
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {proj.techTags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[0.6rem] px-2 py-0.5 rounded-full font-bold uppercase"
+                        style={{ background: 'rgba(17,17,17,0.07)', color: '#555', border: '1px solid rgba(17,17,17,0.1)' }}
+                      >
+                        {tag}
                       </span>
                     ))}
                   </div>
                   <a
-                    href={project.link}
+                    href={proj.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block px-5 py-2.5 rounded-full border border-[#D7E2EA]/40 text-[#D7E2EA] text-xs font-semibold tracking-wider uppercase hover:bg-white/5 transition-all w-full text-center"
+                    className="btn-outline text-xs w-full justify-center"
                   >
-                    View Code
+                    View Code ↗
                   </a>
-                </div>
-              </FadeIn>
-            ))}
+                </FadeIn>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 };

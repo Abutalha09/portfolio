@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import FadeIn from './FadeIn';
 
 const row1Images = [
   '/portfolio.png',
@@ -21,81 +22,46 @@ const row2Images = [
 ];
 
 export const MarqueeSection: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const row1Ref = useRef<HTMLDivElement>(null);
-  const row2Ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const sectionTop = rect.top + window.scrollY;
-      const offset = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
-      
-      const x1 = offset - 200;
-      const x2 = -(offset - 200);
-
-      if (row1Ref.current) {
-        row1Ref.current.style.transform = `translate3d(${x1}px, 0, 0)`;
-      }
-      if (row2Ref.current) {
-        row2Ref.current.style.transform = `translate3d(${x2}px, 0, 0)`;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    // Trigger on mount to calculate initial offset
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  // Triple the images for seamless scrolling
-  const tripledRow1 = [...row1Images, ...row1Images, ...row1Images];
-  const tripledRow2 = [...row2Images, ...row2Images, ...row2Images];
+  const doubled1 = [...row1Images, ...row1Images];
+  const doubled2 = [...row2Images, ...row2Images];
 
   return (
     <section
-      ref={containerRef}
-      className="bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden w-full flex flex-col gap-3"
+      className="w-full overflow-hidden py-10 sm:py-14 flex flex-col gap-3"
+      style={{ background: '#BFB9AE', borderTop: '1px solid rgba(17,17,17,0.08)', borderBottom: '1px solid rgba(17,17,17,0.08)' }}
     >
-      {/* Row 1: moves right */}
+      {/* Section label */}
+      <FadeIn delay={0} y={0} className="flex justify-center mb-2">
+        <span className="tag-yellow">My Work</span>
+      </FadeIn>
+
+      {/* Row 1: slides left (CSS marquee) */}
       <div className="w-full overflow-hidden flex">
-        <div
-          ref={row1Ref}
-          className="flex gap-3"
-          style={{ willChange: 'transform', transform: 'translate3d(0, 0, 0)' }}
-        >
-          {tripledRow1.map((url, i) => (
+        <div className="flex gap-3 animate-marquee-left" style={{ width: 'max-content' }}>
+          {doubled1.map((url, i) => (
             <img
-              key={`row1-${i}`}
+              key={`r1-${i}`}
               src={url}
-              alt={`Work element ${i}`}
+              alt={`project ${i}`}
               loading="lazy"
-              style={{ width: '420px', height: '270px' }}
-              className="rounded-2xl object-cover shrink-0 select-none"
+              style={{ width: '380px', height: '240px', flexShrink: 0, borderRadius: '16px', border: '1px solid rgba(17,17,17,0.1)' }}
+              className="object-cover select-none"
             />
           ))}
         </div>
       </div>
 
-      {/* Row 2: moves left */}
+      {/* Row 2: slides right */}
       <div className="w-full overflow-hidden flex">
-        <div
-          ref={row2Ref}
-          className="flex gap-3"
-          style={{ willChange: 'transform', transform: 'translate3d(0, 0, 0)' }}
-        >
-          {tripledRow2.map((url, i) => (
+        <div className="flex gap-3 animate-marquee-right" style={{ width: 'max-content' }}>
+          {doubled2.map((url, i) => (
             <img
-              key={`row2-${i}`}
+              key={`r2-${i}`}
               src={url}
-              alt={`Work element ${i}`}
+              alt={`project alt ${i}`}
               loading="lazy"
-              style={{ width: '420px', height: '270px' }}
-              className="rounded-2xl object-cover shrink-0 select-none"
+              style={{ width: '380px', height: '240px', flexShrink: 0, borderRadius: '16px', border: '1px solid rgba(17,17,17,0.1)' }}
+              className="object-cover select-none"
             />
           ))}
         </div>

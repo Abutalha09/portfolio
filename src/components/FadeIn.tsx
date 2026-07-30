@@ -10,34 +10,43 @@ interface FadeInProps {
   as?: keyof JSX.IntrinsicElements;
   className?: string;
   id?: string;
+  blur?: boolean;
 }
 
 export const FadeIn: React.FC<FadeInProps> = ({
   children,
   delay = 0,
-  duration = 0.7,
+  duration = 0.85,
   x = 0,
-  y = 30,
+  y = 35,
   as = 'div',
   className = '',
   id,
+  blur = true,
 }) => {
-  // Memoize so motion.create() is NOT called on every re-render.
-  // Without this, every parent state change (e.g. isPlaying) would create a
-  // brand-new component type, causing Framer Motion to reset the animation
-  // to opacity:0 — producing the "blink / flash black" bug.
+  // Memoize motion component creation
   const MotionComponent = useMemo(() => motion.create(as as any), [as]);
 
   return (
     <MotionComponent
       id={id}
-      initial={{ opacity: 0, x, y }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: '50px', amount: 0 }}
+      initial={{
+        opacity: 0,
+        x,
+        y,
+        filter: blur ? 'blur(14px)' : 'blur(0px)',
+      }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+        y: 0,
+        filter: 'blur(0px)',
+      }}
+      viewport={{ once: false, margin: '-30px', amount: 0.1 }}
       transition={{
         delay,
         duration,
-        ease: [0.25, 0.1, 0.25, 1],
+        ease: [0.22, 1, 0.36, 1],
       }}
       className={className}
     >

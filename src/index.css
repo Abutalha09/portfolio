@@ -10,96 +10,271 @@
   }
 
   html, body, #root {
-    background-color: #0C0C0C;
-    color: #D7E2EA;
-    font-family: 'Kanit', sans-serif;
+    background-color: #CAC5BA;
+    color: #111111;
+    font-family: 'Inter', 'Kanit', sans-serif;
     min-height: 100vh;
     overflow-x: clip;
   }
 }
 
-.hero-heading {
-  background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* ─── CSS Custom Properties ─────────────────────── */
+:root {
+  --bg-primary:  #CAC5BA;
+  --bg-light:    #D8D3C8;
+  --bg-card:     #BFBAB0;
+  --bg-dark:     #111111;
+  --text-dark:   #111111;
+  --text-mid:    #444444;
+  --text-light:  #777777;
+  --accent:      #E8FF2A;
+  --accent-dark: #C8DF00;
+  --border:      rgba(17,17,17,0.12);
+  --border-dark: rgba(17,17,17,0.22);
 }
 
+/* ─── Hero Giant Name Letters ───────────────────── */
+.hero-name-bg {
+  font-family: 'Inter', 'Kanit', sans-serif;
+  font-weight: 900;
+  color: #111111;
+  opacity: 0.08;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ─── Section headings ──────────────────────────── */
+.section-heading {
+  font-family: 'Inter', 'Kanit', sans-serif;
+  font-weight: 900;
+  color: #111111;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+}
+
+/* ─── Yellow accent pill ────────────────────────── */
+.tag-yellow {
+  background: var(--accent);
+  color: #111111;
+  font-weight: 700;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+/* ─── Floating animations ───────────────────────── */
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
 }
-
-.animate-float-slow {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-float-medium {
-  animation: float 4.5s ease-in-out infinite;
-}
-
 @keyframes float1 {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(2deg); }
+  50%       { transform: translateY(-8px) rotate(2deg); }
 }
 @keyframes float2 {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-12px) rotate(-3deg); }
+  50%       { transform: translateY(-12px) rotate(-3deg); }
 }
 @keyframes float3 {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-6px) rotate(1deg); }
+  50%       { transform: translateY(-6px) rotate(1deg); }
 }
 @keyframes float4 {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(-2deg); }
-}
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.8; box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), 0 0 40px rgba(34, 211, 238, 0.2); }
-  50% { opacity: 1; box-shadow: 0 0 30px rgba(168, 85, 247, 0.6), 0 0 60px rgba(34, 211, 238, 0.4); }
+  50%       { transform: translateY(-10px) rotate(-2deg); }
 }
 
-.animate-float-1 { animation: float1 4s ease-in-out infinite; }
-.animate-float-2 { animation: float2 5s ease-in-out infinite; }
-.animate-float-3 { animation: float3 3.5s ease-in-out infinite; }
-.animate-float-4 { animation: float4 4.5s ease-in-out infinite; }
+.animate-float-slow   { animation: float  6s ease-in-out infinite; }
+.animate-float-medium { animation: float  4.5s ease-in-out infinite; }
+.animate-float-1      { animation: float1 4s   ease-in-out infinite; }
+.animate-float-2      { animation: float2 5s   ease-in-out infinite; }
+.animate-float-3      { animation: float3 3.5s ease-in-out infinite; }
+.animate-float-4      { animation: float4 4.5s ease-in-out infinite; }
+
+/* ─── Slow spin ─────────────────────────────────── */
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .animate-spin-slow { animation: spin-slow 12s linear infinite; }
-.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
 
-/* Holographic project beam trapezoid clip path */
-.clip-path-beam {
-  clip-path: polygon(30% 100%, 70% 100%, 100% 0, 0 0);
+/* ─── Marquee ───────────────────────────────────── */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.animate-marquee-left  { animation: marquee-left  22s linear infinite; }
+.animate-marquee-right { animation: marquee-right 22s linear infinite; }
 
-/* Hologram glitch flickering keyframes */
-@keyframes holo-flicker {
-  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
-    opacity: 0.95;
-    filter: hue-rotate(0deg) saturate(1) brightness(1);
-  }
-  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
-    opacity: 0.55;
-    filter: hue-rotate(120deg) saturate(1.8) contrast(1.3) brightness(1.2);
-  }
-}
-.animate-holo-flicker {
-  animation: holo-flicker 9s linear infinite;
-}
-
-/* Voice notes bouncing equalizer bars keyframes */
+/* ─── Skill bar bounce ──────────────────────────── */
 @keyframes bounce-bar {
   0%, 100% { transform: scaleY(0.3); }
-  50% { transform: scaleY(1); }
+  50%       { transform: scaleY(1); }
 }
 .animate-bar-1 { animation: bounce-bar 0.8s ease-in-out infinite; transform-origin: bottom; }
 .animate-bar-2 { animation: bounce-bar 0.5s ease-in-out infinite; transform-origin: bottom; }
 .animate-bar-3 { animation: bounce-bar 0.7s ease-in-out infinite; transform-origin: bottom; }
 .animate-bar-4 { animation: bounce-bar 0.6s ease-in-out infinite; transform-origin: bottom; }
 .animate-bar-5 { animation: bounce-bar 0.9s ease-in-out infinite; transform-origin: bottom; }
+
+/* ─── Typing cursor ─────────────────────────────── */
+.typing-cursor {
+  border-right: 2px solid #111111;
+  animation: blink-cursor 0.75s step-end infinite;
+}
+@keyframes blink-cursor {
+  0%, 100% { border-color: #111111; }
+  50%       { border-color: transparent; }
+}
+
+/* ─── Nav link hover underline ──────────────────── */
+.nav-link {
+  position: relative;
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #111111;
+  transition: color 0.2s;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* ─── Yellow pill button ─────────────────────────  */
+.btn-yellow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #111111;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 11px 24px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-yellow:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+/* ─── Dark outline button ────────────────────────  */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #111111;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 11px 24px;
+  border-radius: 999px;
+  border: 2px solid #111111;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+.btn-outline:hover {
+  background: #111111;
+  color: #CAC5BA;
+  transform: translateY(-1px);
+}
+
+/* ─── Section divider line ──────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border-dark);
+}
+
+/* ─── Card (light) ──────────────────────────────── */
+.card-light {
+  background: rgba(255,255,255,0.35);
+  border: 1px solid rgba(17,17,17,0.10);
+  border-radius: 24px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.card-light:hover {
+  background: rgba(255,255,255,0.50);
+  border-color: rgba(17,17,17,0.18);
+}
+
+/* ─── Timeline ──────────────────────────────────── */
+.timeline-line {
+  border-left: 2px solid var(--border-dark);
+}
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid #111111;
+  flex-shrink: 0;
+}
+
+/* ─── Custom Cursor ─────────────────────────────── */
+.custom-cursor {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: multiply;
+  transition: transform 0.15s ease, opacity 0.2s;
+}
+.cursor-trail {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #111111;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: all 0.12s ease;
+}
+
+/* ─── Holo flicker (legacy, keep for contact) ───── */
+@keyframes holo-flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 0.95;
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.55;
+  }
+}
+.animate-holo-flicker { animation: holo-flicker 9s linear infinite; }
+
+/* ─── Loader bar animation ──────────────────────── */
+@keyframes loader-bar {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.animate-loader-bar { animation: loader-bar 1.6s linear forwards; }
+
+/* ─── Scrollbar styling ─────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #CAC5BA; }
+::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }

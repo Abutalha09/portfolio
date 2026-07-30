@@ -5,11 +5,9 @@ export const CustomCursor: React.FC = () => {
   const [hovered, setHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Motion values for exact cursor coordinates
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  // Springs for smooth ring lag
   const springConfig = { damping: 30, stiffness: 250, mass: 0.5 };
   const ringX = useSpring(cursorX, springConfig);
   const ringY = useSpring(cursorY, springConfig);
@@ -26,19 +24,9 @@ export const CustomCursor: React.FC = () => {
       }
     };
 
-    const handleMouseLeave = () => {
-      setIsVisible(false);
-    };
+    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => setIsVisible(true);
 
-    const handleMouseEnter = () => {
-      setIsVisible(true);
-    };
-
-    window.addEventListener('mousemove', moveCursor);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mouseenter', handleMouseEnter);
-
-    // Event listeners to detect hovers on interactive components
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
@@ -54,6 +42,9 @@ export const CustomCursor: React.FC = () => {
       }
     };
 
+    window.addEventListener('mousemove', moveCursor);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mouseenter', handleMouseEnter);
     window.addEventListener('mouseover', handleMouseOver);
 
     return () => {
@@ -68,7 +59,7 @@ export const CustomCursor: React.FC = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[9999] hidden md:block">
-      {/* Outer Spring Ring */}
+      {/* Outer spring ring */}
       <motion.div
         style={{
           x: ringX,
@@ -77,15 +68,15 @@ export const CustomCursor: React.FC = () => {
           translateY: '-50%',
         }}
         animate={{
-          width: hovered ? 56 : 32,
-          height: hovered ? 56 : 32,
-          borderColor: hovered ? 'rgba(34, 211, 238, 0.8)' : 'rgba(215, 226, 234, 0.4)',
-          backgroundColor: hovered ? 'rgba(34, 211, 238, 0.05)' : 'rgba(255, 255, 255, 0)',
+          width: hovered ? 52 : 30,
+          height: hovered ? 52 : 30,
+          borderColor: hovered ? '#E8FF2A' : 'rgba(17,17,17,0.35)',
+          backgroundColor: hovered ? 'rgba(232,255,42,0.1)' : 'transparent',
         }}
         transition={{ type: 'tween', ease: 'backOut', duration: 0.2 }}
-        className="fixed rounded-full border border-[#D7E2EA] pointer-events-none"
+        className="fixed rounded-full border-2 pointer-events-none"
       />
-      {/* Inner Dot */}
+      {/* Inner dot */}
       <motion.div
         style={{
           x: cursorX,
@@ -95,7 +86,7 @@ export const CustomCursor: React.FC = () => {
         }}
         animate={{
           scale: hovered ? 1.5 : 1,
-          backgroundColor: hovered ? '#22d3ee' : '#D7E2EA',
+          backgroundColor: hovered ? '#E8FF2A' : '#111111',
         }}
         className="fixed w-2 h-2 rounded-full pointer-events-none"
       />
