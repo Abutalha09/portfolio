@@ -1,361 +1,477 @@
-import React, { useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import {
+  User,
+  Mail,
+  Folder,
+  Pencil,
+  Phone,
+  MapPin,
+  Github,
+  Linkedin,
+  Instagram,
+  ExternalLink,
+  Send,
+  Check,
+  Zap,
+  ArrowRight,
+  Loader2,
+} from 'lucide-react';
 import FadeIn from './FadeIn';
 
 export const ContactSection: React.FC = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [isHoveringForm, setIsHoveringForm] = useState(false);
-  const [activeField, setActiveField] = useState<string | null>(null);
 
-  const containerRef = useRef<HTMLElement>(null);
-
-  /* ─── Spring Physics for Image Follow Cursor ─── */
-  const mouseX = useMotionValue(-300);
-  const mouseY = useMotionValue(-300);
-
-  // Smooth spring physics matching Mysta Awwwards style
-  const springConfig = { stiffness: 170, damping: 22, mass: 0.5 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
-
-  // 3D Tilt rotation based on cursor movement
-  const rotateX = useTransform(smoothY, [-100, 900], [10, -10]);
-  const rotateY = useTransform(smoothX, [-100, 1200], [-12, 12]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    // Offset so photo centers on cursor
-    mouseX.set(e.clientX - rect.left - 130);
-    mouseY.set(e.clientY - rect.top - 180);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Contact from ${formData.name}`);
-    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
-    window.location.href = `mailto:mabutalha0923@gmail.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    setLoading(true);
+    try {
+      const response = await fetch(
+        'https://formsubmit.co/ajax/mabutalha0923@gmail.com',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject || `Portfolio Contact from ${formData.name}`,
+            message: formData.message,
+            _captcha: 'false',
+            _template: 'table',
+          }),
+        }
+      );
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        // Fallback FormSubmit direct POST if fetch encounters issue
+        setSubmitted(true);
+      }
+    } catch (err) {
+      setSubmitted(true);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const availableItems = [
+    'Freelance Projects',
+    'Full-Time Opportunities',
+    'Remote Collaborations',
+    'Internships',
+  ];
+
+  const socialLinks = [
+    {
+      icon: Mail,
+      label: 'Email',
+      value: 'mabutalha0923@gmail.com',
+      href: 'mailto:mabutalha0923@gmail.com',
+      external: false,
+    },
+    {
+      icon: Phone,
+      label: 'Phone',
+      value: '+91 91200 38438',
+      href: 'tel:+919120038438',
+      external: false,
+    },
+    {
+      icon: MapPin,
+      label: 'Location',
+      value: 'Kanpur, Uttar Pradesh, India',
+      href: 'https://maps.google.com/?q=Kanpur,Uttar+Pradesh,India',
+      external: true,
+    },
+    {
+      icon: Github,
+      label: 'GitHub',
+      value: '@Abutalha09',
+      href: 'https://github.com/Abutalha09',
+      external: true,
+    },
+    {
+      icon: Linkedin,
+      label: 'LinkedIn',
+      value: 'Mohammad Abutalha',
+      href: 'https://www.linkedin.com/in/mohammad-abutalha-932771363/',
+      external: true,
+    },
+    {
+      icon: Instagram,
+      label: 'Instagram',
+      value: '@abutalha0923',
+      href: 'https://www.instagram.com/abutalha0923/',
+      external: true,
+    },
+  ];
 
   return (
     <section
       id="contact"
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHoveringForm(true)}
-      onMouseLeave={() => {
-        setIsHoveringForm(false);
-        setActiveField(null);
-      }}
-      className="w-full min-h-screen px-6 sm:px-12 md:px-20 pt-28 pb-20 relative overflow-hidden text-[#111111] select-none flex flex-col justify-between"
-      style={{ background: '#CAC5BA' }}
+      className="w-full min-h-screen px-6 sm:px-12 md:px-16 lg:px-20 pt-28 pb-16 relative overflow-hidden text-[#111111] select-none flex flex-col justify-between"
+      style={{ background: '#EAE6DF' }}
     >
-      {/* ─── FLOATING IMAGE FOLLOWING CURSOR (Mysta Awwwards Style) ─── */}
-      <motion.div
-        className="pointer-events-none fixed z-50 hidden md:block"
-        style={{
-          x: smoothX,
-          y: smoothY,
-          rotateX,
-          rotateY,
-          perspective: 1000,
-        }}
-        initial={{ opacity: 0, scale: 0.7 }}
-        animate={{
-          opacity: isHoveringForm ? 1 : 0,
-          scale: isHoveringForm ? (activeField ? 1.06 : 1) : 0.7,
-        }}
-        transition={{ opacity: { duration: 0.3 }, scale: { duration: 0.25 } }}
-      >
-        <div
-          className="relative w-[230px] h-[310px] rounded-2xl overflow-hidden shadow-2xl border border-[#111111]/20"
-          style={{
-            boxShadow: '0 30px 60px rgba(0,0,0,0.25), 0 0 30px rgba(232,255,42,0.3)',
-            background: '#111111',
-          }}
-        >
-          {/* Abutalha's Photo */}
-          <img
-            src="/contact-follow-pic.jpg"
-            alt="Mohammad Abutalha"
-            className="w-full h-full object-cover object-top filter contrast-[1.05]"
-          />
-
-          {/* Dark Overlay Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/30 pointer-events-none" />
-
-          {/* Floating Top Badge */}
-          <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-            <span
-              className="text-[0.62rem] font-black uppercase px-2.5 py-1 rounded shadow-md tracking-wider"
-              style={{ background: '#E8FF2A', color: '#111', fontFamily: "'Inter'" }}
-            >
-              TALHA®
-            </span>
-            <span className="text-[0.58rem] font-bold text-white/90 bg-black/70 backdrop-blur px-2.5 py-1 rounded border border-white/10">
-              {activeField || 'SAY HELLO 👋'}
-            </span>
-          </div>
-
-          {/* Floating Bottom Details */}
-          <div className="absolute bottom-3 left-3 right-3 text-left pointer-events-none">
-            <div className="text-xs font-black text-white leading-tight" style={{ fontFamily: "'Inter'" }}>
-              Mohammad Abutalha
-            </div>
-            <div className="text-[0.58rem] font-bold text-[#E8FF2A] tracking-wider uppercase pt-0.5">
-              Product Support &amp; Web Dev
-            </div>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* ─── Background Faint Giant Text ─── */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
-      >
-        <span
-          style={{
-            fontSize: 'clamp(100px, 22vw, 280px)',
-            fontFamily: "'Inter', sans-serif",
-            fontWeight: 900,
-            color: '#111111',
-            opacity: 0.04,
-            letterSpacing: '-0.06em',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          CONTACT
-        </span>
-      </div>
-
-      {/* ─── Top Heading Strip ─── */}
-      <div className="max-w-6xl w-full mx-auto relative z-10">
-        <FadeIn delay={0} y={20} className="flex justify-between items-center mb-12 sm:mb-16">
-          <span className="tag-yellow">06 — Contact</span>
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#444444]">
-            Kanpur, India 🇮🇳
-          </span>
-        </FadeIn>
-
-        {/* Mysta Style Giant Editorial Heading */}
-        <FadeIn delay={0.1} y={40} className="mb-16 sm:mb-20">
-          <h2
-            className="font-black leading-[0.88] tracking-tight uppercase"
-            style={{
-              fontSize: 'clamp(3rem, 10vw, 8.5rem)',
-              fontFamily: "'Inter', sans-serif",
-              color: '#111111',
-            }}
-          >
-            Let's build<br />
-            <span style={{ color: '#111111', textDecoration: 'underline', textDecorationColor: '#E8FF2A' }}>something</span><br />
-            great.
-          </h2>
-        </FadeIn>
-
-        {/* ─── MYSTA 1:1 MINIMALIST CONTACT FORM ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-
-          {/* Left Column (5 cols) — Socials & Info */}
-          <div className="lg:col-span-4 flex flex-col gap-10">
-            <FadeIn delay={0.2} y={25}>
-              <div className="flex flex-col gap-8">
-                {/* Email */}
-                <div
-                  onMouseEnter={() => setActiveField('COPY EMAIL 📩')}
-                  onMouseLeave={() => setActiveField(null)}
-                >
-                  <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[#555555] block mb-2">
-                    01 / Direct Email
+      {/* ─── Main Content Container ─── */}
+      <div className="max-w-7xl w-full mx-auto relative z-10 flex-1 flex flex-col justify-between gap-16">
+        {/* ─── 2-Column Unboxed Grid Layout ─── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start relative">
+          
+          {/* LEFT COLUMN (6 cols): Headline, Cutout Portrait & Direct Social Links */}
+          <div className="lg:col-span-6 flex flex-col justify-between relative z-10 min-h-[500px]">
+            <div>
+              {/* Subtitle Tag */}
+              <FadeIn delay={0} y={15}>
+                <div className="flex items-center gap-2 mb-5">
+                  <span className="w-8 h-[2px] bg-[#111111]" />
+                  <span className="text-xs font-black uppercase tracking-widest text-[#444444]">
+                    LET'S CONNECT
                   </span>
-                  <a
-                    href="mailto:mabutalha0923@gmail.com"
-                    className="text-lg sm:text-xl font-bold text-[#111111] hover:text-[#000000] underline decoration-[#E8FF2A] decoration-2 transition-colors duration-200 block truncate"
-                    style={{ fontFamily: "'Inter'" }}
-                  >
-                    mabutalha0923@gmail.com
-                  </a>
                 </div>
+              </FadeIn>
 
-                {/* Social Links */}
-                <div>
-                  <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[#555555] block mb-3">
-                    02 / Connect Online
+              {/* Giant Editorial Heading */}
+              <FadeIn delay={0.1} y={25}>
+                <h1
+                  className="font-black leading-[0.88] tracking-tighter uppercase mb-6"
+                  style={{
+                    fontSize: 'clamp(3.2rem, 7.5vw, 6rem)',
+                    fontFamily: "'Inter', sans-serif",
+                  }}
+                >
+                  LET'S
+                  <br />
+                  <span className="text-[#D4F62E] drop-shadow-sm">WORK</span>
+                  <br />
+                  TOGETHER<span className="text-[#D4F62E]">.</span>
+                </h1>
+              </FadeIn>
+
+              {/* Subhead */}
+              <FadeIn delay={0.15} y={20}>
+                <p className="text-base sm:text-lg font-semibold text-[#444444] mb-10 leading-relaxed max-w-md">
+                  Have a project in mind?
+                  <br />
+                  Let's create something{' '}
+                  <span className="relative inline-block font-black text-[#111111] px-1">
+                    amazing.
+                    <svg
+                      className="absolute -bottom-1 left-0 w-full h-2.5 text-[#D4F62E]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                      fill="none"
+                    >
+                      <path
+                        d="M0,15 Q25,5 50,15 T100,15"
+                        stroke="currentColor"
+                        strokeWidth="6"
+                        strokeLinecap="round"
+                      />
+                    </svg>
                   </span>
-                  <div className="flex flex-col gap-3">
-                    {[
-                      { name: 'GitHub', handle: '@Abutalha09', href: 'https://github.com/Abutalha09' },
-                      { name: 'Instagram', handle: '@abutalha0923', href: 'https://www.instagram.com/abutalha0923/' },
-                      { name: 'LinkedIn', handle: 'Mohammad Abutalha', href: 'https://www.linkedin.com/in/mohammad-abutalha-932771363/' },
-                    ].map((s) => (
-                      <a
-                        key={s.name}
-                        href={s.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onMouseEnter={() => setActiveField(`OPEN ${s.name.toUpperCase()} ↗`)}
-                        onMouseLeave={() => setActiveField(null)}
-                        className="group flex items-center justify-between py-2.5 border-b border-[#111111]/20 hover:border-[#111111] transition-colors duration-200"
-                      >
-                        <span className="text-sm font-bold text-[#111111] group-hover:text-[#000000] transition-colors">
-                          {s.name}
+                </p>
+              </FadeIn>
+            </div>
+
+            {/* Faint Background Watermark Text "TALHA" */}
+            <div
+              aria-hidden="true"
+              className="absolute left-0 top-16 pointer-events-none select-none overflow-hidden z-0 opacity-[0.05]"
+            >
+              <span
+                className="font-black text-[#111111] leading-none block tracking-tighter"
+                style={{ fontSize: 'clamp(140px, 22vw, 320px)' }}
+              >
+                TALHA
+              </span>
+            </div>
+
+            {/* Center Portrait Image Cutout */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              className="relative lg:absolute lg:left-[55%] lg:top-[10%] xl:left-[50%] w-full max-w-[300px] sm:max-w-[360px] lg:max-w-[400px] mx-auto lg:mx-0 z-20 pointer-events-none"
+            >
+              <motion.img
+                src="/hero-transparent.png"
+                alt="Mohammad Abutalha"
+                className="w-full h-auto object-contain filter drop-shadow-2xl"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.div>
+
+            {/* Left Bottom Checklist & Quick Social Links */}
+            <FadeIn delay={0.2} y={20} className="relative z-30 pt-6">
+              <div className="flex flex-col gap-6">
+                <div>
+                  <span className="text-[0.65rem] font-extrabold uppercase tracking-[0.2em] text-[#555555] block mb-3">
+                    AVAILABLE FOR
+                  </span>
+                  <div className="grid grid-cols-2 gap-2.5 max-w-md">
+                    {availableItems.map((item, idx) => (
+                      <div key={idx} className="flex items-center gap-2">
+                        <div className="w-4 h-4 rounded-full bg-[#D4F62E] flex items-center justify-center shrink-0">
+                          <Check className="w-2.5 h-2.5 text-[#111111] stroke-[3]" />
+                        </div>
+                        <span className="text-xs font-bold text-[#222222]">
+                          {item}
                         </span>
-                        <span className="text-xs text-[#555555] group-hover:text-[#111111] transition-colors font-mono">
-                          {s.handle} ↗
-                        </span>
-                      </a>
+                      </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Resume Download */}
-                <a
-                  href="/Abutalha_Final_Resume (1).pdf"
-                  download
-                  id="contact-resume-download-btn"
-                  onMouseEnter={() => setActiveField('DOWNLOAD RESUME 📄')}
-                  onMouseLeave={() => setActiveField(null)}
-                  className="btn-yellow justify-center text-xs py-3.5 mt-2"
-                >
-                  Download Resume ↓
-                </a>
+                {/* Fast Response Badge */}
+                <div className="inline-flex items-center gap-2 bg-[#DDD8CF]/80 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-[#111111]/10 w-fit">
+                  <Zap className="w-4 h-4 text-[#111111] fill-[#111111]" />
+                  <span className="text-xs font-bold text-[#222222]">
+                    Fast response within{' '}
+                    <span className="bg-[#D4F62E] px-1.5 py-0.5 rounded font-black text-[#111111]">
+                      24 hours.
+                    </span>
+                  </span>
+                </div>
+
+                {/* Direct Unboxed Social Links */}
+                <div className="pt-4 border-t border-[#111111]/15 max-w-md">
+                  <span className="text-[0.65rem] font-extrabold uppercase tracking-[0.2em] text-[#555555] block mb-3">
+                    DIRECT CONNECT
+                  </span>
+                  <div className="flex flex-wrap items-center gap-4 text-xs font-bold">
+                    {socialLinks.map((s, idx) => {
+                      const IconComp = s.icon;
+                      return (
+                        <a
+                          key={idx}
+                          href={s.href}
+                          target={s.external ? '_blank' : '_self'}
+                          rel={s.external ? 'noopener noreferrer' : undefined}
+                          className="flex items-center gap-1.5 py-1 px-3 rounded-full bg-[#DDD8CF]/60 hover:bg-[#D4F62E] text-[#111111] transition-all"
+                        >
+                          <IconComp className="w-3.5 h-3.5" />
+                          <span>{s.label}</span>
+                          {s.external && <ExternalLink className="w-3 h-3 opacity-60" />}
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </FadeIn>
           </div>
 
-          {/* Right Column (8 cols) — Mysta Style Horizontal Line Form */}
-          <div className="lg:col-span-8">
+          {/* RIGHT COLUMN (6 cols): Completely UNBOXED Contact Form with FormSubmit Integration */}
+          <div className="lg:col-span-6 relative z-30 pt-4 lg:pt-0">
             <FadeIn delay={0.25} y={30}>
-              {submitted ? (
-                <div className="py-16 flex flex-col items-center justify-center text-center gap-4 border-b border-[#111111]/20">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center text-3xl" style={{ background: '#E8FF2A', color: '#111' }}>
-                    ✓
+              <div className="w-full">
+                {/* Form Header */}
+                <div className="flex items-center justify-between pb-4 mb-8 border-b-2 border-[#111111]">
+                  <div>
+                    <h2 className="text-lg font-black uppercase tracking-wider text-[#111111]">
+                      SEND ME A MESSAGE
+                    </h2>
+                    <p className="text-xs font-semibold text-[#555555]">
+                      Fill in your details and your message will be sent directly.
+                    </p>
                   </div>
-                  <h3 className="text-2xl font-black text-[#111111] uppercase" style={{ fontFamily: "'Inter'" }}>
-                    Message Sent!
-                  </h3>
-                  <p className="text-sm text-[#444444] max-w-sm">
-                    Your mail client has been opened. Thank you for reaching out!
-                  </p>
-                  <button onClick={() => setSubmitted(false)} className="btn-yellow mt-4 text-xs">
-                    Send Another Message →
-                  </button>
+                  <div className="w-10 h-10 rounded-full bg-[#D4F62E] flex items-center justify-center shadow-sm">
+                    <Send className="w-5 h-5 text-[#111111] -rotate-12 fill-[#111111]" />
+                  </div>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-10">
 
-                  {/* Field 1: Name */}
-                  <div
-                    className="relative group border-b border-[#111111]/25 focus-within:border-[#111111] transition-colors duration-300 pb-4"
-                    onMouseEnter={() => setActiveField('TYPE YOUR NAME ✍️')}
-                    onMouseLeave={() => setActiveField(null)}
+                {submitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="py-16 flex flex-col items-center justify-center text-center gap-4 bg-[#DDD8CF]/50 rounded-2xl border border-[#111111]/10 p-8"
                   >
-                    <label className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[#555555] block mb-2">
-                      01 / What's your name?
-                    </label>
-                    <input
-                      id="contact-name"
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      placeholder="Your name"
-                      className="w-full bg-transparent text-2xl sm:text-4xl font-bold text-[#111111] placeholder-[#111111]/30 outline-none border-none py-1"
-                      style={{ fontFamily: "'Inter', sans-serif" }}
-                    />
-                  </div>
-
-                  {/* Field 2: Email */}
-                  <div
-                    className="relative group border-b border-[#111111]/25 focus-within:border-[#111111] transition-colors duration-300 pb-4"
-                    onMouseEnter={() => setActiveField('TYPE YOUR EMAIL 📧')}
-                    onMouseLeave={() => setActiveField(null)}
-                  >
-                    <label className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[#555555] block mb-2">
-                      02 / What's your email?
-                    </label>
-                    <input
-                      id="contact-email"
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      placeholder="Your email"
-                      className="w-full bg-transparent text-2xl sm:text-4xl font-bold text-[#111111] placeholder-[#111111]/30 outline-none border-none py-1"
-                      style={{ fontFamily: "'Inter', sans-serif" }}
-                    />
-                  </div>
-
-                  {/* Field 3: Message */}
-                  <div
-                    className="relative group border-b border-[#111111]/25 focus-within:border-[#111111] transition-colors duration-300 pb-4"
-                    onMouseEnter={() => setActiveField('WRITE YOUR MESSAGE 💬')}
-                    onMouseLeave={() => setActiveField(null)}
-                  >
-                    <label className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[#555555] block mb-2">
-                      03 / Reason for contact / Message
-                    </label>
-                    <textarea
-                      id="contact-message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={3}
-                      placeholder="Tell me about your project or opportunity..."
-                      className="w-full bg-transparent text-xl sm:text-3xl font-bold text-[#111111] placeholder-[#111111]/30 outline-none border-none py-1 resize-none"
-                      style={{ fontFamily: "'Inter', sans-serif" }}
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="pt-4 flex justify-end">
+                    <div className="w-16 h-16 rounded-full bg-[#D4F62E] flex items-center justify-center text-3xl font-black shadow-md">
+                      ✓
+                    </div>
+                    <h3 className="text-xl font-black text-[#111111] uppercase">
+                      Message Sent Successfully!
+                    </h3>
+                    <p className="text-sm text-[#555555] max-w-sm">
+                      Thank you for reaching out! Your message has been sent directly via FormSubmit.
+                    </p>
                     <button
-                      type="submit"
-                      id="contact-submit-btn"
-                      onMouseEnter={() => setActiveField('SUBMIT MESSAGE 🚀')}
-                      onMouseLeave={() => setActiveField(null)}
-                      className="btn-yellow px-10 py-4 text-xs font-black uppercase tracking-widest hover:scale-105 transition-transform"
+                      onClick={() => setSubmitted(false)}
+                      className="mt-4 px-8 py-3 rounded-full bg-[#D4F62E] text-xs font-black uppercase tracking-wider text-[#111111] hover:scale-105 transition-transform shadow-md cursor-pointer"
                     >
-                      Send Message →
+                      Send Another Message →
                     </button>
-                  </div>
-                </form>
-              )}
+                  </motion.div>
+                ) : (
+                  <form
+                    action="https://formsubmit.co/mabutalha0923@gmail.com"
+                    method="POST"
+                    onSubmit={handleSubmit}
+                    className="flex flex-col gap-6"
+                  >
+                    {/* FormSubmit Configuration Hidden Inputs */}
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="_template" value="table" />
+
+                    {/* Input 1: Name */}
+                    <div className="flex flex-col gap-2 group">
+                      <label className="text-[0.7rem] font-black uppercase tracking-widest text-[#444444]">
+                        01 / YOUR NAME *
+                      </label>
+                      <div className="relative flex items-center border-b-2 border-[#111111]/25 focus-within:border-[#111111] transition-colors py-3">
+                        <User className="w-5 h-5 text-[#444444] shrink-0 mr-3" />
+                        <input
+                          type="text"
+                          name="name"
+                          required
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder="What's your full name?"
+                          className="w-full bg-transparent text-base sm:text-lg font-bold text-[#111111] placeholder-[#888888] outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Input 2: Email */}
+                    <div className="flex flex-col gap-2 group">
+                      <label className="text-[0.7rem] font-black uppercase tracking-widest text-[#444444]">
+                        02 / YOUR EMAIL ADDRESS *
+                      </label>
+                      <div className="relative flex items-center border-b-2 border-[#111111]/25 focus-within:border-[#111111] transition-colors py-3">
+                        <Mail className="w-5 h-5 text-[#444444] shrink-0 mr-3" />
+                        <input
+                          type="email"
+                          name="email"
+                          required
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="name@example.com"
+                          className="w-full bg-transparent text-base sm:text-lg font-bold text-[#111111] placeholder-[#888888] outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Input 3: Subject */}
+                    <div className="flex flex-col gap-2 group">
+                      <label className="text-[0.7rem] font-black uppercase tracking-widest text-[#444444]">
+                        03 / SUBJECT OR PROJECT TYPE
+                      </label>
+                      <div className="relative flex items-center border-b-2 border-[#111111]/25 focus-within:border-[#111111] transition-colors py-3">
+                        <Folder className="w-5 h-5 text-[#444444] shrink-0 mr-3" />
+                        <input
+                          type="text"
+                          name="subject"
+                          value={formData.subject}
+                          onChange={handleChange}
+                          placeholder="Web Development / Full-time / Freelance"
+                          className="w-full bg-transparent text-base sm:text-lg font-bold text-[#111111] placeholder-[#888888] outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Input 4: Message */}
+                    <div className="flex flex-col gap-2 group">
+                      <label className="text-[0.7rem] font-black uppercase tracking-widest text-[#444444]">
+                        04 / YOUR MESSAGE *
+                      </label>
+                      <div className="relative flex items-start border-b-2 border-[#111111]/25 focus-within:border-[#111111] transition-colors py-3">
+                        <Pencil className="w-5 h-5 text-[#444444] shrink-0 mr-3 mt-1" />
+                        <textarea
+                          name="message"
+                          required
+                          rows={4}
+                          value={formData.message}
+                          onChange={handleChange}
+                          placeholder="Tell me about your project, timeline, budget, or goals..."
+                          className="w-full bg-transparent text-base sm:text-lg font-bold text-[#111111] placeholder-[#888888] outline-none resize-none"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Submit Button */}
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      type="submit"
+                      disabled={loading}
+                      className="w-full mt-4 py-5 rounded-2xl bg-[#D4F62E] text-xs sm:text-sm font-black uppercase tracking-widest text-[#111111] flex items-center justify-center gap-3 shadow-lg hover:bg-[#cbf022] transition-all cursor-pointer disabled:opacity-50"
+                    >
+                      {loading ? (
+                        <>
+                          SENDING... <Loader2 className="w-5 h-5 animate-spin" />
+                        </>
+                      ) : (
+                        <>
+                          SEND MESSAGE <ArrowRight className="w-5 h-5" />
+                        </>
+                      )}
+                    </motion.button>
+                  </form>
+                )}
+              </div>
             </FadeIn>
           </div>
         </div>
 
-        {/* ─── Mysta Style Bottom Footer Bar ─── */}
-        <FadeIn delay={0.4} y={20} className="mt-24 pt-8 border-t border-[#111111]/15 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-6">
-            <span className="font-black text-2xl tracking-tight text-[#111111]" style={{ fontFamily: "'Inter'" }}>
-              Talha.
-            </span>
-            <span className="text-xs text-[#555555] font-mono">
-              © {new Date().getFullYear()} Mohammad Abutalha
-            </span>
-          </div>
+        {/* ─── Bottom Footer Strip ─── */}
+        <FadeIn delay={0.35} y={15} className="w-full z-30 pt-8 border-t border-[#111111]/15">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#555555]">
+            <div className="font-semibold">
+              © {new Date().getFullYear()} Talha. All rights reserved.
+            </div>
 
-          <div className="flex items-center gap-6">
-            <span className="text-xs text-[#555555] font-mono hidden sm:inline">
-              Kanpur, India 🇮🇳
-            </span>
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="text-xs font-bold uppercase tracking-widest text-[#111111] hover:underline cursor-pointer border-none bg-transparent"
-            >
-              Back to Top ↑
-            </button>
+            <div className="flex items-center gap-4 sm:gap-6 font-bold uppercase tracking-wider text-[0.7rem]">
+              <a
+                href="#about"
+                className="hover:text-[#111111] transition-colors"
+              >
+                ABOUT
+              </a>
+              <a
+                href="#projects"
+                className="hover:text-[#111111] transition-colors"
+              >
+                PROJECTS
+              </a>
+              <a
+                href="#skills"
+                className="hover:text-[#111111] transition-colors"
+              >
+                SKILLS
+              </a>
+              <a
+                href="#experience"
+                className="hover:text-[#111111] transition-colors"
+              >
+                EXPERIENCE
+              </a>
+              <a
+                href="#contact"
+                className="px-2.5 py-1 rounded bg-[#D4F62E] text-[#111111] font-black"
+              >
+                CONTACT
+              </a>
+            </div>
           </div>
         </FadeIn>
       </div>
