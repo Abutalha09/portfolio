@@ -10,28 +10,32 @@
   }
 
   html, body, #root {
-    background-color: #CAC5BA;
-    color: #111111;
+    background-color: var(--bg-primary, #CAC5BA);
+    color: var(--text-dark, #111111);
     font-family: 'Inter', 'Kanit', sans-serif;
     min-height: 100vh;
     overflow-x: clip;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 }
 
-/* ─── CSS Custom Properties ─────────────────────── */
-:root {
+/* ─── Portfolio Custom Properties (Warm Sand Existing) ───────── */
+:root, html {
   --bg-primary:  #CAC5BA;
-  --bg-light:    #D8D3C8;
-  --bg-card:     #BFBAB0;
+  --bg-light:    rgba(216,211,200,0.94);
+  --bg-card:     rgba(255,255,255,0.45);
   --bg-dark:     #111111;
   --text-dark:   #111111;
   --text-mid:    #444444;
-  --text-light:  #777777;
+  --text-light:  #666666;
   --accent:      #E8FF2A;
   --accent-dark: #C8DF00;
   --border:      rgba(17,17,17,0.12);
   --border-dark: rgba(17,17,17,0.22);
+  --term-bg:     #15181c;
+  --term-header: #1e2228;
 }
+
 
 /* ─── Hero Giant Name Letters ───────────────────── */
 .hero-name-bg {

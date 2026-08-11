@@ -32,9 +32,11 @@ const navItems = [
   { label: 'ABOUT', id: 'about' },
   { label: 'PROJECTS', id: 'projects' },
   { label: 'SKILLS', id: 'skills' },
+  { label: 'TERMINAL', id: 'terminal' },
   { label: 'EXPERIENCE', id: 'experience' },
   { label: 'CONTACT', id: 'contact' },
 ];
+
 
 /* ─── Props ─────────────────────────────────────── */
 interface HeroSectionProps {
@@ -153,7 +155,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
       id="hero"
       ref={sectionRef}
       className="relative w-full overflow-hidden"
-      style={{ minHeight: '100vh', background: '#CAC5BA' }}
+      style={{ minHeight: '100vh', background: 'var(--bg-primary)' }}
     >
       {/* ── Layer 0: Giant yellow "ABU" background ─ */}
       <div
@@ -167,7 +169,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
             fontSize: 'clamp(180px, 32vw, 480px)',
             fontFamily: "'Inter', sans-serif",
             fontWeight: 900,
-            color: '#E8FF2A',
+            color: 'var(--accent)',
             letterSpacing: '-0.06em',
             lineHeight: 0.85,
             whiteSpace: 'nowrap',
@@ -206,7 +208,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
         className="absolute bottom-0 left-0 right-0 pointer-events-none"
         style={{
           height: '36vh',
-          background: 'linear-gradient(to top, #CAC5BA 0%, transparent 100%)',
+          background: 'linear-gradient(to top, var(--bg-primary) 0%, transparent 100%)',
           zIndex: 2,
         }}
       />
@@ -268,8 +270,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
                 fontSize: '0.82rem',
                 padding: '12px 28px',
                 fontWeight: 800,
-                color: '#fff',
-                borderColor: 'rgba(255,255,255,0.55)',
+                color: 'var(--text-dark)',
+                borderColor: 'var(--border-dark)',
               }}
             >
               About Me

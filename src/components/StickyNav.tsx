@@ -8,9 +8,11 @@ const SECTIONS = [
   { id: 'experience', label: 'EXPERIENCE', icon: '🛠️' },
   { id: 'projects',   label: 'PROJECTS',   icon: '💼' },
   { id: 'skills',     label: 'SKILLS',     icon: '⚡' },
+  { id: 'terminal',   label: 'TERMINAL',   icon: '💻' },
   { id: 'education',  label: 'EDUCATION',  icon: '🎓' },
   { id: 'contact',    label: 'CONTACT',    icon: '💬' },
 ];
+
 
 export const StickyNav: React.FC = () => {
   const navRef = useRef<HTMLDivElement>(null);
@@ -132,24 +134,25 @@ export const StickyNav: React.FC = () => {
       <div
         className="p-3 rounded-xl flex flex-col gap-1.5 shadow-sm"
         style={{
-          background: 'rgba(216,211,200,0.94)',
+          background: 'var(--bg-light)',
+          color: 'var(--text-dark)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(17,17,17,0.12)',
+          border: '1px solid var(--border)',
         }}
       >
         <div className="flex items-center justify-between">
           <span
             className="font-black text-[0.65rem] px-2 py-0.5 rounded tracking-wider shadow-sm"
-            style={{ background: '#E8FF2A', color: '#111111', fontFamily: "'Inter'" }}
+            style={{ background: 'var(--accent)', color: '#111111', fontFamily: "'Inter'" }}
           >
             TALHA®
           </span>
-          <span className="text-[0.55rem] font-bold text-[#666] uppercase tracking-widest">
+          <span className="text-[0.55rem] font-bold text-[var(--text-mid)] uppercase tracking-widest">
             PORTFOLIO
           </span>
         </div>
-        <p className="text-[0.64rem] text-[#444] leading-tight font-medium">
+        <p className="text-[0.64rem] text-[var(--text-mid)] leading-tight font-medium">
           Working closely with your team to deliver Web builds that merge creativity &amp; technical value.
         </p>
       </div>
@@ -158,28 +161,29 @@ export const StickyNav: React.FC = () => {
       <div
         className="p-2.5 rounded-xl flex items-center justify-around shadow-sm"
         style={{
-          background: 'rgba(216,211,200,0.94)',
+          background: 'var(--bg-light)',
+          color: 'var(--text-dark)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(17,17,17,0.12)',
+          border: '1px solid var(--border)',
         }}
       >
         <div className="text-center">
-          <div className="font-black text-xs text-[#111]" style={{ fontFamily: "'Inter'" }}>
+          <div className="font-black text-xs text-[var(--text-dark)]" style={{ fontFamily: "'Inter'" }}>
             6+
           </div>
-          <div className="text-[0.52rem] uppercase tracking-wider text-[#666] font-bold">
+          <div className="text-[0.52rem] uppercase tracking-wider text-[var(--text-mid)] font-bold">
             Projects
           </div>
         </div>
 
-        <div className="w-px h-6" style={{ background: 'rgba(17,17,17,0.15)' }} />
+        <div className="w-px h-6" style={{ background: 'var(--border)' }} />
 
         <div className="text-center">
-          <div className="font-black text-xs text-[#111]" style={{ fontFamily: "'Inter'" }}>
+          <div className="font-black text-xs text-[var(--text-dark)]" style={{ fontFamily: "'Inter'" }}>
             2+
           </div>
-          <div className="text-[0.52rem] uppercase tracking-wider text-[#666] font-bold">
+          <div className="text-[0.52rem] uppercase tracking-wider text-[var(--text-mid)] font-bold">
             Years Exp.
           </div>
         </div>
@@ -189,10 +193,10 @@ export const StickyNav: React.FC = () => {
       <div
         className="p-2 rounded-xl flex flex-col gap-1 flex-1 justify-center shadow-sm overflow-y-auto"
         style={{
-          background: 'rgba(216,211,200,0.94)',
+          background: 'var(--bg-light)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(17,17,17,0.12)',
+          border: '1px solid var(--border)',
         }}
       >
         {SECTIONS.map((s) => {
@@ -203,9 +207,9 @@ export const StickyNav: React.FC = () => {
               onClick={() => scrollTo(s.id)}
               className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[0.62rem] font-black uppercase tracking-wider transition-all duration-200 cursor-pointer border-none"
               style={{
-                background: isActive ? '#E8FF2A' : 'rgba(202,197,186,0.4)',
-                color: '#111111',
-                boxShadow: isActive ? '0 2px 6px rgba(0,0,0,0.06)' : 'none',
+                background: isActive ? 'var(--accent)' : 'var(--bg-card)',
+                color: isActive ? '#111111' : 'var(--text-dark)',
+                boxShadow: isActive ? '0 2px 6px rgba(0,0,0,0.1)' : 'none',
                 transform: isActive ? 'translateX(2px)' : 'none',
                 fontFamily: "'Inter', sans-serif",
               }}
@@ -221,19 +225,20 @@ export const StickyNav: React.FC = () => {
       <div
         className="p-2 rounded-lg flex items-center justify-between shadow-sm"
         style={{
-          background: 'rgba(216,211,200,0.94)',
+          background: 'var(--bg-light)',
+          color: 'var(--text-dark)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(17,17,17,0.12)',
+          border: '1px solid var(--border)',
         }}
       >
-        <span className="truncate text-[0.6rem] font-bold text-[#333]">
+        <span className="truncate text-[0.6rem] font-bold text-[var(--text-dark)]">
           mabutalha0923@gmail.com
         </span>
         <button
           onClick={copyEmail}
           title="Copy email"
-          className="p-0.5 rounded cursor-pointer border-none bg-transparent hover:bg-[#E8FF2A] transition-colors text-[0.65rem]"
+          className="p-0.5 rounded cursor-pointer border-none bg-transparent hover:bg-[var(--accent)] transition-colors text-[0.65rem]"
         >
           {copied ? '✅' : '📋'}
         </button>
@@ -244,7 +249,7 @@ export const StickyNav: React.FC = () => {
         onClick={() => scrollTo('contact')}
         className="w-full py-2.5 rounded-xl font-black text-[0.65rem] uppercase tracking-widest transition-all duration-200 hover:scale-[1.02] active:scale-95 shadow-sm cursor-pointer border-none"
         style={{
-          background: '#E8FF2A',
+          background: 'var(--accent)',
           color: '#111111',
           fontFamily: "'Inter', sans-serif",
         }}

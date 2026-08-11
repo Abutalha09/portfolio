@@ -52,7 +52,7 @@ export const ServicesSection: React.FC = () => {
     <section
       id="experience"
       className="w-full px-4 sm:px-8 md:px-10 py-20 sm:py-28 relative"
-      style={{ background: '#D8D3C8' }}
+      style={{ background: 'var(--bg-primary)', color: 'var(--text-dark)' }}
     >
       <div className="max-w-5xl mx-auto">
         {/* Label */}
@@ -63,7 +63,7 @@ export const ServicesSection: React.FC = () => {
         {/* Title */}
         <FadeIn delay={0.1} y={40} className="text-center mb-14 sm:mb-20">
           <h2
-            className="section-heading"
+            className="section-heading text-[var(--text-dark)]"
             style={{ fontSize: 'clamp(2.2rem, 6vw, 5rem)' }}
           >
             Where I've<br />Worked
@@ -71,7 +71,7 @@ export const ServicesSection: React.FC = () => {
         </FadeIn>
 
         {/* Experience list */}
-        <div className="flex flex-col" style={{ borderTop: '1px solid rgba(17,17,17,0.15)' }}>
+        <div className="flex flex-col" style={{ borderTop: '1px solid var(--border-dark)' }}>
           {experiences.map((exp, index) => (
             <FadeIn
               key={exp.id}
@@ -80,17 +80,16 @@ export const ServicesSection: React.FC = () => {
               className="group transition-all duration-300"
             >
               <div
-                className="flex flex-col sm:flex-row sm:items-center py-7 sm:py-9 gap-4 sm:gap-8 cursor-default px-3 rounded-2xl transition-all duration-300 hover:bg-white/30"
-                style={{ borderBottom: '1px solid rgba(17,17,17,0.1)' }}
+                className="flex flex-col sm:flex-row sm:items-center py-7 sm:py-9 gap-4 sm:gap-8 cursor-default px-3 rounded-2xl transition-all duration-300 hover:bg-[var(--bg-card)]"
+                style={{ borderBottom: '1px solid var(--border)' }}
               >
                 {/* Number */}
                 <span
-                  className="font-black leading-none select-none flex-shrink-0"
+                  className="font-black leading-none select-none flex-shrink-0 opacity-20"
                   style={{
                     fontSize: 'clamp(1.8rem, 5vw, 4rem)',
-                    color: 'rgba(17,17,17,0.08)',
+                    color: 'var(--text-dark)',
                     fontFamily: "'Inter'",
-                    transition: 'color 0.3s',
                     width: '80px',
                   }}
                 >
@@ -100,15 +99,15 @@ export const ServicesSection: React.FC = () => {
                 {/* Main info */}
                 <div className="flex-1 flex flex-col gap-1">
                   <h3
-                    className="font-black uppercase text-[#111] leading-tight group-hover:text-[#111] transition-colors"
+                    className="font-black uppercase text-[var(--text-dark)] leading-tight transition-colors"
                     style={{ fontSize: 'clamp(1rem, 2vw, 1.5rem)', fontFamily: "'Inter'" }}
                   >
                     {exp.role}
                   </h3>
-                  <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#666]">
+                  <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[var(--text-mid)]">
                     {exp.company}
                   </p>
-                  <p className="text-xs sm:text-sm text-[#555] leading-relaxed mt-1 max-w-2xl">
+                  <p className="text-xs sm:text-sm text-[var(--text-mid)] leading-relaxed mt-1 max-w-2xl font-medium">
                     {exp.description}
                   </p>
                 </div>
@@ -116,11 +115,11 @@ export const ServicesSection: React.FC = () => {
                 {/* Period badge */}
                 <div className="flex-shrink-0">
                   <span
-                    className="inline-block px-3 py-1.5 rounded-full text-[0.65rem] font-bold uppercase tracking-wider group-hover:bg-[#E8FF2A] transition-all duration-300"
+                    className="inline-block px-3 py-1.5 rounded-full text-[0.65rem] font-bold uppercase tracking-wider group-hover:bg-[var(--accent)] group-hover:text-[#111] transition-all duration-300"
                     style={{
-                      background: 'rgba(17,17,17,0.08)',
-                      color: '#333',
-                      border: '1px solid rgba(17,17,17,0.12)',
+                      background: 'var(--bg-card)',
+                      color: 'var(--text-dark)',
+                      border: '1px solid var(--border)',
                     }}
                   >
                     {exp.period}
@@ -133,7 +132,7 @@ export const ServicesSection: React.FC = () => {
 
         {/* Platform showcase */}
         <FadeIn delay={0.3} y={30} className="mt-16 sm:mt-24">
-          <h3 className="font-black uppercase text-sm tracking-widest text-[#555] mb-6" style={{ fontFamily: "'Inter'" }}>
+          <h3 className="font-black uppercase text-sm tracking-widest text-[var(--text-mid)] mb-6" style={{ fontFamily: "'Inter'" }}>
             Platforms I've Supported
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -143,11 +142,12 @@ export const ServicesSection: React.FC = () => {
             ].map((item) => (
               <div
                 key={item.label}
-                className="card-light p-4 sm:p-5 hover:scale-[1.01] transition-transform duration-300"
+                className="p-4 sm:p-5 hover:scale-[1.01] transition-transform duration-300 rounded-2xl"
+                style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
               >
                 <span className="tag-yellow mb-3 inline-block">Platform Preview</span>
-                <h4 className="font-bold text-base text-[#111] mb-3">{item.label}</h4>
-                <div className="w-full rounded-xl overflow-hidden" style={{ border: '1px solid rgba(17,17,17,0.1)' }}>
+                <h4 className="font-bold text-base text-[var(--text-dark)] mb-3">{item.label}</h4>
+                <div className="w-full rounded-xl overflow-hidden" style={{ border: '1px solid var(--border)' }}>
                   <img
                     src={item.src}
                     alt={item.alt}

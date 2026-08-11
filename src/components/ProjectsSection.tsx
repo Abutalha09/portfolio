@@ -98,28 +98,29 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
         <div
           style={{
             borderRadius: '32px',
-            border: '2px solid rgba(17,17,17,0.15)',
-            background: index % 2 === 0 ? '#F0EDE6' : '#E8E4DC',
+            border: '2px solid var(--border-dark)',
+            background: 'var(--bg-card)',
+            color: 'var(--text-dark)',
             width: '100%',
             height: '100%',
           }}
-          className="flex flex-col p-6 sm:p-8 md:p-10"
+          className="flex flex-col p-6 sm:p-8 md:p-10 backdrop-blur-md"
         >
           {/* Top row */}
           <div className="flex items-start justify-between mb-5 sm:mb-6">
             <div className="flex items-center gap-4 sm:gap-6">
               <span
-                className="font-black leading-none select-none"
-                style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', fontFamily: "'Inter'", color: 'rgba(17,17,17,0.1)' }}
+                className="font-black leading-none select-none opacity-20"
+                style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', fontFamily: "'Inter'", color: 'var(--text-dark)' }}
               >
                 {project.id}
               </span>
               <div>
-                <p className="text-[0.6rem] uppercase tracking-[0.18em] text-[#888] font-semibold mb-0.5">
+                <p className="text-[0.6rem] uppercase tracking-[0.18em] text-[var(--text-mid)] font-semibold mb-0.5">
                   {project.category}
                 </p>
                 <h3
-                  className="font-black uppercase text-[#111] leading-none"
+                  className="font-black uppercase text-[var(--text-dark)] leading-none"
                   style={{ fontSize: 'clamp(1rem, 2.5vw, 2rem)', fontFamily: "'Inter'" }}
                 >
                   {project.name}
@@ -139,7 +140,7 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
 
           {/* Description and tags */}
           <div className="mb-5">
-            <p className="text-sm sm:text-base text-[#444] leading-relaxed max-w-2xl mb-3">
+            <p className="text-sm sm:text-base text-[var(--text-mid)] leading-relaxed max-w-2xl mb-3 font-medium">
               {project.description}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -147,7 +148,7 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
                 <span
                   key={tag}
                   className="text-[0.6rem] px-2.5 py-1 rounded-full font-bold uppercase tracking-wide"
-                  style={{ background: 'rgba(17,17,17,0.08)', color: '#333', border: '1px solid rgba(17,17,17,0.12)' }}
+                  style={{ background: 'var(--bg-card)', color: 'var(--text-dark)', border: '1px solid var(--border)' }}
                 >
                   {tag}
                 </span>
@@ -160,7 +161,7 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
             className="flex-1 overflow-hidden"
             style={{
               borderRadius: '20px',
-              border: '1px solid rgba(17,17,17,0.1)',
+              border: '1px solid var(--border)',
               minHeight: 0,
             }}
           >
@@ -186,7 +187,7 @@ export const ProjectsSection: React.FC = () => {
     <section
       id="projects"
       className="w-full px-4 sm:px-8 md:px-10 py-20 sm:py-28 relative"
-      style={{ background: '#CAC5BA' }}
+      style={{ background: 'var(--bg-primary)' }}
     >
       <div className="max-w-5xl mx-auto">
         {/* Label */}
@@ -216,7 +217,7 @@ export const ProjectsSection: React.FC = () => {
                 onClick={() => setActiveFilter(f)}
                 className="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer"
                 style={{
-                  background: activeFilter === f ? '#E8FF2A' : 'transparent',
+                  background: activeFilter === f ? 'var(--accent)' : 'transparent',
                   color: activeFilter === f ? '#111' : '#666',
                   boxShadow: activeFilter === f ? '0 2px 12px rgba(232,255,42,0.3)' : 'none',
                   fontFamily: "'Inter'",

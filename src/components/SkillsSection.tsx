@@ -38,14 +38,14 @@ const SkillRow: React.FC<{ skill: SkillData; index: number }> = ({ skill, index 
   return (
     <FadeIn delay={index * 0.06} y={20}>
       <div
-        className="group flex items-center gap-4 sm:gap-6 px-4 sm:px-6 py-5 rounded-2xl transition-all duration-300 hover:bg-white/40 cursor-default"
-        style={{ border: '1px solid rgba(17,17,17,0.08)' }}
+        className="group flex items-center gap-4 sm:gap-6 px-4 sm:px-6 py-5 rounded-2xl transition-all duration-300 hover:bg-[var(--bg-card)] cursor-default"
+        style={{ border: '1px solid var(--border)', background: 'var(--bg-card)' }}
         ref={barRef}
       >
         {/* Emoji icon */}
         <div
-          className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center flex-shrink-0 text-xl sm:text-2xl"
-          style={{ background: '#E8FF2A', border: '1.5px solid rgba(17,17,17,0.15)' }}
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center flex-shrink-0 text-xl sm:text-2xl shadow-sm"
+          style={{ background: 'var(--accent)', color: '#111', border: '1px solid var(--border-dark)' }}
         >
           {skill.emoji}
         </div>
@@ -54,23 +54,23 @@ const SkillRow: React.FC<{ skill: SkillData; index: number }> = ({ skill, index 
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between mb-1.5">
             <div>
-              <h3 className="font-black text-sm sm:text-base text-[#111] uppercase tracking-wide" style={{ fontFamily: "'Inter'" }}>
+              <h3 className="font-black text-sm sm:text-base text-[var(--text-dark)] uppercase tracking-wide" style={{ fontFamily: "'Inter'" }}>
                 {skill.name}
               </h3>
-              <span className="text-[0.6rem] uppercase tracking-[0.15em] text-[#888] font-semibold">{skill.category}</span>
+              <span className="text-[0.6rem] uppercase tracking-[0.15em] text-[var(--text-mid)] font-semibold">{skill.category}</span>
             </div>
-            <span className="font-black text-lg sm:text-xl text-[#111] ml-4 flex-shrink-0" style={{ fontFamily: "'Inter'" }}>
+            <span className="font-black text-lg sm:text-xl text-[var(--text-dark)] ml-4 flex-shrink-0" style={{ fontFamily: "'Inter'" }}>
               {skill.level}%
             </span>
           </div>
 
           {/* Progress bar */}
-          <div className="h-2 w-full rounded-full overflow-hidden" style={{ background: 'rgba(17,17,17,0.1)' }}>
+          <div className="h-2 w-full rounded-full overflow-hidden" style={{ background: 'var(--border)' }}>
             <div
               className="h-full rounded-full transition-all duration-1000 ease-out"
               style={{
                 width: animated ? `${skill.level}%` : '0%',
-                background: 'linear-gradient(90deg, #E8FF2A, #C8DF00)',
+                background: 'var(--accent)',
               }}
             />
           </div>
@@ -85,7 +85,7 @@ export const SkillsSection: React.FC = () => {
     <section
       id="skills"
       className="w-full px-4 sm:px-8 md:px-10 py-20 sm:py-28 relative"
-      style={{ background: '#D8D3C8' }}
+      style={{ background: 'var(--bg-primary)', color: 'var(--text-dark)' }}
     >
       <div className="max-w-4xl mx-auto">
         {/* Label */}
@@ -96,7 +96,7 @@ export const SkillsSection: React.FC = () => {
         {/* Title */}
         <FadeIn delay={0.1} y={40} className="text-center mb-5">
           <h2
-            className="section-heading"
+            className="section-heading text-[var(--text-dark)]"
             style={{ fontSize: 'clamp(2.2rem, 6vw, 5rem)' }}
           >
             My Tech Arsenal
@@ -104,7 +104,7 @@ export const SkillsSection: React.FC = () => {
         </FadeIn>
 
         <FadeIn delay={0.15} y={20} className="text-center mb-12 sm:mb-16">
-          <p className="text-sm sm:text-base text-[#555] max-w-md mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-[var(--text-mid)] max-w-md mx-auto leading-relaxed font-medium">
             Tools, languages, and disciplines I use to build, ship, and support digital products.
           </p>
         </FadeIn>
@@ -118,7 +118,7 @@ export const SkillsSection: React.FC = () => {
 
         {/* Tech stack logos strip */}
         <FadeIn delay={0.4} y={20} className="mt-14 sm:mt-20">
-          <h4 className="font-bold text-xs uppercase tracking-widest text-[#888] text-center mb-6">
+          <h4 className="font-bold text-xs uppercase tracking-widest text-[var(--text-mid)] text-center mb-6">
             Technologies I Work With
           </h4>
           <div className="flex flex-wrap justify-center gap-3">
@@ -128,11 +128,11 @@ export const SkillsSection: React.FC = () => {
             ].map((tech) => (
               <span
                 key={tech}
-                className="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide transition-all duration-200 hover:bg-[#E8FF2A] cursor-default"
+                className="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide transition-all duration-200 hover:bg-[var(--accent)] hover:text-[#111] cursor-default"
                 style={{
-                  background: 'rgba(255,255,255,0.5)',
-                  color: '#333',
-                  border: '1px solid rgba(17,17,17,0.12)',
+                  background: 'var(--bg-card)',
+                  color: 'var(--text-dark)',
+                  border: '1px solid var(--border)',
                 }}
               >
                 {tech}

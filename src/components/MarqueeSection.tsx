@@ -28,7 +28,7 @@ export const MarqueeSection: React.FC = () => {
   return (
     <section
       className="w-full overflow-hidden py-10 sm:py-14 flex flex-col gap-3"
-      style={{ background: '#BFB9AE', borderTop: '1px solid rgba(17,17,17,0.08)', borderBottom: '1px solid rgba(17,17,17,0.08)' }}
+      style={{ background: 'var(--bg-card)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}
     >
       {/* Section label */}
       <FadeIn delay={0} y={0} className="flex justify-center mb-2">

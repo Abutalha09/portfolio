@@ -39,7 +39,7 @@ export const EducationSection: React.FC = () => {
     <section
       id="education"
       className="w-full px-4 sm:px-8 md:px-10 py-20 sm:py-28 relative"
-      style={{ background: '#CAC5BA' }}
+      style={{ background: 'var(--bg-primary)', color: 'var(--text-dark)' }}
     >
       <div className="max-w-4xl mx-auto">
         {/* Label */}
@@ -50,7 +50,7 @@ export const EducationSection: React.FC = () => {
         {/* Title */}
         <FadeIn delay={0.1} y={40} className="text-center mb-14 sm:mb-20">
           <h2
-            className="section-heading"
+            className="section-heading text-[var(--text-dark)]"
             style={{ fontSize: 'clamp(2.2rem, 6vw, 5rem)' }}
           >
             Academic<br />Journey
@@ -58,48 +58,49 @@ export const EducationSection: React.FC = () => {
         </FadeIn>
 
         {/* Timeline */}
-        <div className="timeline-line pl-8 ml-2 sm:ml-4 flex flex-col gap-6 mb-16">
+        <div className="timeline-line pl-8 ml-2 sm:ml-4 flex flex-col gap-6 mb-16 border-l-2 border-[var(--border-dark)]">
           {educationTimeline.map((item, idx) => (
             <FadeIn key={idx} delay={idx * 0.12} y={25}>
               <div className="relative">
                 {/* Dot */}
                 <div
                   className="timeline-dot absolute -left-[42px] top-5"
-                  style={{ background: item.isHighlight ? '#E8FF2A' : 'rgba(17,17,17,0.25)' }}
+                  style={{ background: item.isHighlight ? 'var(--accent)' : 'var(--text-mid)' }}
                 />
 
                 {/* Card */}
                 <div
-                  className="card-light p-5 sm:p-7 hover:scale-[1.01] transition-all duration-300"
+                  className="p-5 sm:p-7 hover:scale-[1.01] transition-all duration-300 rounded-2xl"
                   style={{
-                    border: item.isHighlight ? '2px solid rgba(232,255,42,0.5)' : '1px solid rgba(17,17,17,0.1)',
-                    boxShadow: item.isHighlight ? '0 4px 24px rgba(232,255,42,0.15)' : 'none',
+                    background: 'var(--bg-card)',
+                    border: item.isHighlight ? '2px solid var(--accent)' : '1px solid var(--border)',
+                    boxShadow: item.isHighlight ? '0 4px 24px var(--theme-glow)' : 'none',
                   }}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
                     <span
                       className="inline-block px-3 py-1 rounded-full text-[0.6rem] font-bold uppercase tracking-wider w-fit"
                       style={{
-                        background: item.isHighlight ? '#E8FF2A' : 'rgba(17,17,17,0.08)',
-                        color: '#111',
-                        border: '1px solid rgba(17,17,17,0.12)',
+                        background: item.isHighlight ? 'var(--accent)' : 'var(--bg-card)',
+                        color: item.isHighlight ? '#111' : 'var(--text-dark)',
+                        border: '1px solid var(--border)',
                       }}
                     >
                       {item.year}
                     </span>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-[#777]">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-mid)]">
                       {item.institution}
                     </span>
                   </div>
 
                   <h3
-                    className="font-black uppercase text-[#111] mb-2"
+                    className="font-black uppercase text-[var(--text-dark)] mb-2"
                     style={{ fontSize: 'clamp(0.9rem, 2vw, 1.25rem)', fontFamily: "'Inter'" }}
                   >
                     {item.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-[#555] leading-relaxed mb-4">
+                  <p className="text-xs sm:text-sm text-[var(--text-mid)] leading-relaxed mb-4 font-medium">
                     {item.description}
                   </p>
 
@@ -108,7 +109,7 @@ export const EducationSection: React.FC = () => {
                       <span
                         key={tag}
                         className="text-[0.6rem] px-2.5 py-1 rounded-full font-bold uppercase tracking-wide"
-                        style={{ background: 'rgba(17,17,17,0.06)', color: '#555', border: '1px solid rgba(17,17,17,0.1)' }}
+                        style={{ background: 'var(--bg-card)', color: 'var(--text-dark)', border: '1px solid var(--border)' }}
                       >
                         {tag}
                       </span>
@@ -122,19 +123,19 @@ export const EducationSection: React.FC = () => {
 
         {/* Certifications */}
         <FadeIn delay={0.3} y={25}>
-          <h3 className="font-black uppercase text-sm tracking-widest text-[#555] mb-6" style={{ fontFamily: "'Inter'" }}>
+          <h3 className="font-black uppercase text-sm tracking-widest text-[var(--text-mid)] mb-6" style={{ fontFamily: "'Inter'" }}>
             Certifications &amp; Courses
           </h3>
           <div className="flex flex-col gap-3">
             {certifications.map((cert, i) => (
               <div
                 key={i}
-                className="flex items-center justify-between px-5 py-4 rounded-2xl hover:bg-white/40 transition-all duration-200"
-                style={{ border: '1px solid rgba(17,17,17,0.1)', background: 'rgba(255,255,255,0.25)' }}
+                className="flex items-center justify-between px-5 py-4 rounded-2xl hover:scale-[1.01] transition-all duration-200"
+                style={{ border: '1px solid var(--border)', background: 'var(--bg-card)' }}
               >
                 <div>
-                  <h4 className="font-bold text-sm text-[#111]">{cert.name}</h4>
-                  <p className="text-xs text-[#777]">{cert.issuer}</p>
+                  <h4 className="font-bold text-sm text-[var(--text-dark)]">{cert.name}</h4>
+                  <p className="text-xs text-[var(--text-mid)]">{cert.issuer}</p>
                 </div>
                 <span className="tag-yellow flex-shrink-0">{cert.year}</span>
               </div>

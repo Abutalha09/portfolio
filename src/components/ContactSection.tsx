@@ -127,8 +127,8 @@ export const ContactSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="w-full min-h-screen px-6 sm:px-12 md:px-16 lg:px-20 pt-28 pb-16 relative overflow-hidden text-[#111111] select-none flex flex-col justify-between"
-      style={{ background: '#EAE6DF' }}
+      className="w-full min-h-screen px-6 sm:px-12 md:px-16 lg:px-20 pt-28 pb-16 relative overflow-hidden text-[var(--text-dark)] select-none flex flex-col justify-between"
+      style={{ background: 'var(--bg-primary)' }}
     >
       {/* ─── Main Content Container ─── */}
       <div className="max-w-7xl w-full mx-auto relative z-10 flex-1 flex flex-col justify-between gap-16">
@@ -141,8 +141,8 @@ export const ContactSection: React.FC = () => {
               {/* Subtitle Tag */}
               <FadeIn delay={0} y={15}>
                 <div className="flex items-center gap-2 mb-5">
-                  <span className="w-8 h-[2px] bg-[#111111]" />
-                  <span className="text-xs font-black uppercase tracking-widest text-[#444444]">
+                  <span className="w-8 h-[2px] bg-[var(--text-dark)]" />
+                  <span className="text-xs font-black uppercase tracking-widest text-[var(--text-mid)]">
                     LET'S CONNECT
                   </span>
                 </div>
@@ -151,7 +151,7 @@ export const ContactSection: React.FC = () => {
               {/* Giant Editorial Heading */}
               <FadeIn delay={0.1} y={25}>
                 <h1
-                  className="font-black leading-[0.88] tracking-tighter uppercase mb-6"
+                  className="font-black leading-[0.88] tracking-tighter uppercase mb-6 text-[var(--text-dark)]"
                   style={{
                     fontSize: 'clamp(3.2rem, 7.5vw, 6rem)',
                     fontFamily: "'Inter', sans-serif",
@@ -159,22 +159,22 @@ export const ContactSection: React.FC = () => {
                 >
                   LET'S
                   <br />
-                  <span className="text-[#D4F62E] drop-shadow-sm">WORK</span>
+                  <span className="text-[var(--accent)] drop-shadow-sm">WORK</span>
                   <br />
-                  TOGETHER<span className="text-[#D4F62E]">.</span>
+                  TOGETHER<span className="text-[var(--accent)]">.</span>
                 </h1>
               </FadeIn>
 
               {/* Subhead */}
               <FadeIn delay={0.15} y={20}>
-                <p className="text-base sm:text-lg font-semibold text-[#444444] mb-10 leading-relaxed max-w-md">
+                <p className="text-base sm:text-lg font-semibold text-[var(--text-mid)] mb-10 leading-relaxed max-w-md">
                   Have a project in mind?
                   <br />
                   Let's create something{' '}
-                  <span className="relative inline-block font-black text-[#111111] px-1">
+                  <span className="relative inline-block font-black text-[var(--text-dark)] px-1">
                     amazing.
                     <svg
-                      className="absolute -bottom-1 left-0 w-full h-2.5 text-[#D4F62E]"
+                      className="absolute -bottom-1 left-0 w-full h-2.5 text-[var(--accent)]"
                       viewBox="0 0 100 20"
                       preserveAspectRatio="none"
                       fill="none"
