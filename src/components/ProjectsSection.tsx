@@ -9,7 +9,9 @@ interface ProjectData {
   description: string;
   techTags: string[];
   img: string;
+  imgAlt: string;
   liveLink: string;
+  githubLink: string;
 }
 
 const featuredProjects: ProjectData[] = [
@@ -17,37 +19,45 @@ const featuredProjects: ProjectData[] = [
     id: '01',
     name: 'Cosmic Portfolio',
     category: 'Brand Showcase',
-    description: 'An interactive portfolio with deep space dynamics, canvas particle flows, custom cursor, and glassmorphism panels.',
+    description: 'Needed a portfolio that felt alive, not static. Built with canvas particle flows, glassmorphism panels, and a custom cursor — turning a simple personal page into an immersive interactive experience.',
     techTags: ['Canvas API', 'CSS variables', 'GitHub Pages'],
     img: '/portfolio.png',
+    imgAlt: 'Cosmic Portfolio website — deep space particle animations with glassmorphism panels',
     liveLink: 'https://abutalha09.github.io/portfolio/',
+    githubLink: 'https://github.com/Abutalha09/portfolio',
   },
   {
     id: '02',
     name: 'Video Downloader',
     category: 'Media Tool',
-    description: 'A high-performance media downloader utility optimized for rapid client link parsing and download queues.',
+    description: 'Solved the problem of slow, ad-heavy video download sites by building a clean, high-performance media downloader. Optimized URL parsing and queuing to handle multiple formats instantly.',
     techTags: ['HTML/CSS', 'JavaScript', 'Render'],
     img: '/abusha.png',
+    imgAlt: 'Video Downloader web app — clean interface with download queue management',
     liveLink: 'https://abusha.onrender.com',
+    githubLink: 'https://github.com/Abutalha09',
   },
   {
     id: '03',
     name: 'Al-Madina Telecom',
     category: 'Repair Shop Studio',
-    description: 'Premium mobile and watch repair studio landing page with diagnostic details and a booking workflow.',
+    description: 'A local repair shop needed a professional digital presence to attract customers. Designed and built a premium landing page with service details and a booking workflow to convert visitors into clients.',
     techTags: ['HTML5', 'CSS3', 'JavaScript', 'Netlify'],
     img: '/almadina.png',
+    imgAlt: 'Al-Madina Telecom repair shop website — professional landing page with service listing',
     liveLink: 'https://almadina1.netlify.app/',
+    githubLink: 'https://github.com/Abutalha09',
   },
   {
     id: '04',
     name: 'Sleek Calculator',
     category: 'Utility App',
-    description: 'A lightweight calculator with prompt evaluations, tactile click feedback, and dark/light responsive layout.',
+    description: 'Rebuilt the browser calculator concept from scratch to explore prompt-based expression evaluation. Added tactile click feedback, keyboard support, and a responsive dark/light layout — clean and functional.',
     techTags: ['HTML5', 'CSS Flexbox', 'Vanilla JS'],
     img: '/Calculator1.png',
+    imgAlt: 'Sleek Calculator app — modern dark-mode calculator with keyboard support',
     liveLink: 'https://abutalha09.github.io/calculator/',
+    githubLink: 'https://github.com/Abutalha09/calculator',
   },
 ];
 
@@ -55,17 +65,21 @@ const otherProjects = [
   {
     name: 'Tic Tac Toe',
     category: 'Interactive Game',
-    description: 'A tactile Tic Tac Toe game with smooth resets, score logging, and elegant UI.',
+    description: 'Challenged myself to implement complete game state management in Vanilla JS — win detection, score logging, and smooth resets — without any framework.',
     techTags: ['Vanilla JS', 'CSS variables', 'State Tracking'],
     img: '/Tic tac toe.png',
+    imgAlt: 'Tic Tac Toe game with score tracking and smooth UI',
+    liveLink: 'https://abutalha09.github.io',
     link: 'https://github.com/Abutalha09',
   },
   {
     name: 'Rock Paper Scissors',
     category: 'Interactive Game',
-    description: 'Classic game with animation resets, score tracking, and responsive layouts for mobile.',
+    description: 'Built classic Rock Paper Scissors with animated choice reveals, computer AI, and score persistence — focused on delivering smooth micro-interactions across all screen sizes.',
     techTags: ['Vanilla JS', 'Web Animations', 'Score Tracker'],
     img: '/rock paper.png',
+    imgAlt: 'Rock Paper Scissors game with animated moves and score tracking',
+    liveLink: 'https://abutalha09.github.io',
     link: 'https://github.com/Abutalha09',
   },
 ];
@@ -93,7 +107,7 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
     >
       <motion.div
         style={{ scale }}
-        className="w-full h-full overflow-hidden shadow-xl"
+        className="w-full h-full overflow-hidden shadow-xl group"
       >
         <div
           style={{
@@ -103,8 +117,9 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
             color: 'var(--text-dark)',
             width: '100%',
             height: '100%',
+            transition: 'box-shadow 0.3s ease',
           }}
-          className="flex flex-col p-5 sm:p-8 md:p-10 backdrop-blur-md"
+          className="flex flex-col p-5 sm:p-8 md:p-10 backdrop-blur-md hover:shadow-[0_0_40px_rgba(232,255,42,0.12)]"
         >
           {/* Top row */}
           <div className="flex items-start justify-between mb-4 sm:mb-6 gap-2">
@@ -127,15 +142,29 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
                 </h3>
               </div>
             </div>
-            <a
-              href={project.liveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-yellow text-[0.65rem] py-1.5 px-3.5 sm:py-2 sm:px-4 flex-shrink-0"
-              id={`project-link-${project.id}`}
-            >
-              Live ↗
-            </a>
+            {/* Live + GitHub links */}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <a
+                href={project.githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline text-[0.65rem] py-1.5 px-3 sm:py-2 sm:px-3.5"
+                id={`project-github-${project.id}`}
+                aria-label={`${project.name} GitHub repository`}
+              >
+                GitHub ↗
+              </a>
+              <a
+                href={project.liveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-yellow text-[0.65rem] py-1.5 px-3.5 sm:py-2 sm:px-4"
+                id={`project-link-${project.id}`}
+                aria-label={`${project.name} live demo`}
+              >
+                Live ↗
+              </a>
+            </div>
           </div>
 
           {/* Description and tags */}
@@ -159,15 +188,13 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
           {/* Project image */}
           <div
             className="flex-1 overflow-hidden min-h-[160px] sm:min-h-[220px]"
-            style={{
-              borderRadius: '16px',
-              border: '1px solid var(--border)',
-            }}
+            style={{ borderRadius: '16px', border: '1px solid var(--border)' }}
           >
             <img
               src={project.img}
-              alt={project.name}
+              alt={project.imgAlt}
               className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+              loading="lazy"
             />
           </div>
         </div>
@@ -267,8 +294,9 @@ export const ProjectsSection: React.FC = () => {
                   >
                     <img
                       src={proj.img}
-                      alt={proj.name}
+                      alt={proj.imgAlt}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
                     />
                   </div>
                   <span className="text-[0.6rem] font-bold uppercase tracking-widest text-[#888] block mb-1">
@@ -289,14 +317,24 @@ export const ProjectsSection: React.FC = () => {
                       </span>
                     ))}
                   </div>
-                  <a
-                    href={proj.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-outline text-xs w-full justify-center"
-                  >
-                    View Code ↗
-                  </a>
+                  <div className="flex gap-2">
+                    <a
+                      href={proj.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-outline text-xs flex-1 justify-center"
+                    >
+                      GitHub ↗
+                    </a>
+                    <a
+                      href={proj.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-yellow text-xs flex-1 justify-center"
+                    >
+                      Live ↗
+                    </a>
+                  </div>
                 </FadeIn>
               ))}
             </div>

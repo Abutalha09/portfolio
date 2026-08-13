@@ -1,6 +1,47 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
+/* ─── Cycling role typewriter hook ──────────────── */
+const ROLES = ['Product Support Associate', 'Frontend Developer', 'QA & Software Tester', 'Builder of Web Apps'];
+function useTypewriter(active: boolean) {
+  const [display, setDisplay] = useState('');
+  const [roleIdx, setRoleIdx] = useState(0);
+  const [phase, setPhase] = useState<'typing' | 'pause' | 'erasing'>('typing');
+  const [charIdx, setCharIdx] = useState(0);
+
+  useEffect(() => {
+    if (!active) return;
+    let timer: ReturnType<typeof setTimeout>;
+    const current = ROLES[roleIdx];
+
+    if (phase === 'typing') {
+      if (charIdx < current.length) {
+        timer = setTimeout(() => {
+          setDisplay(current.slice(0, charIdx + 1));
+          setCharIdx(c => c + 1);
+        }, 52);
+      } else {
+        timer = setTimeout(() => setPhase('pause'), 1600);
+      }
+    } else if (phase === 'pause') {
+      timer = setTimeout(() => setPhase('erasing'), 200);
+    } else if (phase === 'erasing') {
+      if (charIdx > 0) {
+        timer = setTimeout(() => {
+          setDisplay(current.slice(0, charIdx - 1));
+          setCharIdx(c => c - 1);
+        }, 28);
+      } else {
+        setRoleIdx(r => (r + 1) % ROLES.length);
+        setPhase('typing');
+      }
+    }
+    return () => clearTimeout(timer);
+  }, [active, phase, charIdx, roleIdx]);
+
+  return display;
+}
+
 /* ─── Count-up hook ─────────────────────────────── */
 function useCountUp(target: number, durationMs = 1600, start = false) {
   const [count, setCount] = useState(0);
@@ -63,6 +104,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
 
   const projectCount = useCountUp(6, 1600, countersStarted);
   const expYears = useCountUp(2, 1200, countersStarted);
+  const roleText = useTypewriter(countersStarted);
 
   /* ── GSAP entrance (triggered by animate prop) ── */
   useEffect(() => {
@@ -241,6 +283,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
             Creatively
           </h1>
 
+          {/* Typewriter cycling role */}
+          <div className="mb-3 h-6 flex items-center" aria-live="polite" aria-label="Current role">
+            <span
+              className="text-xs sm:text-sm font-bold uppercase tracking-[0.15em] text-[#333] typing-cursor pr-1"
+              style={{ fontFamily: "'Inter'" }}
+            >
+              {roleText || '\u00A0'}
+            </span>
+          </div>
+
           {/* ── CTA BUTTONS ─────────────────────── */}
           <div
             ref={btnsRef}
@@ -250,14 +302,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
             <button
               id="hero-hire-btn"
               onClick={() => scrollTo('contact', 'CONTACT')}
-              className="btn-yellow text-xs sm:text-sm py-3 px-6 font-extrabold"
+              className="btn-yellow text-xs sm:text-sm py-3 px-6 font-extrabold focus:outline-none focus:ring-2 focus:ring-white"
             >
               Hire Me
             </button>
             <button
+              id="hero-view-work-btn"
+              onClick={() => scrollTo('projects', 'PROJECTS')}
+              className="btn-yellow text-xs sm:text-sm py-3 px-6 font-extrabold focus:outline-none focus:ring-2 focus:ring-white"
+              style={{ background: '#111111', color: '#E8FF2A' }}
+            >
+              View My Work ↓
+            </button>
+            <button
               id="hero-about-btn"
               onClick={() => scrollTo('about', 'ABOUT')}
-              className="btn-outline text-xs sm:text-sm py-3 px-6 font-extrabold"
+              className="btn-outline text-xs sm:text-sm py-3 px-6 font-extrabold focus:outline-none focus:ring-2 focus:ring-white"
               style={{
                 color: 'var(--text-dark)',
                 borderColor: 'var(--border-dark)',

@@ -267,7 +267,7 @@ export const ContactSection: React.FC = () => {
                           href={s.href}
                           target={s.external ? '_blank' : '_self'}
                           rel={s.external ? 'noopener noreferrer' : undefined}
-                          className="flex items-center gap-1.5 py-1 px-3 rounded-full bg-[#DDD8CF]/60 hover:bg-[#D4F62E] text-[#111111] transition-all"
+                          className="flex items-center gap-1.5 py-1 px-3 rounded-full bg-[#DDD8CF]/60 hover:bg-[#D4F62E] hover:scale-105 hover:shadow-sm text-[#111111] transition-all duration-200"
                         >
                           <IconComp className="w-3.5 h-3.5" />
                           <span>{s.label}</span>
@@ -338,7 +338,7 @@ export const ContactSection: React.FC = () => {
                       <label className="text-[0.7rem] font-black uppercase tracking-widest text-[#444444]">
                         01 / YOUR NAME *
                       </label>
-                      <div className="relative flex items-center border-b-2 border-[#111111]/25 focus-within:border-[#111111] transition-colors py-3">
+                      <div className="relative flex items-center border-b-2 border-[#111111]/25 focus-within:border-[#E8FF2A] focus-within:shadow-[0_2px_0_0_#E8FF2A] transition-all duration-200 py-3">
                         <User className="w-5 h-5 text-[#444444] shrink-0 mr-3" />
                         <input
                           type="text"
@@ -357,7 +357,7 @@ export const ContactSection: React.FC = () => {
                       <label className="text-[0.7rem] font-black uppercase tracking-widest text-[#444444]">
                         02 / YOUR EMAIL ADDRESS *
                       </label>
-                      <div className="relative flex items-center border-b-2 border-[#111111]/25 focus-within:border-[#111111] transition-colors py-3">
+                      <div className="relative flex items-center border-b-2 border-[#111111]/25 focus-within:border-[#E8FF2A] focus-within:shadow-[0_2px_0_0_#E8FF2A] transition-all duration-200 py-3">
                         <Mail className="w-5 h-5 text-[#444444] shrink-0 mr-3" />
                         <input
                           type="email"
@@ -376,7 +376,7 @@ export const ContactSection: React.FC = () => {
                       <label className="text-[0.7rem] font-black uppercase tracking-widest text-[#444444]">
                         03 / SUBJECT OR PROJECT TYPE
                       </label>
-                      <div className="relative flex items-center border-b-2 border-[#111111]/25 focus-within:border-[#111111] transition-colors py-3">
+                      <div className="relative flex items-center border-b-2 border-[#111111]/25 focus-within:border-[#E8FF2A] focus-within:shadow-[0_2px_0_0_#E8FF2A] transition-all duration-200 py-3">
                         <Folder className="w-5 h-5 text-[#444444] shrink-0 mr-3" />
                         <input
                           type="text"
@@ -394,7 +394,7 @@ export const ContactSection: React.FC = () => {
                       <label className="text-[0.7rem] font-black uppercase tracking-widest text-[#444444]">
                         04 / YOUR MESSAGE *
                       </label>
-                      <div className="relative flex items-start border-b-2 border-[#111111]/25 focus-within:border-[#111111] transition-colors py-3">
+                      <div className="relative flex items-start border-b-2 border-[#111111]/25 focus-within:border-[#E8FF2A] focus-within:shadow-[0_2px_0_0_#E8FF2A] transition-all duration-200 py-3">
                         <Pencil className="w-5 h-5 text-[#444444] shrink-0 mr-3 mt-1" />
                         <textarea
                           name="message"

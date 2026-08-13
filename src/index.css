@@ -29,7 +29,7 @@
   --bg-card:     rgba(255,255,255,0.45);
   --bg-dark:     #111111;
   --text-dark:   #111111;
-  --text-mid:    #444444;
+  --text-mid:    #333333;
   --text-light:  #666666;
   --accent:      #E8FF2A;
   --accent-dark: #C8DF00;
@@ -280,8 +280,33 @@
 }
 .animate-loader-bar { animation: loader-bar 1.6s linear forwards; }
 
-/* ─── Scrollbar styling ─────────────────────────── */
+/* ─── Scrollbar styling ─────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #CAC5BA; }
 ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+/* ─── Global Keyboard Accessibility — focus-visible ─── */
+/* Only shows for keyboard nav, invisible on mouse click  */
+*:focus { outline: none; }
+*:focus-visible {
+  outline: 2.5px solid #111111;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+/* Yellow accent focus for buttons */
+button:focus-visible,
+a:focus-visible {
+  outline: 2.5px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 999px;
+  box-shadow: 0 0 0 4px rgba(232,255,42,0.25);
+}
+/* Sharper ring for form inputs */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 0px;
+  box-shadow: 0 0 0 3px rgba(232,255,42,0.2);
+}
