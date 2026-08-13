@@ -157,7 +157,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
       className="relative w-full overflow-hidden"
       style={{ minHeight: '100vh', background: 'var(--bg-primary)' }}
     >
-      {/* ── Layer 0: Giant yellow "ABU" background ─ */}
+      {/* ── Layer 0: Giant yellow "TALHA" background ─ */}
       <div
         aria-hidden
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
@@ -166,7 +166,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
         <span
           ref={bgTextRef}
           style={{
-            fontSize: 'clamp(180px, 32vw, 480px)',
+            fontSize: 'clamp(70px, 24vw, 480px)',
             fontFamily: "'Inter', sans-serif",
             fontWeight: 900,
             color: 'var(--accent)',
@@ -190,14 +190,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
         <img
           src="/hero-transparent.png"
           alt="Mohammad Abutalha"
-          style={{
-            height: '96vh',
-            maxHeight: '900px',
-            width: 'auto',
-            objectFit: 'cover',
-            objectPosition: 'top center',
-            filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.12))',
-          }}
+          className="h-[52vh] sm:h-[80vh] lg:h-[96vh] max-h-[900px] w-auto object-cover object-top filter drop-shadow-2xl"
           draggable={false}
         />
       </div>
@@ -215,14 +208,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
 
       {/* ── Layer 3: All overlay content ───────── */}
       <div
-        className="relative flex flex-col"
-        style={{ minHeight: '100vh', zIndex: 3 }}
+        className="relative flex flex-col min-h-screen"
+        style={{ zIndex: 3 }}
       >
         {/* Spacer — pushes content to bottom */}
-        <div className="flex-1" />
+        <div className="flex-1 min-h-[140px]" />
 
         {/* Bottom content area */}
-        <div className="w-full px-5 sm:px-8 md:px-10 pb-0">
+        <div className="w-full px-4 sm:px-8 md:px-10 pb-0">
 
           {/* ── HEADING ─────────────────────────── */}
           <h1
@@ -230,7 +223,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
             style={{
               fontFamily: "'Inter', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(2.8rem, 7.5vw, 8rem)',
+              fontSize: 'clamp(2.2rem, 7.5vw, 8rem)',
               color: '#ffffff',
               letterSpacing: '-0.04em',
               lineHeight: 0.9,
@@ -251,25 +244,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
           {/* ── CTA BUTTONS ─────────────────────── */}
           <div
             ref={btnsRef}
-            className="flex gap-3 mb-5 sm:mb-6"
+            className="flex flex-wrap gap-3 mb-5 sm:mb-6"
             style={{ opacity: 0, willChange: 'transform, opacity' }}
           >
             <button
               id="hero-hire-btn"
               onClick={() => scrollTo('contact', 'CONTACT')}
-              className="btn-yellow"
-              style={{ fontSize: '0.82rem', padding: '12px 28px', fontWeight: 800 }}
+              className="btn-yellow text-xs sm:text-sm py-3 px-6 font-extrabold"
             >
               Hire Me
             </button>
             <button
               id="hero-about-btn"
               onClick={() => scrollTo('about', 'ABOUT')}
-              className="btn-outline"
+              className="btn-outline text-xs sm:text-sm py-3 px-6 font-extrabold"
               style={{
-                fontSize: '0.82rem',
-                padding: '12px 28px',
-                fontWeight: 800,
                 color: 'var(--text-dark)',
                 borderColor: 'var(--border-dark)',
               }}
@@ -281,7 +270,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
           {/* ── BOTTOM NAV BAR ──────────────────── */}
           <nav
             ref={navBarRef}
-            className="flex items-center flex-wrap gap-x-0 gap-y-2 pb-5 sm:pb-7"
+            className="flex items-center flex-wrap gap-x-3 gap-y-2 pb-5 sm:pb-7"
             style={{
               borderTop: '1px solid rgba(17,17,17,0.15)',
               opacity: 0,
@@ -291,19 +280,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
             {/* Left cluster: identity + stat cards */}
             <div
               ref={statsRef}
-              className="flex items-center gap-4 sm:gap-5 pt-3 flex-wrap"
+              className="flex items-center gap-3 sm:gap-5 pt-3 flex-wrap"
             >
               {/* Identity blurb */}
               <div className="flex flex-col mr-1">
-                <span className="text-xs font-semibold text-[#444] leading-tight">Product Support Associate</span>
-                <span className="text-xs font-semibold text-[#444] leading-tight">That's Abutalha.</span>
+                <span className="text-[0.65rem] sm:text-xs font-semibold text-[#444] leading-tight">Product Support Associate</span>
+                <span className="text-[0.65rem] sm:text-xs font-semibold text-[#444] leading-tight">That's Abutalha.</span>
               </div>
 
               <div className="w-px h-8 hidden sm:block" style={{ background: 'rgba(17,17,17,0.18)' }} />
 
               {/* Stat card 1 */}
               <div
-                className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl"
+                className="flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl"
                 style={{
                   background: 'rgba(202,197,186,0.85)',
                   backdropFilter: 'blur(8px)',
@@ -311,25 +300,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
                 }}
               >
                 <div
-                  className="w-8 h-8 rounded-lg flex items-center justify-center text-base flex-shrink-0"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center text-sm sm:text-base flex-shrink-0"
                   style={{ background: '#E8FF2A' }}
                 >
                   🚀
                 </div>
                 <div>
                   <div
-                    className="font-black text-base leading-none"
+                    className="font-black text-sm sm:text-base leading-none"
                     style={{ fontFamily: "'Inter'", color: '#111' }}
                   >
                     {projectCount}+
                   </div>
-                  <div className="text-[0.58rem] uppercase tracking-wider text-[#666] font-semibold">Projects</div>
+                  <div className="text-[0.52rem] sm:text-[0.58rem] uppercase tracking-wider text-[#666] font-semibold">Projects</div>
                 </div>
               </div>
 
               {/* Stat card 2 */}
               <div
-                className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl"
+                className="flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl"
                 style={{
                   background: 'rgba(202,197,186,0.85)',
                   backdropFilter: 'blur(8px)',
@@ -338,13 +327,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
               >
                 <div className="flex flex-col">
                   <div
-                    className="font-black leading-none"
-                    style={{ fontSize: '1.4rem', fontFamily: "'Inter'", color: '#E8FF2A' }}
+                    className="font-black leading-none text-sm sm:text-base"
+                    style={{ fontFamily: "'Inter'", color: '#E8FF2A' }}
                   >
                     {expYears}+
                   </div>
-                  <div className="text-[0.58rem] uppercase tracking-wider text-[#666] font-semibold">
-                    Years<br />Exp.
+                  <div className="text-[0.52rem] sm:text-[0.58rem] uppercase tracking-wider text-[#666] font-semibold">
+                    Years Exp.
                   </div>
                 </div>
               </div>
@@ -383,12 +372,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
             <div className="flex-1 hidden sm:block" />
 
             {/* Right nav links */}
-            <div className="flex items-center gap-3 sm:gap-4 pt-3 flex-wrap">
+            <div className="flex items-center gap-2 sm:gap-4 pt-3 flex-wrap">
               {navItems.slice(1).map((item) => (
                 <button
                   key={item.label}
                   onClick={() => scrollTo(item.id, item.label)}
-                  className="text-[0.6rem] font-bold uppercase tracking-[0.12em] cursor-pointer border-none bg-transparent outline-none transition-colors duration-200 hover:text-[#111]"
+                  className="text-[0.58rem] sm:text-[0.6rem] font-bold uppercase tracking-[0.1em] cursor-pointer border-none bg-transparent outline-none transition-colors duration-200 hover:text-[#111]"
                   style={{ color: activeNav === item.label ? '#111' : '#666' }}
                 >
                   {item.label}

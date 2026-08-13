@@ -89,7 +89,7 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
     <div
       ref={containerRef}
       style={{ top: `calc(${index * 24}px + 5rem)` }}
-      className="sticky h-[82vh] w-full origin-top"
+      className="sticky h-auto min-h-[440px] md:h-[82vh] w-full origin-top"
     >
       <motion.div
         style={{ scale }}
@@ -97,26 +97,26 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
       >
         <div
           style={{
-            borderRadius: '32px',
+            borderRadius: '28px',
             border: '2px solid var(--border-dark)',
             background: 'var(--bg-card)',
             color: 'var(--text-dark)',
             width: '100%',
             height: '100%',
           }}
-          className="flex flex-col p-6 sm:p-8 md:p-10 backdrop-blur-md"
+          className="flex flex-col p-5 sm:p-8 md:p-10 backdrop-blur-md"
         >
           {/* Top row */}
-          <div className="flex items-start justify-between mb-5 sm:mb-6">
-            <div className="flex items-center gap-4 sm:gap-6">
+          <div className="flex items-start justify-between mb-4 sm:mb-6 gap-2">
+            <div className="flex items-center gap-3 sm:gap-6">
               <span
                 className="font-black leading-none select-none opacity-20"
-                style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', fontFamily: "'Inter'", color: 'var(--text-dark)' }}
+                style={{ fontSize: 'clamp(1.8rem, 5vw, 4rem)', fontFamily: "'Inter'", color: 'var(--text-dark)' }}
               >
                 {project.id}
               </span>
               <div>
-                <p className="text-[0.6rem] uppercase tracking-[0.18em] text-[var(--text-mid)] font-semibold mb-0.5">
+                <p className="text-[0.55rem] sm:text-[0.6rem] uppercase tracking-[0.18em] text-[var(--text-mid)] font-semibold mb-0.5">
                   {project.category}
                 </p>
                 <h3
@@ -131,7 +131,7 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
               href={project.liveLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-yellow text-[0.65rem] py-2 px-4 flex-shrink-0"
+              className="btn-yellow text-[0.65rem] py-1.5 px-3.5 sm:py-2 sm:px-4 flex-shrink-0"
               id={`project-link-${project.id}`}
             >
               Live ↗
@@ -139,15 +139,15 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
           </div>
 
           {/* Description and tags */}
-          <div className="mb-5">
-            <p className="text-sm sm:text-base text-[var(--text-mid)] leading-relaxed max-w-2xl mb-3 font-medium">
+          <div className="mb-4">
+            <p className="text-xs sm:text-base text-[var(--text-mid)] leading-relaxed max-w-2xl mb-3 font-medium">
               {project.description}
             </p>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {project.techTags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-[0.6rem] px-2.5 py-1 rounded-full font-bold uppercase tracking-wide"
+                  className="text-[0.58rem] sm:text-[0.6rem] px-2.5 py-1 rounded-full font-bold uppercase tracking-wide"
                   style={{ background: 'var(--bg-card)', color: 'var(--text-dark)', border: '1px solid var(--border)' }}
                 >
                   {tag}
@@ -158,11 +158,10 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
 
           {/* Project image */}
           <div
-            className="flex-1 overflow-hidden"
+            className="flex-1 overflow-hidden min-h-[160px] sm:min-h-[220px]"
             style={{
-              borderRadius: '20px',
+              borderRadius: '16px',
               border: '1px solid var(--border)',
-              minHeight: 0,
             }}
           >
             <img

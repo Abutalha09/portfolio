@@ -57,20 +57,20 @@ export const TerminalSection: React.FC = () => {
       command: 'welcome',
       content: (
         <div className="space-y-2 py-1 font-mono text-xs text-white/90">
-          <pre className="text-[var(--accent)] font-bold text-[0.6rem] sm:text-xs leading-none overflow-x-auto select-none opacity-95">
+          <pre className="text-[var(--accent)] font-bold text-[0.4rem] xs:text-[0.5rem] sm:text-xs leading-none overflow-x-auto select-none opacity-95">
 {` █████╗ ██████╗ ██╗   ██╗████████╗ █████╗ ██╗     ██╗  ██╗ █████╗ 
 ██╔══██╗██╔══██╗██║   ██║╚══██╔══╝██╔══██╗██║     ██║  ██║██╔══██╗
 ███████║██████╔╝██║   ██║   ██║   ███████║██║     ███████║███████║
 ██╔══██║██╔══██╗██║   ██║   ██║   ██╔══██║██║     ██╔══██║██╔══██║
 ██║  ██║██████╔╝╚██████╔╝   ██║   ██║  ██║███████╗██║  ██║██║  ██║`}
           </pre>
-          <div className="flex flex-wrap items-center gap-2 pt-1 text-[0.7rem] text-white/70">
-            <span className="px-2 py-0.5 rounded text-[0.65rem] font-bold bg-[var(--accent)] text-[#111] uppercase tracking-wider">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-1 text-[0.65rem] sm:text-[0.7rem] text-white/70">
+            <span className="px-2 py-0.5 rounded text-[0.6rem] sm:text-[0.65rem] font-bold bg-[var(--accent)] text-[#111] uppercase tracking-wider">
               ABUTALHA RESUME CLI v2.6
             </span>
             <span>[Kanpur, UP | BCA CGPA: 7.12 | Status: Open to Roles]</span>
           </div>
-          <p className="text-white/80 text-xs leading-relaxed">
+          <p className="text-white/80 text-[0.7rem] sm:text-xs leading-relaxed">
             Welcome to Mohammad Abutalha's Interactive Resume CLI! Type <span className="text-[var(--accent)] font-bold">'help'</span> or tap any shortcut pill below to view detailed resume sections.
           </p>
         </div>

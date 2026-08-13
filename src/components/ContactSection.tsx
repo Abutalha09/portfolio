@@ -153,7 +153,7 @@ export const ContactSection: React.FC = () => {
                 <h1
                   className="font-black leading-[0.88] tracking-tighter uppercase mb-6 text-[var(--text-dark)]"
                   style={{
-                    fontSize: 'clamp(3.2rem, 7.5vw, 6rem)',
+                    fontSize: 'clamp(2.6rem, 7.5vw, 6rem)',
                     fontFamily: "'Inter', sans-serif",
                   }}
                 >
@@ -167,7 +167,7 @@ export const ContactSection: React.FC = () => {
 
               {/* Subhead */}
               <FadeIn delay={0.15} y={20}>
-                <p className="text-base sm:text-lg font-semibold text-[var(--text-mid)] mb-10 leading-relaxed max-w-md">
+                <p className="text-sm sm:text-lg font-semibold text-[var(--text-mid)] mb-8 sm:mb-10 leading-relaxed max-w-md">
                   Have a project in mind?
                   <br />
                   Let's create something{' '}
@@ -198,7 +198,7 @@ export const ContactSection: React.FC = () => {
             >
               <span
                 className="font-black text-[#111111] leading-none block tracking-tighter"
-                style={{ fontSize: 'clamp(140px, 22vw, 320px)' }}
+                style={{ fontSize: 'clamp(70px, 20vw, 320px)' }}
               >
                 TALHA
               </span>
@@ -210,12 +210,12 @@ export const ContactSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="relative lg:absolute lg:left-[55%] lg:top-[10%] xl:left-[50%] w-full max-w-[300px] sm:max-w-[360px] lg:max-w-[400px] mx-auto lg:mx-0 z-20 pointer-events-none"
+              className="relative xl:absolute xl:left-[52%] xl:top-[10%] w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[380px] mx-auto xl:mx-0 z-20 pointer-events-none my-6 xl:my-0"
             >
               <motion.img
                 src="/hero-transparent.png"
                 alt="Mohammad Abutalha"
-                className="w-full h-auto object-contain filter drop-shadow-2xl"
+                className="w-full h-auto object-contain filter drop-shadow-2xl max-h-[350px] sm:max-h-[450px]"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               />
