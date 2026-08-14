@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const DESKTOP_RADIUS = 235;
-const MOBILE_RADIUS = 150;
+const DESKTOP_RADIUS = 260;
+const MOBILE_RADIUS = 160;
 
 export const GlassAbout: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -16,14 +16,16 @@ export const GlassAbout: React.FC = () => {
   // Entrance animation state
   const [hasEntered, setHasEntered] = useState(false);
 
-  // Frame Loop (Interpolation)
+  // Smooth interpolation frame loop
   const updateFrame = () => {
     if (!isInViewRef.current || !sectionRef.current) {
       rafIdRef.current = null;
       return;
     }
 
-    const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const posFactor = prefersReduced ? 1 : 0.14;
     const radiusFactor = prefersReduced ? 1 : 0.12;
 
@@ -44,7 +46,7 @@ export const GlassAbout: React.FC = () => {
     rafIdRef.current = requestAnimationFrame(updateFrame);
   };
 
-  // IntersectionObserver
+  // Intersection Observer
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -60,7 +62,7 @@ export const GlassAbout: React.FC = () => {
           }
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.12 }
     );
 
     observer.observe(el);
@@ -74,7 +76,7 @@ export const GlassAbout: React.FC = () => {
     };
   }, [hasEntered]);
 
-  // Pointer handlers
+  // Pointer Handlers
   const handlePointerEnter = (e: React.PointerEvent<HTMLElement>) => {
     if (e.pointerType === 'mouse') {
       const rect = sectionRef.current?.getBoundingClientRect();
@@ -129,21 +131,28 @@ export const GlassAbout: React.FC = () => {
     }
   };
 
-  const bottomHighlights = [
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const stats = [
     {
-      title: 'PRODUCT SUPPORT',
-      tags: 'Troubleshooting · Demos · SaaS Operations',
-      icon: '🎧',
+      icon: '🎫',
+      val: '20–25+',
+      title: 'Tickets / Week',
+      sub: 'Troubleshooting · Demos · SaaS QA',
     },
     {
-      title: 'WEB DEVELOPMENT',
-      tags: 'HTML · CSS · JavaScript · Python',
-      icon: '⚡',
+      icon: '🤝',
+      val: '40+',
+      title: 'Clients Onboarded',
+      sub: 'Hands-on Technical Training',
     },
     {
-      title: 'TESTING',
-      tags: 'Feature Testing · Bug Reporting · QA',
-      icon: '🧪',
+      icon: '🚀',
+      val: '2 Live',
+      title: 'SaaS Products',
+      sub: 'EduBuddy · HotelBuddy Support',
     },
   ];
 
@@ -157,9 +166,9 @@ export const GlassAbout: React.FC = () => {
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUpOrCancel}
       onPointerCancel={handlePointerUpOrCancel}
-      className="relative w-full min-h-[100dvh] py-12 sm:py-16 overflow-hidden select-none isolation-isolate touch-none flex flex-col justify-between"
+      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden select-none isolation-isolate"
       style={{
-        background: '#edf5ff',
+        background: 'var(--bg-primary, #CAC5BA)',
         color: '#111111',
         minWidth: '320px',
         fontFamily: "'Inter', sans-serif",
@@ -168,186 +177,257 @@ export const GlassAbout: React.FC = () => {
       <style>{`
         .glass-about-base {
           background-image: url('/images/About_reveal_desktop.png');
-          background-position: right top;
+          background-position: right 2% center;
           background-size: contain;
+          background-repeat: no-repeat;
         }
         .glass-about-reveal {
           background-image: url('/images/About_base_desktop.png');
-          background-position: right top;
+          background-position: right 2% center;
           background-size: contain;
+          background-repeat: no-repeat;
+        }
+        @media (min-width: 1440px) {
+          .glass-about-base {
+            background-position: right 6% center;
+          }
+          .glass-about-reveal {
+            background-position: right 6% center;
+          }
         }
         @media (max-width: 1024px) {
           .glass-about-base {
-            background-position: 85% top;
-            background-size: cover;
-          }
-          .glass-about-reveal {
-            background-position: 85% top;
-            background-size: cover;
-          }
-        }
-        @media (max-width: 767px) and (orientation: portrait) {
-          .glass-about-base {
-            background-image: url('/images/About_reveal_mobile.png');
-            background-position: center top;
-            background-size: cover;
-          }
-          .glass-about-reveal {
-            background-image: url('/images/About_base_mobile.png');
-            background-position: center top;
-            background-size: cover;
-          }
-        }
-        @media (max-width: 767px) and (orientation: landscape) {
-          .glass-about-base {
-            background-image: url('/images/About_reveal_desktop.png');
-            background-position: right top;
+            background-position: right -10% center;
             background-size: contain;
           }
           .glass-about-reveal {
-            background-image: url('/images/About_base_desktop.png');
-            background-position: right top;
+            background-position: right -10% center;
+            background-size: contain;
+          }
+        }
+        @media (max-width: 767px) {
+          .glass-about-base {
+            background-image: url('/images/About_reveal_mobile.png');
+            background-position: center top 5%;
+            background-size: contain;
+          }
+          .glass-about-reveal {
+            background-image: url('/images/About_base_mobile.png');
+            background-position: center top 5%;
             background-size: contain;
           }
         }
       `}</style>
 
-      {/* Layer 1: Base Image (Anatomical Glass Portrait shows FIRST, positioned top to avoid cropping) */}
+      {/* ── Layer 0: Giant Background Watermark Text ── */}
       <div
         aria-hidden="true"
-        className={`absolute inset-0 bg-no-repeat pointer-events-none glass-about-base transition-all duration-1000 ease-out ${
-          hasEntered ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.035]'
+        className="absolute inset-0 flex items-center justify-start pointer-events-none select-none overflow-hidden pl-6 lg:pl-12 opacity-[0.05]"
+        style={{ zIndex: 0 }}
+      >
+        <span
+          style={{
+            fontSize: 'clamp(80px, 22vw, 420px)',
+            fontWeight: 900,
+            letterSpacing: '-0.06em',
+            lineHeight: 0.8,
+            color: '#111111',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          ABOUT
+        </span>
+      </div>
+
+      {/* ── Layer 1: Base Image (Spider-Man shows FIRST, 100% Crystal Clear, No Blur) ── */}
+      <div
+        aria-hidden="true"
+        className={`absolute inset-0 pointer-events-none glass-about-base transition-all duration-1000 ease-out ${
+          hasEntered ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02]'
         }`}
+        style={{ zIndex: 1 }}
       />
 
-      {/* Layer 2: Reveal Image (Human Portrait revealed on cursor hover) */}
+      {/* ── Layer 2: Reveal Image (Black Shirt Portrait revealed on cursor hover, 100% Crisp) ── */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-no-repeat pointer-events-none z-10 glass-about-reveal"
+        className="absolute inset-0 pointer-events-none z-10 glass-about-reveal"
         style={{
+          zIndex: 2,
           WebkitMaskImage:
-            'radial-gradient(circle var(--reveal-radius, 0px) at var(--reveal-x, -999px) var(--reveal-y, -999px), rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.94) 62%, rgba(255,255,255,0.72) 76%, rgba(255,255,255,0.28) 90%, transparent 100%)',
+            'radial-gradient(circle var(--reveal-radius, 0px) at var(--reveal-x, -999px) var(--reveal-y, -999px), rgba(255,255,255,1) 0%, rgba(255,255,255,1) 62%, rgba(255,255,255,0.75) 78%, rgba(255,255,255,0.20) 92%, transparent 100%)',
           maskImage:
-            'radial-gradient(circle var(--reveal-radius, 0px) at var(--reveal-x, -999px) var(--reveal-y, -999px), rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.94) 62%, rgba(255,255,255,0.72) 76%, rgba(255,255,255,0.28) 90%, transparent 100%)',
+            'radial-gradient(circle var(--reveal-radius, 0px) at var(--reveal-x, -999px) var(--reveal-y, -999px), rgba(255,255,255,1) 0%, rgba(255,255,255,1) 62%, rgba(255,255,255,0.75) 78%, rgba(255,255,255,0.20) 92%, transparent 100%)',
         }}
       />
 
-      {/* Layer 3: Technical Grid & Left Backdrop for Pristine Readability */}
-      <div aria-hidden="true" className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
-        {/* Soft paper gradient overlay on left column for high text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#edf5ff] via-[#edf5ff]/90 to-transparent w-full md:w-[70%] z-0 pointer-events-none" />
-
-        {/* Desktop 12-column grid lines */}
-        <div className="hidden md:grid grid-cols-12 h-full w-full max-w-7xl mx-auto px-8 opacity-15">
-          {Array.from({ length: 12 }).map((_, i) => (
-            <div key={i} className="border-r border-[#648cc8]/30 h-full first:border-l" />
-          ))}
-        </div>
-
-        {/* Mobile 4-column grid lines */}
-        <div className="grid md:hidden grid-cols-4 h-full w-full px-5 opacity-10">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="border-r border-[#648cc8]/40 h-full first:border-l" />
-          ))}
-        </div>
-
-        {/* Oversized Fine-line Background Circle */}
-        <div
-          className="absolute rounded-full border border-[#648cc8]/20 pointer-events-none"
-          style={{
-            width: 'min(78vw, 72rem)',
-            height: 'min(78vw, 72rem)',
-            right: '5%',
-            top: '-25%',
-          }}
-        />
-      </div>
-
-      {/* Layer 4: Content Overlay */}
-      <div className="relative z-30 w-full max-w-7xl mx-auto px-5 sm:px-8 md:px-10 flex flex-col justify-between flex-1 pointer-events-none">
+      {/* ── Layer 3: Main Content (Direct Typography, Left-Aligned with zero overlap) ── */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-5 sm:px-8 md:px-10 lg:px-12 pt-12 sm:pt-16 pb-6 flex flex-col justify-between flex-1">
         
-        {/* Top Header: Left Section Label */}
-        <div className={`pt-2 mb-6 sm:mb-8 transition-all duration-700 delay-100 ${
-          hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-        }`}>
+        {/* Top Header Label */}
+        <div
+          className={`transition-all duration-700 delay-100 ${
+            hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+          }`}
+        >
           <span
-            className="inline-block text-[0.68rem] font-mono font-bold tracking-[0.2em] text-[#111111] uppercase px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-black/15 shadow-sm pointer-events-auto"
-            style={{ fontFamily: "'Courier New', monospace" }}
+            className="inline-flex items-center gap-2 text-[0.68rem] font-bold tracking-[0.2em] text-[#111111] uppercase px-3.5 py-1.5 rounded-full border border-black/20 bg-black/5"
+            style={{ fontFamily: "'Inter', sans-serif" }}
           >
+            <span style={{ color: 'var(--accent, #E8FF2A)', fontSize: '0.85rem' }}>◆</span>
             ABOUT ME / 01
           </span>
         </div>
 
-        {/* Middle Section: Editorial Heading & Wider About Bio Card */}
-        <div className="flex flex-col gap-6 sm:gap-8 my-auto max-w-2xl">
+        {/* Middle Editorial Content Block (Max-width strictly limited to left side to prevent image overlap) */}
+        <div className="my-auto py-8 sm:py-10 max-w-lg lg:max-w-[460px] xl:max-w-[510px] flex flex-col gap-6">
           
-          {/* Heading */}
-          <div className={`transition-all duration-800 delay-200 ${
-            hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
+          {/* Huge Editorial Heading */}
+          <div
+            className={`transition-all duration-800 delay-200 ${
+              hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
             <h2
-              className="font-black uppercase text-[#111111] leading-[0.98] tracking-[-0.05em]"
+              className="font-black uppercase text-[#111111] leading-[0.94] tracking-[-0.04em] mb-3"
               style={{
-                fontSize: 'clamp(1.6rem, 3.2vw, 3.2rem)',
+                fontSize: 'clamp(2rem, 3.6vw, 3.6rem)',
                 fontFamily: "'Inter', sans-serif",
+                textShadow: '0 2px 20px rgba(0,0,0,0.06)',
               }}
             >
               PRODUCT SUPPORT &amp;<br />
-              WEB DEVELOPMENT<br />
-              <span className="text-[#0055FF] underline decoration-wavy decoration-1 underline-offset-4">WITH A BUILDER'S MINDSET</span>.
+              <span
+                style={{
+                  color: '#111111',
+                  background: 'var(--accent, #E8FF2A)',
+                  padding: '0 8px',
+                  display: 'inline-block',
+                }}
+              >
+                WEB DEVELOPMENT
+              </span>
             </h2>
+            
+            <p
+              className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#333333] mt-2 flex items-center gap-2"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              <span>Full-Stack Builder</span>
+              <span>·</span>
+              <span>Bug-Squasher</span>
+              <span>·</span>
+              <span>BCA '26</span>
+            </p>
           </div>
 
-          {/* Wider About Bio Card */}
-          <div className={`transition-all duration-800 delay-300 ${
-            hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-          }`}>
-            <div className="w-full backdrop-blur-md bg-white/60 p-5 sm:p-6 rounded-2xl border border-white/80 shadow-md">
-              <p className="text-xs sm:text-sm md:text-base font-medium text-[#111111] leading-relaxed">
-                I’m Mohammad Abutalha — a Product Support Associate and BCA graduate focused on product support, software testing, and web development. My experience includes troubleshooting SaaS products, testing new features, managing application data, and conducting product demos. Alongside my professional work, I build web applications and practical projects with HTML, CSS, JavaScript and Python.
-              </p>
-
-              {/* Prominent Download Résumé Button */}
-              <div className="mt-5 pt-2 pointer-events-auto">
-                <a
-                  href="/Abutalha_Final_Resume (1).pdf"
-                  download
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-[#E8FF2A] hover:bg-[#d8ef18] text-[#111111] font-black text-xs uppercase tracking-widest border border-black/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95"
-                >
-                  <span>Download Résumé</span>
-                  <span className="text-base leading-none">↓</span>
-                </a>
-              </div>
-            </div>
+          {/* Clean Bio Paragraphs — Directly on Page, Seamless & Modern */}
+          <div
+            className={`flex flex-col gap-3.5 transition-all duration-800 delay-300 ${
+              hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+          >
+            <p className="text-sm sm:text-base font-semibold text-[#111111] leading-relaxed">
+              Hi, I'm <span className="font-extrabold text-black underline decoration-2 underline-offset-4 decoration-black">Mohammad Abutalha</span> — a Product Support Associate based in Kanpur, India, currently helping keep two live SaaS products, <strong>EduBuddy</strong> and <strong>HotelBuddy</strong>, running smoothly for real users.
+            </p>
+            
+            <p className="text-xs sm:text-sm font-medium text-[#222222] leading-relaxed">
+              I handle <strong>20–25+ client tickets a week</strong>, troubleshoot technical issues, and work closely with the dev team to squash bugs before they become bigger problems. I've personally onboarded <strong>40+ clients</strong> through hands-on training.
+            </p>
+            
+            <p className="text-xs sm:text-sm font-medium text-[#333333] leading-relaxed">
+              Outside of support work, I build web apps — including a full-stack video downloader (Flask + Python) and an AI-powered telecom assistant using the Gemini API.
+            </p>
           </div>
+
+          {/* CTA Buttons (Matching Hero Action Buttons) */}
+          <div
+            className={`pt-2 flex flex-wrap gap-3 pointer-events-auto transition-all duration-800 delay-400 ${
+              hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+          >
+            <button
+              id="about-hire-btn"
+              onClick={() => scrollTo('contact')}
+              className="btn-yellow text-xs sm:text-sm py-3 px-7 font-extrabold shadow-sm hover:shadow-md transition-transform hover:-translate-y-0.5 cursor-pointer"
+            >
+              Hire Me
+            </button>
+            <button
+              id="about-view-work-btn"
+              onClick={() => scrollTo('projects')}
+              className="btn-yellow text-xs sm:text-sm py-3 px-7 font-extrabold shadow-sm hover:shadow-md transition-transform hover:-translate-y-0.5 cursor-pointer"
+              style={{ background: '#111111', color: 'var(--accent, #E8FF2A)' }}
+            >
+              View My Work ↓
+            </button>
+            <a
+              id="about-download-resume-btn"
+              href="/Abutalha_Final_Resume (1).pdf"
+              download
+              target="_blank"
+              rel="noreferrer"
+              className="btn-outline text-xs sm:text-sm py-3 px-7 font-extrabold transition-transform hover:-translate-y-0.5 cursor-pointer"
+              style={{ color: '#111111', borderColor: 'rgba(17,17,17,0.35)' }}
+            >
+              Download Résumé ↓
+            </a>
+          </div>
+
         </div>
 
-        {/* Bottom Highlights (3 Cards / Columns) */}
-        <div className={`mt-8 sm:mt-12 transition-all duration-800 delay-400 ${
-          hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-        }`}>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 w-full max-w-3xl">
-            {bottomHighlights.map((item) => (
-              <div
-                key={item.title}
-                className="p-3.5 sm:p-4 rounded-xl bg-white/70 backdrop-blur-md border border-white/90 shadow-sm"
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-sm">{item.icon}</span>
-                  <h4
-                    className="font-black text-xs uppercase tracking-wider text-[#111111]"
-                    style={{ fontFamily: "'Inter', sans-serif" }}
-                  >
-                    {item.title}
-                  </h4>
+        {/* ── Bottom Strip / Stats Bar (Integrated Clean Strip Matching Hero Bottom Nav) ── */}
+        <div
+          className={`pt-5 pb-2 border-t border-black/15 flex items-center justify-between flex-wrap gap-4 transition-all duration-800 delay-500 ${
+            hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}
+        >
+          {/* Stats Cluster */}
+          <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
+            {stats.map((s, idx) => (
+              <div key={s.title} className="flex items-center gap-3">
+                <div
+                  className="flex items-center gap-2 px-3.5 py-2 rounded-xl"
+                  style={{
+                    background: 'rgba(255,255,255,0.40)',
+                    border: '1px solid rgba(17,17,17,0.12)',
+                    backdropFilter: 'blur(8px)',
+                  }}
+                >
+                  <span className="text-base">{s.icon}</span>
+                  <div className="flex flex-col">
+                    <div
+                      className="font-black text-sm sm:text-base leading-none text-[#111111]"
+                      style={{ fontFamily: "'Inter', sans-serif" }}
+                    >
+                      {s.val}
+                    </div>
+                    <div className="text-[0.56rem] uppercase tracking-wider text-[#555555] font-bold mt-0.5">
+                      {s.title}
+                    </div>
+                  </div>
                 </div>
-                <p className="text-[0.68rem] font-semibold text-[#444444] leading-normal">
-                  {item.tags}
-                </p>
+                {idx < stats.length - 1 && (
+                  <div className="w-px h-6 hidden md:block opacity-20 bg-black" />
+                )}
               </div>
             ))}
+          </div>
+
+          {/* Right Status Pill */}
+          <div className="flex items-center gap-2">
+            <div
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full"
+              style={{
+                background: 'rgba(17,17,17,0.90)',
+                border: '1px solid rgba(255,255,255,0.15)',
+              }}
+            >
+              <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse flex-shrink-0" />
+              <span className="text-[0.62rem] font-bold uppercase tracking-wider text-white">
+                Available for New Roles · 2026
+              </span>
+            </div>
           </div>
         </div>
 
