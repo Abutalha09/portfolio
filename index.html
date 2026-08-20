@@ -136,6 +136,31 @@
     </script>
 
     <!-- ═══════════════════════════════════════════
+         STRUCTURED DATA — Featured Project Schema (JSON-LD)
+    ═══════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Abusha — Fast HD Social Media Video Downloader",
+      "url": "https://abusha.onrender.com",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "description": "Fast HD social media video downloader enabling high-speed video downloads from YouTube, Instagram, Facebook, and TikTok.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://abutalha09.vercel.app/#person",
+        "name": "Mohammad Abutalha"
+      },
+      "creator": {
+        "@type": "Person",
+        "@id": "https://abutalha09.vercel.app/#person",
+        "name": "Mohammad Abutalha"
+      }
+    }
+    </script>
+
+    <!-- ═══════════════════════════════════════════
          FONTS
     ═══════════════════════════════════════════ -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -144,6 +169,14 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <div style="padding: 20px; text-align: center;">
+        <p>Featured Project by Mohammad Abutalha:</p>
+        <a href="https://abusha.onrender.com" target="_blank" rel="noopener">
+          Abusha — Fast HD Social Media Video Downloader
+        </a>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

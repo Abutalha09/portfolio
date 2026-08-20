@@ -336,7 +336,7 @@ export const GlassAbout: React.FC = () => {
             </p>
             
             <p className="text-xs sm:text-sm font-medium text-[#333333] leading-relaxed">
-              Outside of support work, I build web apps — including a full-stack video downloader (Flask + Python) and an AI-powered telecom assistant using the Gemini API.
+              Outside of support work, I build web apps — including <a href="https://abusha.onrender.com" target="_blank" rel="noopener" className="font-bold underline text-black hover:text-[var(--accent)] transition-colors">Abusha — Fast HD Social Media Video Downloader</a> (Flask + Python) and an AI-powered telecom assistant using the Gemini API.
             </p>
           </div>
 

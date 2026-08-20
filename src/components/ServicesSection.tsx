@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import FadeIn from './FadeIn';
+import GravityDrop from './GravityDrop';
+import PhysicsBall from './PhysicsBall';
 
 interface ExperienceItem {
   id: string;
@@ -143,30 +145,26 @@ export const ServicesSection: React.FC = () => {
               />
             </svg>
 
-            {/* Glowing Traveling Bullet Orb on tip of SVG Line */}
-            <motion.div
-              className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full pointer-events-none z-20"
-              style={{
-                top: orbTop,
-                opacity: orbOpacity,
-                background: 'var(--accent)',
-                boxShadow: '0 0 12px var(--accent), 0 0 24px #00F0FF',
-              }}
-            >
-              <div className="w-full h-full rounded-full animate-ping bg-[var(--accent)] opacity-75" />
-            </motion.div>
+            {/* 3D Rolling Physics Ball on tip of SVG Line */}
+            <PhysicsBall
+              top={orbTop}
+              opacity={orbOpacity}
+              progress={smoothProgress}
+              size={26}
+            />
           </div>
 
-          {/* Experience Items List */}
+          {/* Experience Items List with scroll-triggered gravity drop */}
           <div className="flex flex-col gap-6" style={{ borderTop: '1px solid var(--border-dark)' }}>
             {experiences.map((exp, index) => {
               const nodeThreshold = (index + 0.2) / experiences.length;
 
               return (
-                <FadeIn
+                <GravityDrop
                   key={exp.id}
-                  delay={index * 0.07}
-                  y={20}
+                  delay={index * 0.12}
+                  yDrop={-70}
+                  rotateDrop={index % 2 === 0 ? -2.5 : 2.5}
                   className="group transition-all duration-300 relative"
                 >
                   {/* SVG Node Marker */}
@@ -218,45 +216,52 @@ export const ServicesSection: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                </FadeIn>
+                </GravityDrop>
               );
             })}
           </div>
         </div>
 
-        {/* Platform showcase */}
-        <FadeIn delay={0.3} y={30} className="mt-16 sm:mt-24">
-          <div className="flex items-center gap-3 mb-6">
-            <svg className="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-            <h3 className="font-black uppercase text-sm tracking-widest text-[var(--text-mid)]" style={{ fontFamily: "'Inter'" }}>
-              Platforms I've Supported
-            </h3>
-          </div>
+        {/* Platform showcase with scroll-triggered gravity drop */}
+        <div className="mt-16 sm:mt-24">
+          <FadeIn delay={0.1} y={20}>
+            <div className="flex items-center gap-3 mb-6">
+              <svg className="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+              <h3 className="font-black uppercase text-sm tracking-widest text-[var(--text-mid)]" style={{ fontFamily: "'Inter'" }}>
+                Platforms I've Supported
+              </h3>
+            </div>
+          </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {[
               { label: 'EduBuddy School Operations', src: '/edubuddy-showcase.png', alt: 'EduBuddy Portal' },
               { label: 'HotelBuddy Control Hub', src: '/hotelbuddy-showcase.png', alt: 'HotelBuddy Portal' },
-            ].map((item) => (
-              <div
+            ].map((item, idx) => (
+              <GravityDrop
                 key={item.label}
-                className="p-4 sm:p-5 hover:scale-[1.01] transition-transform duration-300 rounded-2xl"
-                style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
+                delay={0.15 + idx * 0.12}
+                yDrop={-50}
               >
-                <span className="tag-yellow mb-3 inline-block">Platform Preview</span>
-                <h4 className="font-bold text-base text-[var(--text-dark)] mb-3">{item.label}</h4>
-                <div className="w-full rounded-xl overflow-hidden" style={{ border: '1px solid var(--border)' }}>
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className="w-full h-auto object-cover transition-opacity duration-300 hover:opacity-90"
-                  />
+                <div
+                  className="p-4 sm:p-5 hover:scale-[1.01] transition-transform duration-300 rounded-2xl"
+                  style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
+                >
+                  <span className="tag-yellow mb-3 inline-block">Platform Preview</span>
+                  <h4 className="font-bold text-base text-[var(--text-dark)] mb-3">{item.label}</h4>
+                  <div className="w-full rounded-xl overflow-hidden" style={{ border: '1px solid var(--border)' }}>
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="w-full h-auto object-cover transition-opacity duration-300 hover:opacity-90"
+                    />
+                  </div>
                 </div>
-              </div>
+              </GravityDrop>
             ))}
           </div>
-        </FadeIn>
+        </div>
       </div>
     </section>
   );

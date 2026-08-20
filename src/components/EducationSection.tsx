@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import FadeIn from './FadeIn';
+import GravityDrop from './GravityDrop';
+import PhysicsBall from './PhysicsBall';
 
 const educationTimeline = [
   {
@@ -130,28 +132,28 @@ export const EducationSection: React.FC = () => {
               />
             </svg>
 
-            {/* Glowing Traveling Bullet Orb on tip of SVG Line */}
-            <motion.div
-              className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full pointer-events-none z-20"
-              style={{
-                top: orbTop,
-                opacity: orbOpacity,
-                background: 'var(--accent)',
-                boxShadow: '0 0 12px var(--accent), 0 0 24px #00F0FF',
-              }}
-            >
-              <div className="w-full h-full rounded-full animate-ping bg-[var(--accent)] opacity-75" />
-            </motion.div>
+            {/* 3D Rolling Physics Ball on tip of SVG Line */}
+            <PhysicsBall
+              top={orbTop}
+              opacity={orbOpacity}
+              progress={smoothProgress}
+              size={26}
+            />
           </div>
 
-          {/* Timeline items */}
+          {/* Timeline items with scroll-triggered gravity drop */}
           <div className="flex flex-col gap-8 sm:gap-10">
             {educationTimeline.map((item, idx) => {
               // Calculate threshold for dot illumination based on item position
               const nodeThreshold = (idx + 0.2) / educationTimeline.length;
               
               return (
-                <FadeIn key={idx} delay={idx * 0.12} y={25}>
+                <GravityDrop
+                  key={idx}
+                  delay={idx * 0.13}
+                  yDrop={-70}
+                  rotateDrop={idx % 2 === 0 ? -2.5 : 2.5}
+                >
                   <div className="relative group">
                     {/* SVG Interactive Milestone Dot */}
                     <MilestoneDot
@@ -209,38 +211,41 @@ export const EducationSection: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                </FadeIn>
+                </GravityDrop>
               );
             })}
           </div>
         </div>
 
-        {/* Certifications */}
-        <FadeIn delay={0.3} y={25}>
-          <div className="flex items-center gap-3 mb-6">
-            <svg className="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <h3 className="font-black uppercase text-sm tracking-widest text-[var(--text-mid)]" style={{ fontFamily: "'Inter'" }}>
-              Certifications &amp; Courses
-            </h3>
-          </div>
+        {/* Certifications with scroll-triggered gravity drop */}
+        <div className="mt-8">
+          <FadeIn delay={0.1} y={20}>
+            <div className="flex items-center gap-3 mb-6">
+              <svg className="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h3 className="font-black uppercase text-sm tracking-widest text-[var(--text-mid)]" style={{ fontFamily: "'Inter'" }}>
+                Certifications &amp; Courses
+              </h3>
+            </div>
+          </FadeIn>
           <div className="flex flex-col gap-3">
             {certifications.map((cert, i) => (
-              <div
-                key={i}
-                className="flex items-center justify-between px-5 py-4 rounded-2xl hover:scale-[1.01] transition-all duration-200"
-                style={{ border: '1px solid var(--border)', background: 'var(--bg-card)' }}
-              >
-                <div>
-                  <h4 className="font-bold text-sm text-[var(--text-dark)]">{cert.name}</h4>
-                  <p className="text-xs text-[var(--text-mid)]">{cert.issuer}</p>
+              <GravityDrop key={i} delay={0.15 + i * 0.1} yDrop={-40}>
+                <div
+                  className="flex items-center justify-between px-5 py-4 rounded-2xl hover:scale-[1.01] transition-all duration-200"
+                  style={{ border: '1px solid var(--border)', background: 'var(--bg-card)' }}
+                >
+                  <div>
+                    <h4 className="font-bold text-sm text-[var(--text-dark)]">{cert.name}</h4>
+                    <p className="text-xs text-[var(--text-mid)]">{cert.issuer}</p>
+                  </div>
+                  <span className="tag-yellow flex-shrink-0">{cert.year}</span>
                 </div>
-                <span className="tag-yellow flex-shrink-0">{cert.year}</span>
-              </div>
+              </GravityDrop>
             ))}
           </div>
-        </FadeIn>
+        </div>
       </div>
     </section>
   );

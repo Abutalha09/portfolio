@@ -28,12 +28,12 @@ const featuredProjects: ProjectData[] = [
   },
   {
     id: '02',
-    name: 'Video Downloader',
+    name: 'Abusha — Fast HD Social Media Video Downloader',
     category: 'Media Tool',
-    description: 'Solved the problem of slow, ad-heavy video download sites by building a clean, high-performance media downloader. Optimized URL parsing and queuing to handle multiple formats instantly.',
-    techTags: ['HTML/CSS', 'JavaScript', 'Render'],
+    description: 'Solved the problem of slow, ad-heavy video download sites by building Abusha — a high-performance web application for fast HD video downloads from YouTube, Instagram, Facebook, and TikTok with clean queue management.',
+    techTags: ['HTML/CSS', 'JavaScript', 'Python', 'Render'],
     img: '/abusha.png',
-    imgAlt: 'Video Downloader web app — clean interface with download queue management',
+    imgAlt: 'Abusha — Fast HD Social Media Video Downloader web app — clean interface with download queue management',
     liveLink: 'https://abusha.onrender.com',
     githubLink: 'https://github.com/Abutalha09',
   },
@@ -135,10 +135,17 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
                   {project.category}
                 </p>
                 <h3
-                  className="font-black uppercase text-[var(--text-dark)] leading-none"
-                  style={{ fontSize: 'clamp(1rem, 2.5vw, 2rem)', fontFamily: "'Inter'" }}
+                  className="font-black uppercase text-[var(--text-dark)] leading-tight"
+                  style={{ fontSize: 'clamp(1rem, 2.2vw, 1.75rem)', fontFamily: "'Inter'" }}
                 >
-                  {project.name}
+                  <a
+                    href={project.liveLink}
+                    target="_blank"
+                    rel="noopener"
+                    className="hover:text-[var(--accent)] transition-colors inline-block"
+                  >
+                    {project.name}
+                  </a>
                 </h3>
               </div>
             </div>
@@ -147,7 +154,7 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
               <a
                 href={project.githubLink}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener"
                 className="btn-outline text-[0.65rem] py-1.5 px-3 sm:py-2 sm:px-3.5"
                 id={`project-github-${project.id}`}
                 aria-label={`${project.name} GitHub repository`}
@@ -157,7 +164,7 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
               <a
                 href={project.liveLink}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener"
                 className="btn-yellow text-[0.65rem] py-1.5 px-3.5 sm:py-2 sm:px-4"
                 id={`project-link-${project.id}`}
                 aria-label={`${project.name} live demo`}
@@ -186,9 +193,13 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
           </div>
 
           {/* Project image */}
-          <div
-            className="flex-1 overflow-hidden min-h-[160px] sm:min-h-[220px]"
+          <a
+            href={project.liveLink}
+            target="_blank"
+            rel="noopener"
+            className="flex-1 overflow-hidden min-h-[160px] sm:min-h-[220px] block cursor-pointer"
             style={{ borderRadius: '16px', border: '1px solid var(--border)' }}
+            aria-label={`Open ${project.name}`}
           >
             <img
               src={project.img}
@@ -196,7 +207,7 @@ const StickyCard: React.FC<StickyCardProps> = ({ project, index, totalCards }) =
               className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
               loading="lazy"
             />
-          </div>
+          </a>
         </div>
       </motion.div>
     </div>

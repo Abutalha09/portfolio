@@ -210,11 +210,21 @@ export const TerminalSection: React.FC = () => {
 
               <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
                 <div className="flex items-center justify-between font-bold">
-                  <span className="text-white text-sm">2. Social Media Video Downloader</span>
-                  <span className="px-2 py-0.5 rounded bg-[var(--accent)] text-[#111] text-[0.6rem] font-bold">Python + Flask</span>
+                  <span className="text-white text-sm">2. Abusha — Fast HD Social Media Video Downloader</span>
+                  <span className="px-2 py-0.5 rounded bg-[var(--accent)] text-[#111] text-[0.6rem] font-bold">Python + Flask + Render</span>
                 </div>
-                <p className="text-white/70">Full-stack app enabling video downloads from multiple social media platforms with optimized Python/Flask backend request handling for low latency.</p>
-                <div className="text-[0.65rem] text-[var(--accent)]">Tech: HTML, CSS, JavaScript, Python, Flask</div>
+                <p className="text-white/70">Full-stack high-speed application enabling instant HD video downloads from YouTube, Instagram, Facebook, and TikTok with clean queue management.</p>
+                <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                  <span className="text-[0.65rem] text-[var(--accent)]">Tech: HTML, CSS, JavaScript, Python, Flask</span>
+                  <a
+                    href="https://abusha.onrender.com"
+                    target="_blank"
+                    rel="noopener"
+                    className="text-[var(--accent)] underline font-bold text-[0.7rem] hover:opacity-80"
+                  >
+                    Live Demo: abusha.onrender.com ↗
+                  </a>
+                </div>
               </div>
 
               <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
