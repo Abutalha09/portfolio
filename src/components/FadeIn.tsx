@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 interface FadeInProps {
@@ -24,8 +24,9 @@ export const FadeIn: React.FC<FadeInProps> = ({
   id,
   blur = true,
 }) => {
-  // Memoize motion component creation
-  const MotionComponent = useMemo(() => motion.create(as as any), [as]);
+  // Resolve the intrinsic motion element via the proxy (stable reference — no
+  // component creation during render). Mirrors the pattern used in GravityDrop.
+  const MotionComponent = (motion[as as keyof typeof motion] || motion.div) as React.ElementType;
 
   return (
     <MotionComponent

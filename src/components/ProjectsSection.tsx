@@ -21,7 +21,7 @@ const featuredProjects: ProjectData[] = [
     category: 'Brand Showcase',
     description: 'Needed a portfolio that felt alive, not static. Built with canvas particle flows, glassmorphism panels, and a custom cursor — turning a simple personal page into an immersive interactive experience.',
     techTags: ['Canvas API', 'CSS variables', 'GitHub Pages'],
-    img: '/portfolio.png',
+    img: '/portfolio.webp',
     imgAlt: 'Cosmic Portfolio website — deep space particle animations with glassmorphism panels',
     liveLink: 'https://abutalha09.github.io/portfolio/',
     githubLink: 'https://github.com/Abutalha09/portfolio',
@@ -32,7 +32,7 @@ const featuredProjects: ProjectData[] = [
     category: 'Media Tool',
     description: 'Solved the problem of slow, ad-heavy video download sites by building Abusha — a high-performance web application for fast HD video downloads from YouTube, Instagram, Facebook, and TikTok with clean queue management.',
     techTags: ['HTML/CSS', 'JavaScript', 'Python', 'Render'],
-    img: '/abusha.png',
+    img: '/abusha.webp',
     imgAlt: 'Abusha — Fast HD Social Media Video Downloader web app — clean interface with download queue management',
     liveLink: 'https://abusha.onrender.com',
     githubLink: 'https://github.com/Abutalha09',
@@ -43,7 +43,7 @@ const featuredProjects: ProjectData[] = [
     category: 'Repair Shop Studio',
     description: 'A local repair shop needed a professional digital presence to attract customers. Designed and built a premium landing page with service details and a booking workflow to convert visitors into clients.',
     techTags: ['HTML5', 'CSS3', 'JavaScript', 'Netlify'],
-    img: '/almadina.png',
+    img: '/almadina.webp',
     imgAlt: 'Al-Madina Telecom repair shop website — professional landing page with service listing',
     liveLink: 'https://almadina1.netlify.app/',
     githubLink: 'https://github.com/Abutalha09',
@@ -54,7 +54,7 @@ const featuredProjects: ProjectData[] = [
     category: 'Utility App',
     description: 'Rebuilt the browser calculator concept from scratch to explore prompt-based expression evaluation. Added tactile click feedback, keyboard support, and a responsive dark/light layout — clean and functional.',
     techTags: ['HTML5', 'CSS Flexbox', 'Vanilla JS'],
-    img: '/Calculator1.png',
+    img: '/Calculator1.webp',
     imgAlt: 'Sleek Calculator app — modern dark-mode calculator with keyboard support',
     liveLink: 'https://abutalha09.github.io/calculator/',
     githubLink: 'https://github.com/Abutalha09/calculator',
@@ -67,7 +67,7 @@ const otherProjects = [
     category: 'Interactive Game',
     description: 'Challenged myself to implement complete game state management in Vanilla JS — win detection, score logging, and smooth resets — without any framework.',
     techTags: ['Vanilla JS', 'CSS variables', 'State Tracking'],
-    img: '/Tic tac toe.png',
+    img: '/tic-tac-toe.webp',
     imgAlt: 'Tic Tac Toe game with score tracking and smooth UI',
     liveLink: 'https://abutalha09.github.io',
     link: 'https://github.com/Abutalha09',
@@ -77,7 +77,7 @@ const otherProjects = [
     category: 'Interactive Game',
     description: 'Built classic Rock Paper Scissors with animated choice reveals, computer AI, and score persistence — focused on delivering smooth micro-interactions across all screen sizes.',
     techTags: ['Vanilla JS', 'Web Animations', 'Score Tracker'],
-    img: '/rock paper.png',
+    img: '/rock-paper.webp',
     imgAlt: 'Rock Paper Scissors game with animated moves and score tracking',
     liveLink: 'https://abutalha09.github.io',
     link: 'https://github.com/Abutalha09',
@@ -222,7 +222,6 @@ export const ProjectsSection: React.FC = () => {
 
   return (
     <section
-      id="projects"
       className="w-full px-4 sm:px-8 md:px-10 py-20 sm:py-28 relative"
       style={{ background: 'var(--bg-primary)' }}
     >
@@ -255,7 +254,7 @@ export const ProjectsSection: React.FC = () => {
                 className="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer"
                 style={{
                   background: activeFilter === f ? 'var(--accent)' : 'transparent',
-                  color: activeFilter === f ? '#111' : '#666',
+                  color: activeFilter === f ? '#111' : 'var(--text-light)',
                   boxShadow: activeFilter === f ? '0 2px 12px rgba(232,255,42,0.3)' : 'none',
                   fontFamily: "'Inter'",
                 }}
@@ -310,7 +309,7 @@ export const ProjectsSection: React.FC = () => {
                       loading="lazy"
                     />
                   </div>
-                  <span className="text-[0.6rem] font-bold uppercase tracking-widest text-[#888] block mb-1">
+                  <span className="text-[0.6rem] font-bold uppercase tracking-widest text-[var(--text-light)] block mb-1">
                     {proj.category}
                   </span>
                   <h4 className="font-black uppercase text-[#111] text-lg mb-2" style={{ fontFamily: "'Inter'" }}>

@@ -65,7 +65,7 @@ export const ContactSection: React.FC = () => {
         // Fallback FormSubmit direct POST if fetch encounters issue
         setSubmitted(true);
       }
-    } catch (err) {
+    } catch {
       setSubmitted(true);
     } finally {
       setLoading(false);
@@ -126,8 +126,7 @@ export const ContactSection: React.FC = () => {
 
   return (
     <section
-      id="contact"
-      className="w-full min-h-screen px-6 sm:px-12 md:px-16 lg:px-20 pt-28 pb-16 relative overflow-hidden text-[var(--text-dark)] select-none flex flex-col justify-between"
+      className="w-full min-h-screen px-6 sm:px-12 md:px-16 lg:px-20 pt-28 pb-16 relative overflow-hidden text-[var(--text-dark)] flex flex-col justify-between"
       style={{ background: 'var(--bg-primary)' }}
     >
       {/* ─── Main Content Container ─── */}
@@ -150,7 +149,7 @@ export const ContactSection: React.FC = () => {
 
               {/* Giant Editorial Heading */}
               <FadeIn delay={0.1} y={25}>
-                <h1
+                <h2
                   className="font-black leading-[0.88] tracking-tighter uppercase mb-6 text-[var(--text-dark)]"
                   style={{
                     fontSize: 'clamp(2.6rem, 7.5vw, 6rem)',
@@ -162,7 +161,7 @@ export const ContactSection: React.FC = () => {
                   <span className="text-[var(--accent)] drop-shadow-sm">WORK</span>
                   <br />
                   TOGETHER<span className="text-[var(--accent)]">.</span>
-                </h1>
+                </h2>
               </FadeIn>
 
               {/* Subhead */}
@@ -213,7 +212,7 @@ export const ContactSection: React.FC = () => {
               className="relative xl:absolute xl:left-[52%] xl:top-[10%] w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[380px] mx-auto xl:mx-0 z-20 pointer-events-none my-6 xl:my-0"
             >
               <motion.img
-                src="/hero-transparent.png"
+                src="/hero-transparent.webp"
                 alt="Mohammad Abutalha"
                 className="w-full h-auto object-contain filter drop-shadow-2xl max-h-[350px] sm:max-h-[450px]"
                 whileHover={{ scale: 1.02 }}
@@ -347,7 +346,7 @@ export const ContactSection: React.FC = () => {
                           value={formData.name}
                           onChange={handleChange}
                           placeholder="What's your full name?"
-                          className="w-full bg-transparent text-base sm:text-lg font-bold text-[#111111] placeholder-[#888888] outline-none"
+                          className="w-full bg-transparent text-base sm:text-lg font-bold text-[#111111] placeholder-[#666666] outline-none"
                         />
                       </div>
                     </div>
@@ -366,7 +365,7 @@ export const ContactSection: React.FC = () => {
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="name@example.com"
-                          className="w-full bg-transparent text-base sm:text-lg font-bold text-[#111111] placeholder-[#888888] outline-none"
+                          className="w-full bg-transparent text-base sm:text-lg font-bold text-[#111111] placeholder-[#666666] outline-none"
                         />
                       </div>
                     </div>
@@ -384,7 +383,7 @@ export const ContactSection: React.FC = () => {
                           value={formData.subject}
                           onChange={handleChange}
                           placeholder="Web Development / Full-time / Freelance"
-                          className="w-full bg-transparent text-base sm:text-lg font-bold text-[#111111] placeholder-[#888888] outline-none"
+                          className="w-full bg-transparent text-base sm:text-lg font-bold text-[#111111] placeholder-[#666666] outline-none"
                         />
                       </div>
                     </div>
@@ -403,7 +402,7 @@ export const ContactSection: React.FC = () => {
                           value={formData.message}
                           onChange={handleChange}
                           placeholder="Tell me about your project, timeline, budget, or goals..."
-                          className="w-full bg-transparent text-base sm:text-lg font-bold text-[#111111] placeholder-[#888888] outline-none resize-none"
+                          className="w-full bg-transparent text-base sm:text-lg font-bold text-[#111111] placeholder-[#666666] outline-none resize-none"
                         />
                       </div>
                     </div>

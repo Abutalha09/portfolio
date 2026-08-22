@@ -11,6 +11,7 @@ export interface ThemeConfig {
   description: string;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- context file intentionally co-locates theme data with its provider
 export const THEMES: ThemeConfig[] = [
   {
     id: 'cream',
@@ -54,6 +55,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components -- hook must ship with its provider
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (!context) {

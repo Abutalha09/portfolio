@@ -121,7 +121,7 @@ export const TerminalSection: React.FC = () => {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[0.72rem] text-white/85">
               <div><span className="text-[var(--accent)] font-bold">about</span> — Bio, role &amp; summary</div>
-              <div><span className="text-[var(--accent)] font-bold">experience</span> — PolarBear Tech SaaS roles</div>
+              <div><span className="text-[var(--accent)] font-bold">experience</span> — Polar Bear Tech SaaS roles</div>
               <div><span className="text-[var(--accent)] font-bold">projects</span> — AI Telecom, Downloader &amp; Web Apps</div>
               <div><span className="text-[var(--accent)] font-bold">skills</span> — Languages, AI tools &amp; frameworks</div>
               <div><span className="text-[var(--accent)] font-bold">education</span> — BCA (Vision Tech) &amp; DCA (Swami Vivekanand)</div>
@@ -146,7 +146,7 @@ export const TerminalSection: React.FC = () => {
             </p>
             <div className="pt-1 text-[0.72rem] text-white/70 space-y-1 bg-white/5 p-2.5 rounded-lg border border-white/10">
               <div>📍 Location: <span className="text-white font-semibold">Kanpur, Uttar Pradesh, India</span></div>
-              <div>💼 Current Role: <span className="text-[var(--accent)] font-bold">Product Support Associate at PolarBear Tech</span></div>
+              <div>💼 Current Role: <span className="text-[var(--accent)] font-bold">Product Support Associate at Polar Bear Tech</span></div>
               <div>🎓 Education: <span className="text-white font-semibold">BCA (CGPA: 7.12) &amp; DCA (85%)</span></div>
               <div>📞 Phone: <span className="text-white font-semibold">+91 91200 38438</span></div>
             </div>
@@ -167,7 +167,7 @@ export const TerminalSection: React.FC = () => {
                   <span className="text-[var(--accent)] text-sm">Product Support Associate</span>
                   <span className="text-white/60">April 2026 – Present</span>
                 </div>
-                <div className="text-white/70 font-semibold">PolarBear Tech · Kanpur, UP</div>
+                <div className="text-white/70 font-semibold">Polar Bear Tech · Kanpur, UP</div>
                 <ul className="list-disc list-inside text-white/80 space-y-1 pt-1">
                   <li>Manage end-to-end customer support for SaaS products <strong>Edubuddy</strong> and <strong>HotelBuddy</strong>.</li>
                   <li>Coordinate with development team to document, track &amp; resolve bugs, speeding up resolution cycles.</li>
@@ -181,7 +181,7 @@ export const TerminalSection: React.FC = () => {
                   <span className="text-[var(--accent)] text-sm">Paid Intern – Product Support</span>
                   <span className="text-white/60">Jan 2026 – Mar 2026</span>
                 </div>
-                <div className="text-white/70 font-semibold">PolarBear Tech · Kanpur, UP</div>
+                <div className="text-white/70 font-semibold">Polar Bear Tech · Kanpur, UP</div>
                 <ul className="list-disc list-inside text-white/80 space-y-1 pt-1">
                   <li>Assisted in handling customer queries &amp; support tickets for Edubuddy &amp; HotelBuddy platforms.</li>
                   <li>Supported troubleshooting, QA testing, and issue documentation in a live SaaS product environment.</li>
@@ -283,7 +283,7 @@ export const TerminalSection: React.FC = () => {
                   <span className="text-[var(--accent)] text-sm">Bachelor of Computer Applications (BCA)</span>
                   <span>Sept 2023 – May 2026</span>
                 </div>
-                <p className="text-white/70">Vision Institute of Technology, Kanpur</p>
+                <p className="text-white/70">Vision Management College, Kanpur</p>
                 <p className="text-[var(--accent)] font-bold mt-1">CGPA: 7.12 / 10.0</p>
               </div>
 
@@ -327,7 +327,7 @@ export const TerminalSection: React.FC = () => {
               <li>Participated in AI Workshop on "Application of Artificial Intelligence in Colleges" at CSJMU University, Kanpur.</li>
               <li>Engaged in technical discussions on practical AI implementations alongside participants from 40+ colleges.</li>
               <li>Achieved 85% Distinction in Diploma in Computer Applications (DCA).</li>
-              <li>Successfully managed SaaS client onboarding &amp; SLA compliance at PolarBear Tech.</li>
+              <li>Successfully managed SaaS client onboarding &amp; SLA compliance at Polar Bear Tech.</li>
             </ul>
           </div>
         );
@@ -470,7 +470,7 @@ export const TerminalSection: React.FC = () => {
   };
 
   return (
-    <section id="terminal" className={`w-full py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto ${isFullscreen ? 'fixed inset-0 z-[9999] p-0 max-w-none bg-black/90 flex flex-col justify-center' : ''}`}>
+    <section className={`w-full py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto ${isFullscreen ? 'fixed inset-0 z-[9999] p-0 max-w-none bg-black/90 flex flex-col justify-center' : ''}`}>
       {/* Section Header */}
       {!isFullscreen && (
         <div className="flex flex-col items-center text-center mb-8">

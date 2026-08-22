@@ -1,16 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { Sparkles, ShieldCheck, Target, Hammer, Gauge } from 'lucide-react';
+
+/* ─── Reduced-motion preference ─────────────────── */
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ─── Cycling role typewriter hook ──────────────── */
 const ROLES = ['Product Support Associate', 'Frontend Developer', 'QA & Software Tester', 'Builder of Web Apps'];
 function useTypewriter(active: boolean) {
+  const [reduced] = useState(prefersReducedMotion);
   const [display, setDisplay] = useState('');
   const [roleIdx, setRoleIdx] = useState(0);
   const [phase, setPhase] = useState<'typing' | 'pause' | 'erasing'>('typing');
   const [charIdx, setCharIdx] = useState(0);
 
   useEffect(() => {
-    if (!active) return;
+    if (!active || reduced) return;
     let timer: ReturnType<typeof setTimeout>;
     const current = ROLES[roleIdx];
 
@@ -32,21 +39,24 @@ function useTypewriter(active: boolean) {
           setCharIdx(c => c - 1);
         }, 28);
       } else {
-        setRoleIdx(r => (r + 1) % ROLES.length);
-        setPhase('typing');
+        timer = setTimeout(() => {
+          setRoleIdx(r => (r + 1) % ROLES.length);
+          setPhase('typing');
+        }, 120);
       }
     }
     return () => clearTimeout(timer);
-  }, [active, phase, charIdx, roleIdx]);
+  }, [active, reduced, phase, charIdx, roleIdx]);
 
-  return display;
+  return reduced ? ROLES[0] : display;
 }
 
 /* ─── Count-up hook ─────────────────────────────── */
 function useCountUp(target: number, durationMs = 1600, start = false) {
+  const [reduced] = useState(prefersReducedMotion);
   const [count, setCount] = useState(0);
   useEffect(() => {
-    if (!start) return;
+    if (!start || reduced) return;
     let frame = 0;
     const totalFrames = Math.round((durationMs / 1000) * 60);
     const timer = setInterval(() => {
@@ -55,17 +65,17 @@ function useCountUp(target: number, durationMs = 1600, start = false) {
       if (frame >= totalFrames) clearInterval(timer);
     }, 1000 / 60);
     return () => clearInterval(timer);
-  }, [start, target, durationMs]);
-  return count;
+  }, [start, target, durationMs, reduced]);
+  return reduced ? target : count;
 }
 
 /* ─── Data ──────────────────────────────────────── */
 const skills = [
-  { icon: '⚡', label: 'Creative' },
-  { icon: '🛡️', label: 'Reliable' },
-  { icon: '🎯', label: 'Strategist' },
-  { icon: '🔨', label: 'Builder' },
-  { icon: '⚙️', label: 'Efficient' },
+  { Icon: Sparkles,    label: 'Creative' },
+  { Icon: ShieldCheck, label: 'Reliable' },
+  { Icon: Target,      label: 'Strategist' },
+  { Icon: Hammer,      label: 'Builder' },
+  { Icon: Gauge,       label: 'Efficient' },
 ];
 
 const navItems = [
@@ -109,6 +119,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
   /* ── GSAP entrance (triggered by animate prop) ── */
   useEffect(() => {
     if (!animate) return;
+
+    // Reduced motion: reveal everything instantly, no transforms.
+    // (Counters/typewriter hooks return their final values on their own.)
+    if (prefersReducedMotion()) {
+      gsap.set(
+        [
+          bgTextRef.current, photoRef.current, headingRef.current,
+          subLineRef.current, btnsRef.current, navBarRef.current,
+          skillsRef.current, descRef.current,
+        ],
+        { opacity: 1, x: 0, y: 0, scale: 1, scaleX: 1, skewY: 0 }
+      );
+      if (statsRef.current) gsap.set(statsRef.current.children, { opacity: 1, y: 0 });
+      return;
+    }
 
     const tl = gsap.timeline({
       defaults: { ease: 'power3.out' },
@@ -230,7 +255,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
         style={{ zIndex: 1, opacity: 0, willChange: 'transform, opacity' }}
       >
         <img
-          src="/hero-transparent.png"
+          src="/hero-transparent.webp"
           alt="Mohammad Abutalha"
           className="h-[52vh] sm:h-[80vh] lg:h-[96vh] max-h-[900px] w-auto object-cover object-top filter drop-shadow-2xl"
           draggable={false}
@@ -372,7 +397,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
                   >
                     {projectCount}+
                   </div>
-                  <div className="text-[0.52rem] sm:text-[0.58rem] uppercase tracking-wider text-[#666] font-semibold">Projects</div>
+                  <div className="text-[0.52rem] sm:text-[0.58rem] uppercase tracking-wider text-[var(--text-light)] font-semibold">Projects</div>
                 </div>
               </div>
 
@@ -392,7 +417,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
                   >
                     {expYears}+
                   </div>
-                  <div className="text-[0.52rem] sm:text-[0.58rem] uppercase tracking-wider text-[#666] font-semibold">
+                  <div className="text-[0.52rem] sm:text-[0.58rem] uppercase tracking-wider text-[var(--text-light)] font-semibold">
                     Years Exp.
                   </div>
                 </div>
@@ -410,7 +435,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
             >
               {skills.map((s) => (
                 <div key={s.label} className="flex items-center gap-1.5">
-                  <span className="text-xs">{s.icon}</span>
+                  <s.Icon size={13} strokeWidth={2.5} className="text-[var(--text-dark)]" />
                   <span className="text-[0.65rem] font-bold uppercase tracking-widest text-[#333]">
                     {s.label}
                   </span>
@@ -438,7 +463,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
                   key={item.label}
                   onClick={() => scrollTo(item.id, item.label)}
                   className="text-[0.58rem] sm:text-[0.6rem] font-bold uppercase tracking-[0.1em] cursor-pointer border-none bg-transparent outline-none transition-colors duration-200 hover:text-[#111]"
-                  style={{ color: activeNav === item.label ? '#111' : '#666' }}
+                  style={{ color: activeNav === item.label ? '#111' : 'var(--text-light)' }}
                 >
                   {item.label}
                 </button>

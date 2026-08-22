@@ -114,7 +114,7 @@ export const GlassAbout: React.FC = () => {
       isTouchTrackingRef.current = true;
       try {
         (e.target as HTMLElement).setPointerCapture(e.pointerId);
-      } catch (_) {}
+      } catch { /* setPointerCapture may throw on some browsers; safe to ignore */ }
       const rect = sectionRef.current?.getBoundingClientRect();
       if (rect) {
         rawPosRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
@@ -159,14 +159,13 @@ export const GlassAbout: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      id="about"
       onPointerEnter={handlePointerEnter}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUpOrCancel}
       onPointerCancel={handlePointerUpOrCancel}
-      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden select-none isolation-isolate"
+      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden isolation-isolate"
       style={{
         background: 'var(--bg-primary, #CAC5BA)',
         color: '#111111',
@@ -176,13 +175,13 @@ export const GlassAbout: React.FC = () => {
     >
       <style>{`
         .glass-about-base {
-          background-image: url('/images/About_reveal_desktop.png');
+          background-image: url('/images/About_reveal_desktop.webp');
           background-position: right 2% center;
           background-size: contain;
           background-repeat: no-repeat;
         }
         .glass-about-reveal {
-          background-image: url('/images/About_base_desktop.png');
+          background-image: url('/images/About_base_desktop.webp');
           background-position: right 2% center;
           background-size: contain;
           background-repeat: no-repeat;
@@ -207,12 +206,12 @@ export const GlassAbout: React.FC = () => {
         }
         @media (max-width: 767px) {
           .glass-about-base {
-            background-image: url('/images/About_reveal_mobile.png');
+            background-image: url('/images/About_reveal_mobile.webp');
             background-position: center top 5%;
             background-size: contain;
           }
           .glass-about-reveal {
-            background-image: url('/images/About_base_mobile.png');
+            background-image: url('/images/About_base_mobile.webp');
             background-position: center top 5%;
             background-size: contain;
           }

@@ -1,16 +1,21 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
+import {
+  Home, User, Briefcase, FolderGit2, Zap, Terminal as TerminalIcon,
+  GraduationCap, Mail, Copy, Check, Menu, X,
+  type LucideIcon,
+} from 'lucide-react';
 
 /* ─── Section definitions ───────────────────────── */
-const SECTIONS = [
-  { id: 'hero',       label: 'HOME',       icon: '🏠' },
-  { id: 'about',      label: 'ABOUT ME',   icon: '👤' },
-  { id: 'experience', label: 'EXPERIENCE', icon: '🛠️' },
-  { id: 'projects',   label: 'PROJECTS',   icon: '💼' },
-  { id: 'skills',     label: 'SKILLS',     icon: '⚡' },
-  { id: 'terminal',   label: 'TERMINAL',   icon: '💻' },
-  { id: 'education',  label: 'EDUCATION',  icon: '🎓' },
-  { id: 'contact',    label: 'CONTACT',    icon: '💬' },
+const SECTIONS: { id: string; label: string; Icon: LucideIcon }[] = [
+  { id: 'hero',       label: 'HOME',       Icon: Home },
+  { id: 'about',      label: 'ABOUT ME',   Icon: User },
+  { id: 'experience', label: 'EXPERIENCE', Icon: Briefcase },
+  { id: 'projects',   label: 'PROJECTS',   Icon: FolderGit2 },
+  { id: 'skills',     label: 'SKILLS',     Icon: Zap },
+  { id: 'terminal',   label: 'TERMINAL',   Icon: TerminalIcon },
+  { id: 'education',  label: 'EDUCATION',  Icon: GraduationCap },
+  { id: 'contact',    label: 'CONTACT',    Icon: Mail },
 ];
 
 export const StickyNav: React.FC = () => {
@@ -239,7 +244,7 @@ export const StickyNav: React.FC = () => {
                   fontFamily: "'Inter', sans-serif",
                 }}
               >
-                <span className="text-xs">{s.icon}</span>
+                <span className="flex-shrink-0"><s.Icon size={13} strokeWidth={2.5} /></span>
                 <span className="truncate">{s.label}</span>
               </button>
             );
@@ -263,9 +268,10 @@ export const StickyNav: React.FC = () => {
           <button
             onClick={copyEmail}
             title="Copy email"
-            className="p-0.5 rounded cursor-pointer border-none bg-transparent hover:bg-[var(--accent)] transition-colors text-[0.65rem]"
+            aria-label="Copy email address"
+            className="p-1 rounded cursor-pointer border-none bg-transparent hover:bg-[var(--accent)] transition-colors flex items-center justify-center text-[var(--text-dark)]"
           >
-            {copied ? '✅' : '📋'}
+            {copied ? <Check size={13} strokeWidth={2.5} /> : <Copy size={13} strokeWidth={2.5} />}
           </button>
         </div>
 
@@ -305,7 +311,7 @@ export const StickyNav: React.FC = () => {
             TALHA®
           </button>
           <span className="text-[0.65rem] font-bold text-[var(--text-dark)] flex items-center gap-1">
-            <span>{activeObj.icon}</span>
+            <activeObj.Icon size={13} strokeWidth={2.5} />
             <span className="uppercase tracking-wider">{activeObj.label}</span>
           </span>
         </div>
@@ -323,7 +329,7 @@ export const StickyNav: React.FC = () => {
             className="p-1.5 rounded-lg border border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-dark)] flex items-center justify-center"
             aria-label="Toggle navigation menu"
           >
-            <span className="text-base leading-none">{mobileMenuOpen ? '✕' : '☰'}</span>
+            <span className="flex items-center justify-center leading-none">{mobileMenuOpen ? <X size={16} strokeWidth={2.5} /> : <Menu size={16} strokeWidth={2.5} />}</span>
           </button>
         </div>
       </div>
@@ -356,7 +362,7 @@ export const StickyNav: React.FC = () => {
                     border: '1px solid var(--border)',
                   }}
                 >
-                  <span>{s.icon}</span>
+                  <s.Icon size={14} strokeWidth={2.5} />
                   <span className="truncate">{s.label}</span>
                 </button>
               );
@@ -366,9 +372,11 @@ export const StickyNav: React.FC = () => {
             <span className="text-[0.65rem] font-medium text-[var(--text-mid)]">mabutalha0923@gmail.com</span>
             <button
               onClick={copyEmail}
-              className="px-3 py-1 rounded bg-[var(--bg-card)] border border-[var(--border)] text-xs font-bold text-[var(--text-dark)]"
+              className="px-3 py-1 rounded bg-[var(--bg-card)] border border-[var(--border)] text-xs font-bold text-[var(--text-dark)] flex items-center gap-1.5"
             >
-              {copied ? 'Copied! ✅' : 'Copy Email 📋'}
+              {copied
+                ? (<><Check size={12} strokeWidth={2.5} /> Copied!</>)
+                : (<><Copy size={12} strokeWidth={2.5} /> Copy Email</>)}
             </button>
           </div>
         </div>

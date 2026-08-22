@@ -3,9 +3,14 @@ import { motion, useReducedMotion } from 'framer-motion';
 import FadeIn from './FadeIn';
 import GravityDrop from './GravityDrop';
 
+type Tier = 'Advanced' | 'Proficient' | 'Familiar';
+
+/** How many of the 3 segments a tier fills — honest levels, not fake percentages. */
+const TIER_FILL: Record<Tier, number> = { Advanced: 3, Proficient: 2, Familiar: 1 };
+
 interface SkillData {
   name: string;
-  level: number;
+  tier: Tier;
   emoji: string;
 }
 
@@ -20,27 +25,27 @@ const categories: CategoryData[] = [
     label: 'Frontend Development',
     icon: '🖥️',
     skills: [
-      { name: 'HTML5 & CSS3',      level: 88, emoji: '🌐' },
-      { name: 'JavaScript',        level: 78, emoji: '⚡' },
-      { name: 'Responsive Design', level: 85, emoji: '📱' },
+      { name: 'HTML5 & CSS3',      tier: 'Advanced',   emoji: '🌐' },
+      { name: 'JavaScript',        tier: 'Proficient', emoji: '⚡' },
+      { name: 'Responsive Design', tier: 'Advanced',   emoji: '📱' },
     ],
   },
   {
     label: 'Operations & Support',
     icon: '🎧',
     skills: [
-      { name: 'SaaS Support',      level: 90, emoji: '🎧' },
-      { name: 'Software Testing',  level: 82, emoji: '🧪' },
-      { name: 'Data Analytics',    level: 70, emoji: '📊' },
+      { name: 'SaaS Support',      tier: 'Advanced',   emoji: '🎧' },
+      { name: 'Software Testing',  tier: 'Proficient', emoji: '🧪' },
+      { name: 'Data Analytics',    tier: 'Proficient', emoji: '📊' },
     ],
   },
   {
     label: 'Tools & Other',
     icon: '🛠️',
     skills: [
-      { name: 'Python',            level: 72, emoji: '🐍' },
-      { name: 'Git & GitHub',      level: 82, emoji: '🌿' },
-      { name: 'Database Queries',  level: 68, emoji: '🗄️' },
+      { name: 'Python',            tier: 'Proficient', emoji: '🐍' },
+      { name: 'Git & GitHub',      tier: 'Proficient', emoji: '🌿' },
+      { name: 'Database Queries',  tier: 'Familiar',   emoji: '🗄️' },
     ],
   },
 ];
@@ -105,20 +110,27 @@ const SkillBar: React.FC<{ skill: SkillData; index: number }> = ({ skill, index 
 
         {/* Info */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between mb-1.5">
+          <div className="flex items-center justify-between mb-1.5 gap-3">
             <h3 className="font-black text-sm text-[var(--text-dark)] uppercase tracking-wide" style={{ fontFamily: "'Inter'" }}>
               {skill.name}
             </h3>
-            <span className="font-black text-sm text-[var(--text-dark)] ml-3 flex-shrink-0" style={{ fontFamily: "'Inter'" }}>
-              {skill.level}%
+            <span className="text-[0.6rem] font-black uppercase tracking-widest text-[var(--text-mid)] ml-3 flex-shrink-0" style={{ fontFamily: "'Inter'" }}>
+              {skill.tier}
             </span>
           </div>
-          {/* Progress bar */}
-          <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ background: 'var(--border)' }}>
-            <div
-              className="h-full rounded-full transition-all duration-1000 ease-out"
-              style={{ width: animated ? `${skill.level}%` : '0%', background: 'var(--accent)' }}
-            />
+          {/* 3-segment proficiency indicator */}
+          <div className="flex gap-1" role="img" aria-label={`${skill.tier} proficiency`}>
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className="h-1.5 flex-1 rounded-full origin-left transition-transform duration-500 ease-out"
+                style={{
+                  background: i < TIER_FILL[skill.tier] ? 'var(--accent)' : 'var(--border)',
+                  transform: animated ? 'scaleX(1)' : 'scaleX(0)',
+                  transitionDelay: `${i * 90}ms`,
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -128,6 +140,7 @@ const SkillBar: React.FC<{ skill: SkillData; index: number }> = ({ skill, index 
 
 // Zajno motion physics ball track visual
 const ZajnoBallTrack: React.FC = () => {
+  const shouldReduceMotion = useReducedMotion();
   return (
     <div className="relative w-full max-w-xl mx-auto h-16 mb-8 overflow-hidden flex items-center justify-center pointer-events-none select-none">
       <svg className="w-full h-full" viewBox="0 0 500 60" fill="none">
@@ -157,13 +170,13 @@ const ZajnoBallTrack: React.FC = () => {
           boxShadow: '0 0 16px var(--accent), 0 0 25px rgba(0,240,255,0.6)',
           border: '1.5px solid rgba(255,255,255,0.8)',
         }}
-        animate={{
+        animate={shouldReduceMotion ? undefined : {
           x: [-180, -60, 40, 160, 40, -60, -180],
           y: [-12, 14, -8, 8, -8, 14, -12],
           rotate: [0, 360, 720, 1080, 720, 360, 0],
           scaleY: [1.15, 0.85, 1.1, 0.9, 1.1, 0.85, 1.15],
         }}
-        transition={{
+        transition={shouldReduceMotion ? undefined : {
           duration: 7,
           repeat: Infinity,
           ease: 'easeInOut',
@@ -179,7 +192,6 @@ const ZajnoBallTrack: React.FC = () => {
 export const SkillsSection: React.FC = () => {
   return (
     <section
-      id="skills"
       className="w-full px-4 sm:px-8 md:px-10 py-20 sm:py-28 relative overflow-hidden"
       style={{ background: 'var(--bg-primary)', color: 'var(--text-dark)' }}
     >

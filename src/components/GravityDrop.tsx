@@ -31,7 +31,7 @@ export const GravityDrop: React.FC<GravityDropProps> = ({
   as = 'div',
 }) => {
   const shouldReduceMotion = useReducedMotion();
-  const MotionComponent = motion[as as keyof typeof motion] as any || motion.div;
+  const MotionComponent = (motion[as as keyof typeof motion] || motion.div) as React.ElementType;
 
   if (shouldReduceMotion) {
     return (

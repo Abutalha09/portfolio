@@ -2,23 +2,23 @@ import React from 'react';
 import FadeIn from './FadeIn';
 
 const row1Images = [
-  '/portfolio.png',
-  '/abusha.png',
-  '/almadina.png',
-  '/Calculator1.png',
-  '/Tic tac toe.png',
-  '/rock paper.png',
-  '/pfms.png',
+  '/portfolio.webp',
+  '/abusha.webp',
+  '/almadina.webp',
+  '/Calculator1.webp',
+  '/tic-tac-toe.webp',
+  '/rock-paper.webp',
+  '/pfms.webp',
 ];
 
 const row2Images = [
-  '/Calculator1.png',
-  '/Tic tac toe.png',
-  '/rock paper.png',
-  '/portfolio.png',
-  '/abusha.png',
-  '/almadina.png',
-  '/pfms.png',
+  '/Calculator1.webp',
+  '/tic-tac-toe.webp',
+  '/rock-paper.webp',
+  '/portfolio.webp',
+  '/abusha.webp',
+  '/almadina.webp',
+  '/pfms.webp',
 ];
 
 export const MarqueeSection: React.FC = () => {
