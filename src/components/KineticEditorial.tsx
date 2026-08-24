@@ -213,6 +213,7 @@ interface EditorialRowProps {
   tags?: string[];
   delay?: number;
   highlight?: boolean;
+  href?: string;
 }
 
 export const EditorialRow: React.FC<EditorialRowProps> = ({
@@ -224,6 +225,7 @@ export const EditorialRow: React.FC<EditorialRowProps> = ({
   tags,
   delay = 0,
   highlight = false,
+  href,
 }) => {
   const reduce = useReducedMotion();
   const rowRef = useRef<HTMLDivElement>(null);
@@ -272,12 +274,27 @@ export const EditorialRow: React.FC<EditorialRowProps> = ({
         </div>
 
         <div className="kx-main">
-          <div className="kx-title-wrap">
-            <MaskReveal as="h3" className="kx-title" text={title} delay={delay + 0.05} />
-            <span className="kx-arrow" aria-hidden="true">
-              ↗
-            </span>
-          </div>
+          {href ? (
+            <a
+              className="kx-title-wrap"
+              href={href}
+              target="_blank"
+              rel="noopener"
+              aria-label={`Open ${title}`}
+            >
+              <MaskReveal as="h3" className="kx-title" text={title} delay={delay + 0.05} />
+              <span className="kx-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          ) : (
+            <div className="kx-title-wrap">
+              <MaskReveal as="h3" className="kx-title" text={title} delay={delay + 0.05} />
+              <span className="kx-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </div>
+          )}
 
           <div className="kx-meta">
             <span className="kx-company">{meta}</span>

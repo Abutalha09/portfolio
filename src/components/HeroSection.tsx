@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
+import { useAnimate, stagger } from 'framer-motion';
 import { Sparkles, ShieldCheck, Target, Hammer, Gauge } from 'lucide-react';
 
 /* ─── Reduced-motion preference ─────────────────── */
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ─── Entrance easings (cubic-bézier equivalents of the former GSAP eases) ── */
+const EASE_OUT: [number, number, number, number] = [0.22, 1, 0.36, 1];  // ≈ power3.out
+const EASE_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1];  // ≈ power4.out
 
 /* ─── Cycling role typewriter hook ──────────────── */
 const ROLES = ['Product Support Associate', 'Frontend Developer', 'QA & Software Tester', 'Builder of Web Apps'];
@@ -81,17 +85,18 @@ const skills = [
 const navItems = [
   { label: 'HOME', id: null },
   { label: 'ABOUT', id: 'about' },
+  { label: 'EXPERIENCE', id: 'experience' },
   { label: 'PROJECTS', id: 'projects' },
   { label: 'SKILLS', id: 'skills' },
   { label: 'TERMINAL', id: 'terminal' },
-  { label: 'EXPERIENCE', id: 'experience' },
+  { label: 'EDUCATION', id: 'education' },
   { label: 'CONTACT', id: 'contact' },
 ];
 
 
 /* ─── Props ─────────────────────────────────────── */
 interface HeroSectionProps {
-  /** Called by App after the page loader completes — starts the GSAP entrance */
+  /** Called by App after the page loader completes — starts the entrance animation */
   animate?: boolean;
 }
 
@@ -100,7 +105,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
   const [activeNav, setActiveNav] = useState('HOME');
   const [countersStarted, setCountersStarted] = useState(false);
 
-  /* Refs for GSAP targets */
+  /* Refs for entrance targets */
   const bgTextRef = useRef<HTMLSpanElement>(null);
   const photoRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -110,102 +115,69 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
   const statsRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
+  const [scope, runAnimation] = useAnimate();
 
   const projectCount = useCountUp(6, 1600, countersStarted);
   const expYears = useCountUp(2, 1200, countersStarted);
   const roleText = useTypewriter(countersStarted);
 
-  /* ── GSAP entrance (triggered by animate prop) ── */
+  /* ── Entrance animation (triggered by animate prop) ── */
   useEffect(() => {
     if (!animate) return;
+
+    const bg = bgTextRef.current;
+    const photo = photoRef.current;
+    const heading = headingRef.current;
+    const sub = subLineRef.current;
+    const btns = btnsRef.current;
+    const nav = navBarRef.current;
+    const skills = skillsRef.current;
+    const desc = descRef.current;
+    const statsChildren = statsRef.current
+      ? Array.from(statsRef.current.children)
+      : [];
+
+    if (!bg || !photo || !heading || !sub || !btns || !nav || !skills || !desc) return;
 
     // Reduced motion: reveal everything instantly, no transforms.
     // (Counters/typewriter hooks return their final values on their own.)
     if (prefersReducedMotion()) {
-      gsap.set(
-        [
-          bgTextRef.current, photoRef.current, headingRef.current,
-          subLineRef.current, btnsRef.current, navBarRef.current,
-          skillsRef.current, descRef.current,
-        ],
-        { opacity: 1, x: 0, y: 0, scale: 1, scaleX: 1, skewY: 0 }
+      runAnimation(
+        [bg, photo, heading, sub, btns, nav, skills, desc, ...statsChildren],
+        { opacity: 1, x: 0, y: 0, scale: 1, scaleX: 1, skewY: 0 },
+        { duration: 0 }
       );
-      if (statsRef.current) gsap.set(statsRef.current.children, { opacity: 1, y: 0 });
+      setCountersStarted(true);
       return;
     }
 
-    const tl = gsap.timeline({
-      defaults: { ease: 'power3.out' },
-      onComplete: () => setCountersStarted(true),
+    // Pre-set the from-state for elements that reveal *after* their container
+    // (the nav strip) has already faded in, so they don't flash in first.
+    runAnimation(statsChildren, { opacity: 0, y: 16 }, { duration: 0 });
+    runAnimation([skills, desc], { opacity: 0, x: 20 }, { duration: 0 });
+
+    // Orchestrated entrance — mirrors the former GSAP timeline positions.
+    const controls = runAnimation([
+      [bg,      { opacity: [0, 1], x: [-350, 0], scaleX: [0.92, 1] }, { duration: 1.25, ease: EASE_EXPO, at: 0 }],
+      [photo,   { opacity: [0, 1], scale: [0.9, 1], y: [30, 0] },     { duration: 1.0,  ease: EASE_OUT, at: 0.15 }],
+      [heading, { opacity: [0, 1], y: [55, 0], skewY: [2, 0] },       { duration: 0.85, ease: EASE_OUT, at: 0.35 }],
+      [sub,     { opacity: [0, 1], y: [20, 0] },                      { duration: 0.6,  ease: EASE_OUT, at: 0.5 }],
+      [btns,    { opacity: [0, 1], y: [24, 0] },                      { duration: 0.55, ease: EASE_OUT, at: 0.62 }],
+      [nav,     { opacity: [0, 1], y: [18, 0] },                      { duration: 0.6,  ease: EASE_OUT, at: 0.72 }],
+      [statsChildren,   { opacity: [0, 1], y: [16, 0] }, { duration: 0.5,  ease: EASE_OUT, delay: stagger(0.1), at: 0.78 }],
+      [[skills, desc],  { opacity: [0, 1], x: [20, 0] }, { duration: 0.55, ease: EASE_OUT, delay: stagger(0.1), at: 0.82 }],
+    ]);
+
+    let cancelled = false;
+    controls.then(() => {
+      if (!cancelled) setCountersStarted(true);
     });
 
-    // 1. Giant "TALHA" bg text — slide in from LEFT
-    tl.fromTo(
-      bgTextRef.current,
-      { opacity: 0, x: -350, scaleX: 0.92 },
-      { opacity: 1, x: 0, scaleX: 1, duration: 1.25, ease: 'power4.out' },
-      0
-    );
-
-    // 2. Photo — scale + fade in (slight delay so bg text comes first)
-    tl.fromTo(
-      photoRef.current,
-      { opacity: 0, scale: 0.9, y: 30 },
-      { opacity: 1, scale: 1, y: 0, duration: 1.0 },
-      0.15
-    );
-
-    // 3. Heading — clip/slide up (premium text reveal)
-    tl.fromTo(
-      headingRef.current,
-      { opacity: 0, y: 55, skewY: 2 },
-      { opacity: 1, y: 0, skewY: 0, duration: 0.85 },
-      0.35
-    );
-
-    // 4. Yellow "Applied" highlight word (sub-line)
-    tl.fromTo(
-      subLineRef.current,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6 },
-      0.5
-    );
-
-    // 5. CTA buttons
-    tl.fromTo(
-      btnsRef.current,
-      { opacity: 0, y: 24 },
-      { opacity: 1, y: 0, duration: 0.55 },
-      0.62
-    );
-
-    // 6. Bottom nav bar (whole strip)
-    tl.fromTo(
-      navBarRef.current,
-      { opacity: 0, y: 18 },
-      { opacity: 1, y: 0, duration: 0.6 },
-      0.72
-    );
-
-    // 7. Stats cards
-    tl.fromTo(
-      statsRef.current?.children ?? [],
-      { opacity: 0, y: 16 },
-      { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 },
-      0.78
-    );
-
-    // 8. Skills + description (right side)
-    tl.fromTo(
-      [skillsRef.current, descRef.current],
-      { opacity: 0, x: 20 },
-      { opacity: 1, x: 0, duration: 0.55, stagger: 0.1 },
-      0.82
-    );
-
-    return () => { tl.kill(); };
-  }, [animate]);
+    return () => {
+      cancelled = true;
+      controls.stop();
+    };
+  }, [animate, runAnimation]);
 
 
 
@@ -220,7 +192,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
   return (
     <section
       id="hero"
-      ref={sectionRef}
+      ref={scope}
       className="relative w-full overflow-hidden"
       style={{ minHeight: '100vh', background: 'var(--bg-primary)' }}
     >
@@ -241,7 +213,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
             lineHeight: 0.85,
             whiteSpace: 'nowrap',
             willChange: 'transform, opacity',
-            opacity: 0,           /* hidden until GSAP plays */
+            opacity: 0,           /* hidden until entrance plays */
           }}
         >
           TALHA
@@ -296,7 +268,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
               lineHeight: 0.9,
               textShadow: '0 4px 40px rgba(0,0,0,0.15)',
               marginBottom: '0.25em',
-              opacity: 0,         /* hidden until GSAP */
+              opacity: 0,         /* hidden until entrance plays */
               willChange: 'transform, opacity',
             }}
           >
@@ -473,8 +445,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
         </div>
       </div>
 
-      {/* ── Vertical sidebar (scroll-triggered Framer motion kept for compatibility) */}
-      {/* Sidebar is now handled by the StickyNav component in App.tsx */}
+      {/* ── Vertical sidebar is handled by the StickyNav component in App.tsx ── */}
     </section>
   );
 };

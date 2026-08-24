@@ -17,7 +17,7 @@ const educationTimeline: EducationItem[] = [
     index: '01',
     year: '2023 — 2026',
     title: 'Bachelor of Computer Applications',
-    institution: 'Vision Management College',
+    institution: 'Vision Institute of Technology',
     description: 'BCA focused degree covering relational databases, software design cycles, web development, and algorithms.',
     tags: ['Application Logic', 'Frontend Paradigms', 'Databases'],
     isHighlight: true,

@@ -444,6 +444,141 @@
   transform-origin: right center;
 }
 
+/* ── Projects — editorial image-led blocks (kinetic-editorial) ── */
+.kxp-list { display: flex; flex-direction: column; gap: clamp(3rem, 7vw, 6rem); }
+.kxp-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  align-items: center;
+}
+.kxp-text { display: flex; flex-direction: column; min-width: 0; }
+.kxp-head { display: flex; align-items: flex-start; gap: clamp(0.75rem, 2vw, 1.4rem); }
+.kxp-headings { min-width: 0; }
+.kxp-index {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4.5vw, 3.4rem);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1.4px var(--border-dark);
+  user-select: none;
+  flex-shrink: 0;
+  transition: color 0.3s ease, -webkit-text-stroke-color 0.3s ease, text-shadow 0.3s ease;
+}
+@supports not ((-webkit-text-stroke: 1px black)) {
+  .kxp-index, .kxs-index { color: var(--border-dark); }
+}
+.kxp-title {
+  font-family: 'Inter', 'Kanit', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  font-size: clamp(1.3rem, 3vw, 2.15rem);
+  color: var(--text-dark);
+  margin-top: 0.3rem;
+}
+.kxp-links { display: flex; align-items: center; gap: 1.75rem; margin-top: 1.5rem; }
+.kxp-link {
+  position: relative;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-mid);
+  padding-bottom: 3px;
+  transition: color 0.3s ease;
+}
+.kxp-link--live { color: var(--text-dark); }
+.kxp-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.kxp-media {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  aspect-ratio: 16 / 10;
+}
+.kxp-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  filter: grayscale(0.18);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+/* ── Skills — editorial proficiency ledger (kinetic-editorial) ── */
+.kxs-group { margin-bottom: clamp(2.25rem, 5vw, 3.5rem); }
+.kxs-group-head { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.35rem; }
+.kxs-tick { width: 24px; height: 2px; background: var(--accent); flex-shrink: 0; }
+.kxs-cat-emoji { font-size: 1rem; line-height: 1; }
+.kxs-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(34px, 48px) 1fr auto;
+  column-gap: clamp(0.85rem, 2.5vw, 2rem);
+  align-items: center;
+  padding: clamp(0.95rem, 2.2vw, 1.35rem) clamp(0.2rem, 0.8vw, 0.6rem);
+  border-top: 1px solid var(--border);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.kxs-index {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: clamp(0.9rem, 1.8vw, 1.25rem);
+  color: transparent;
+  -webkit-text-stroke: 1.1px var(--border-dark);
+  line-height: 1;
+  user-select: none;
+  transition: color 0.3s ease, -webkit-text-stroke-color 0.3s ease;
+}
+.kxs-name {
+  font-family: 'Inter', 'Kanit', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  font-size: clamp(0.92rem, 1.9vw, 1.2rem);
+  color: var(--text-dark);
+  min-width: 0;
+}
+.kxs-level { display: flex; align-items: center; gap: clamp(0.6rem, 1.5vw, 1rem); }
+.kxs-tier {
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-mid);
+  min-width: 5.4em;
+  text-align: right;
+}
+.kxs-segs { display: flex; gap: 4px; flex-shrink: 0; }
+.kxs-seg {
+  width: clamp(14px, 2.6vw, 24px);
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  transform-origin: left center;
+}
+.kxs-seg--on { background: var(--accent); }
+.kxs-techtags { gap: 0.6rem 1.4rem; margin-top: 0; }
+
+/* Linked editorial title (Projects games ledger) */
+a.kx-title-wrap { text-decoration: none; color: inherit; }
+
 /* ── Hover interactions (pointer devices only) ──────────── */
 @media (hover: hover) {
   .kx-list:hover .kx-row { filter: opacity(0.45) saturate(0.85); }
@@ -462,6 +597,23 @@
   .kx-cert:hover .kx-cert-year { color: var(--accent-dark); }
 
   .kx-shot:hover .kx-shot-media img { transform: scale(1.04); filter: grayscale(0); }
+
+  /* Projects — image-led blocks */
+  .kxp-item:hover .kxp-index {
+    color: var(--accent);
+    -webkit-text-stroke-color: transparent;
+    text-shadow: 0 0 22px rgba(232, 255, 42, 0.45);
+  }
+  .kxp-media:hover img { transform: scale(1.05); filter: grayscale(0); }
+  .kxp-link:hover { color: var(--text-dark); }
+  .kxp-link:hover::after { transform: scaleX(1); }
+
+  /* Skills — proficiency ledger */
+  .kxs-row:hover { transform: translateX(clamp(4px, 1vw, 10px)); }
+  .kxs-row:hover .kxs-index {
+    color: var(--accent);
+    -webkit-text-stroke-color: transparent;
+  }
 }
 
 /* ── Responsive: stack on small screens ─────────────────── */
@@ -483,14 +635,32 @@
   }
 }
 
+/* Projects — two-column alternating layout on wider screens */
+@media (min-width: 860px) {
+  .kxp-item { grid-template-columns: 1fr 1.05fr; gap: clamp(2rem, 5vw, 4.5rem); }
+  .kxp-item:nth-child(even) .kxp-media { order: -1; }
+}
+
+/* Skills — tighten ledger rows on very small screens */
+@media (max-width: 460px) {
+  .kxs-row { grid-template-columns: 30px 1fr auto; column-gap: 0.7rem; }
+  .kxs-tier { min-width: 0; }
+}
+
 /* ── Reduced motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .kx-row-inner,
   .kx-cert,
   .kx-shot-media img,
-  .kx-arrow { transition: none !important; }
+  .kx-arrow,
+  .kxs-row,
+  .kxp-media img,
+  .kxp-index,
+  .kxs-index { transition: none !important; }
   .kx-row:hover .kx-row-inner,
-  .kx-cert:hover { transform: none !important; }
+  .kx-cert:hover,
+  .kxs-row:hover { transform: none !important; }
+  .kxp-media:hover img { transform: none !important; }
   .kx-now-dot { animation: none !important; }
   .kx-backword { transform: none !important; }
 }

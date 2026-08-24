@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import gsap from 'gsap';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   Home, User, Briefcase, FolderGit2, Zap, Terminal as TerminalIcon,
   GraduationCap, Mail, Copy, Check, Menu, X,
@@ -18,68 +18,39 @@ const SECTIONS: { id: string; label: string; Icon: LucideIcon }[] = [
   { id: 'contact',    label: 'CONTACT',    Icon: Mail },
 ];
 
+/* ─── Show/hide easings + variants ──────────────── */
+const EASE_OUT: [number, number, number, number] = [0.22, 1, 0.36, 1];  // ≈ power3.out
+const EASE_IN: [number, number, number, number] = [0.5, 0, 0.75, 0];    // ≈ power2.in
+
+const desktopNavVariants = {
+  hide: { opacity: 0, x: -35, filter: 'blur(8px)' },
+  show: { opacity: 1, x: 0, filter: 'blur(0px)' },
+};
+const mobileNavVariants = {
+  hide: { opacity: 0, y: -25, filter: 'blur(8px)' },
+  show: { opacity: 1, y: 0, filter: 'blur(0px)' },
+};
+
 export const StickyNav: React.FC = () => {
-  const navRef = useRef<HTMLDivElement>(null);
-  const mobileNavRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState('hero');
-  const [visible, setVisible] = useState(false);
+  const [shown, setShown] = useState(false);           // hero scrolled away → nav should be visible
+  const [interactive, setInteractive] = useState(false); // gates pointer events + mobile drawer
   const [copied, setCopied] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const visibleRef = useRef(false);
 
-  /* ── GSAP show/hide ───────────────────────────── */
-  const show = useCallback(() => {
-    if (visibleRef.current) return;
-    visibleRef.current = true;
-    setVisible(true);
-    if (navRef.current) {
-      gsap.fromTo(
-        navRef.current,
-        { opacity: 0, x: -35, filter: 'blur(8px)' },
-        { opacity: 1, x: 0, filter: 'blur(0px)', duration: 0.55, ease: 'power3.out' }
-      );
-    }
-    if (mobileNavRef.current) {
-      gsap.fromTo(
-        mobileNavRef.current,
-        { opacity: 0, y: -25, filter: 'blur(8px)' },
-        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.4, ease: 'power3.out' }
-      );
-    }
-  }, []);
-
-  const hide = useCallback(() => {
-    if (!visibleRef.current) return;
-    visibleRef.current = false;
-    if (navRef.current) {
-      gsap.to(navRef.current, {
-        opacity: 0,
-        x: -35,
-        filter: 'blur(8px)',
-        duration: 0.35,
-        ease: 'power2.in',
-        onComplete: () => setVisible(false),
-      });
-    }
-    if (mobileNavRef.current) {
-      gsap.to(mobileNavRef.current, {
-        opacity: 0,
-        y: -25,
-        duration: 0.3,
-        ease: 'power2.in',
-      });
-    }
-  }, []);
-
-  /* ── Hero visibility observer → show/hide nav ── */
+  /* ── Hero visibility observer → toggle nav ──────── */
   useEffect(() => {
     const heroEl = document.getElementById('hero');
     if (!heroEl) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) show();
-        else hide();
+        if (!entry.isIntersecting) {
+          setShown(true);
+          setInteractive(true); // enable interaction the moment it starts entering
+        } else {
+          setShown(false); // interactive stays true until the exit animation completes
+        }
       },
       {
         root: null,
@@ -89,7 +60,7 @@ export const StickyNav: React.FC = () => {
     );
     observer.observe(heroEl);
     return () => observer.disconnect();
-  }, [show, hide]);
+  }, []);
 
   /* ── Active section tracking ─────────────────── */
   useEffect(() => {
@@ -152,13 +123,14 @@ export const StickyNav: React.FC = () => {
   return (
     <>
       {/* ── Desktop Left Sticky Sidebar ─────────────── */}
-      <div
-        ref={navRef}
+      <motion.div
+        variants={desktopNavVariants}
+        initial="hide"
+        animate={shown ? 'show' : 'hide'}
+        transition={shown ? { duration: 0.55, ease: EASE_OUT } : { duration: 0.35, ease: EASE_IN }}
+        onAnimationComplete={(def) => { if (def === 'hide') setInteractive(false); }}
         className="fixed left-4 top-5 bottom-5 z-50 hidden lg:flex flex-col gap-2 w-[195px]"
-        style={{
-          opacity: 0,
-          pointerEvents: visible ? 'auto' : 'none',
-        }}
+        style={{ pointerEvents: interactive ? 'auto' : 'none' }}
       >
         {/* Card 1: Brand */}
         <div
@@ -287,15 +259,17 @@ export const StickyNav: React.FC = () => {
         >
           Book a Call
         </button>
-      </div>
+      </motion.div>
 
       {/* ── Mobile Top Sticky Bar (Shown on Mobile/Tablet < 1024px) ── */}
-      <div
-        ref={mobileNavRef}
-        className="fixed top-3 left-3 right-3 z-50 flex lg:hidden items-center justify-between px-4 py-2.5 rounded-2xl shadow-xl transition-all"
+      <motion.div
+        variants={mobileNavVariants}
+        initial="hide"
+        animate={shown ? 'show' : 'hide'}
+        transition={shown ? { duration: 0.4, ease: EASE_OUT } : { duration: 0.3, ease: EASE_IN }}
+        className="fixed top-3 left-3 right-3 z-50 flex lg:hidden items-center justify-between px-4 py-2.5 rounded-2xl shadow-xl transition-colors"
         style={{
-          opacity: 0,
-          pointerEvents: visible ? 'auto' : 'none',
+          pointerEvents: interactive ? 'auto' : 'none',
           background: 'var(--bg-light)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
@@ -332,10 +306,10 @@ export const StickyNav: React.FC = () => {
             <span className="flex items-center justify-center leading-none">{mobileMenuOpen ? <X size={16} strokeWidth={2.5} /> : <Menu size={16} strokeWidth={2.5} />}</span>
           </button>
         </div>
-      </div>
+      </motion.div>
 
       {/* Mobile Drawer Dropdown Overlay */}
-      {mobileMenuOpen && visible && (
+      {mobileMenuOpen && interactive && (
         <div
           className="fixed top-16 left-3 right-3 z-50 p-4 rounded-2xl flex flex-col gap-2 shadow-2xl lg:hidden max-h-[80vh] overflow-y-auto"
           style={{

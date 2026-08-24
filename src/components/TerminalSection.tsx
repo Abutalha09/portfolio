@@ -283,7 +283,7 @@ export const TerminalSection: React.FC = () => {
                   <span className="text-[var(--accent)] text-sm">Bachelor of Computer Applications (BCA)</span>
                   <span>Sept 2023 – May 2026</span>
                 </div>
-                <p className="text-white/70">Vision Management College, Kanpur</p>
+                <p className="text-white/70">Vision Institute of Technology, Kanpur</p>
                 <p className="text-[var(--accent)] font-bold mt-1">CGPA: 7.12 / 10.0</p>
               </div>
 
