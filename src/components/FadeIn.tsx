@@ -25,7 +25,7 @@ export const FadeIn: React.FC<FadeInProps> = ({
   blur = true,
 }) => {
   // Resolve the intrinsic motion element via the proxy (stable reference — no
-  // component creation during render). Mirrors the pattern used in GravityDrop.
+  // component creation during render).
   const MotionComponent = (motion[as as keyof typeof motion] || motion.div) as React.ElementType;
 
   return (

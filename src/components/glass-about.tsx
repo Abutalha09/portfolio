@@ -15,41 +15,50 @@ export const GlassAbout: React.FC = () => {
 
   // Entrance animation state
   const [hasEntered, setHasEntered] = useState(false);
+  const [isForced, setIsForced] = useState(false);
 
-  // Smooth interpolation frame loop
-  const updateFrame = () => {
-    if (!isInViewRef.current || !sectionRef.current) {
-      rafIdRef.current = null;
-      return;
+  // When isForced changes, adjust target radius
+  useEffect(() => {
+    if (isForced) {
+      targetRadiusRef.current = 2500;
+    } else {
+      targetRadiusRef.current = 0;
     }
+  }, [isForced]);
 
-    const prefersReduced =
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const posFactor = prefersReduced ? 1 : 0.14;
-    const radiusFactor = prefersReduced ? 1 : 0.12;
-
-    smoothPosRef.current.x += (rawPosRef.current.x - smoothPosRef.current.x) * posFactor;
-    smoothPosRef.current.y += (rawPosRef.current.y - smoothPosRef.current.y) * posFactor;
-    currentRadiusRef.current += (targetRadiusRef.current - currentRadiusRef.current) * radiusFactor;
-
-    if (Math.abs(currentRadiusRef.current - targetRadiusRef.current) < 0.1 && targetRadiusRef.current === 0) {
-      currentRadiusRef.current = 0;
-    }
-
-    if (sectionRef.current) {
-      sectionRef.current.style.setProperty('--reveal-x', `${smoothPosRef.current.x}px`);
-      sectionRef.current.style.setProperty('--reveal-y', `${smoothPosRef.current.y}px`);
-      sectionRef.current.style.setProperty('--reveal-radius', `${currentRadiusRef.current}px`);
-    }
-
-    rafIdRef.current = requestAnimationFrame(updateFrame);
-  };
-
-  // Intersection Observer
+  // Intersection Observer and frame loop
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
+
+    const updateFrame = () => {
+      if (!isInViewRef.current || !sectionRef.current) {
+        rafIdRef.current = null;
+        return;
+      }
+
+      const prefersReduced =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const posFactor = prefersReduced ? 1 : 0.16;
+      const radiusFactor = prefersReduced ? 1 : 0.14;
+
+      smoothPosRef.current.x += (rawPosRef.current.x - smoothPosRef.current.x) * posFactor;
+      smoothPosRef.current.y += (rawPosRef.current.y - smoothPosRef.current.y) * posFactor;
+      currentRadiusRef.current += (targetRadiusRef.current - currentRadiusRef.current) * radiusFactor;
+
+      if (Math.abs(currentRadiusRef.current - targetRadiusRef.current) < 0.1 && targetRadiusRef.current === 0) {
+        currentRadiusRef.current = 0;
+      }
+
+      if (sectionRef.current) {
+        sectionRef.current.style.setProperty('--reveal-x', `${smoothPosRef.current.x}px`);
+        sectionRef.current.style.setProperty('--reveal-y', `${smoothPosRef.current.y}px`);
+        sectionRef.current.style.setProperty('--reveal-radius', `${currentRadiusRef.current}px`);
+      }
+
+      rafIdRef.current = requestAnimationFrame(updateFrame);
+    };
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -78,6 +87,7 @@ export const GlassAbout: React.FC = () => {
 
   // Pointer Handlers
   const handlePointerEnter = (e: React.PointerEvent<HTMLElement>) => {
+    if (isForced) return;
     if (e.pointerType === 'mouse') {
       const rect = sectionRef.current?.getBoundingClientRect();
       if (rect) {
@@ -91,6 +101,7 @@ export const GlassAbout: React.FC = () => {
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLElement>) => {
+    if (isForced) return;
     const rect = sectionRef.current?.getBoundingClientRect();
     if (!rect) return;
 
@@ -104,6 +115,7 @@ export const GlassAbout: React.FC = () => {
   };
 
   const handlePointerLeave = (e: React.PointerEvent<HTMLElement>) => {
+    if (isForced) return;
     if (e.pointerType === 'mouse') {
       targetRadiusRef.current = 0;
     }
@@ -120,15 +132,21 @@ export const GlassAbout: React.FC = () => {
         rawPosRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
         smoothPosRef.current = { ...rawPosRef.current };
       }
-      targetRadiusRef.current = MOBILE_RADIUS;
+      if (!isForced) targetRadiusRef.current = MOBILE_RADIUS;
     }
   };
 
   const handlePointerUpOrCancel = (e: React.PointerEvent<HTMLElement>) => {
     if (e.pointerType !== 'mouse') {
       isTouchTrackingRef.current = false;
-      targetRadiusRef.current = 0;
+      if (!isForced) targetRadiusRef.current = 0;
     }
+  };
+
+  const handleSectionClick = (e: React.MouseEvent<HTMLElement>) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('button, a, input, textarea')) return;
+    setIsForced((prev) => !prev);
   };
 
   const scrollTo = (id: string) => {
@@ -159,13 +177,14 @@ export const GlassAbout: React.FC = () => {
   return (
     <section
       ref={sectionRef}
+      onClick={handleSectionClick}
       onPointerEnter={handlePointerEnter}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUpOrCancel}
       onPointerCancel={handlePointerUpOrCancel}
-      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden isolation-isolate"
+      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden isolation-isolate cursor-crosshair select-none"
       style={{
         background: 'var(--bg-primary, #CAC5BA)',
         color: '#111111',
@@ -175,16 +194,36 @@ export const GlassAbout: React.FC = () => {
     >
       <style>{`
         .glass-about-base {
-          background-image: url('/images/About_reveal_desktop.webp');
-          background-position: right 2% center;
-          background-size: contain;
-          background-repeat: no-repeat;
-        }
-        .glass-about-reveal {
           background-image: url('/images/About_base_desktop.webp');
           background-position: right 2% center;
           background-size: contain;
           background-repeat: no-repeat;
+        }
+        .glass-about-mask-circle,
+        .glass-about-edge-circle {
+          cx: var(--reveal-x, -999px);
+          cy: var(--reveal-y, -999px);
+          r: var(--reveal-radius, 0px);
+        }
+        .glass-about-reveal {
+          background-image: url('/images/About_reveal_desktop.webp');
+          background-position: right 2% center;
+          background-size: contain;
+          background-repeat: no-repeat;
+          -webkit-mask: url(#glassAmoebaMask);
+          mask: url(#glassAmoebaMask);
+        }
+        .glass-about-reveal.is-forced {
+          -webkit-mask: none !important;
+          mask: none !important;
+        }
+        .glass-about-edge-circle {
+          fill: none;
+          stroke: #ffaa40f0;
+          stroke-width: 2.8px;
+        }
+        .glass-about-edge-glow {
+          filter: drop-shadow(0 0 6px #ff7b00) drop-shadow(0 0 16px rgba(255, 55, 0, 0.65));
         }
         @media (min-width: 1440px) {
           .glass-about-base {
@@ -206,12 +245,12 @@ export const GlassAbout: React.FC = () => {
         }
         @media (max-width: 767px) {
           .glass-about-base {
-            background-image: url('/images/About_reveal_mobile.webp');
+            background-image: url('/images/About_base_mobile.webp');
             background-position: center top 5%;
             background-size: contain;
           }
           .glass-about-reveal {
-            background-image: url('/images/About_base_mobile.webp');
+            background-image: url('/images/About_reveal_mobile.webp');
             background-position: center top 5%;
             background-size: contain;
           }
@@ -238,7 +277,7 @@ export const GlassAbout: React.FC = () => {
         </span>
       </div>
 
-      {/* ── Layer 1: Base Image (Spider-Man shows FIRST, 100% Crystal Clear, No Blur) ── */}
+      {/* ── Layer 1: Base Image (Black Jacket shows FIRST, 100% Crystal Clear, No Blur) ── */}
       <div
         aria-hidden="true"
         className={`absolute inset-0 pointer-events-none glass-about-base transition-all duration-1000 ease-out ${
@@ -247,18 +286,70 @@ export const GlassAbout: React.FC = () => {
         style={{ zIndex: 1 }}
       />
 
-      {/* ── Layer 2: Reveal Image (Black Shirt Portrait revealed on cursor hover, 100% Crisp) ── */}
+      {/* ── Layer 2: Reveal Image (Superman revealed on cursor hover with organic amoeba/flame liquid mask) ── */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none z-10 glass-about-reveal"
-        style={{
-          zIndex: 2,
-          WebkitMaskImage:
-            'radial-gradient(circle var(--reveal-radius, 0px) at var(--reveal-x, -999px) var(--reveal-y, -999px), rgba(255,255,255,1) 0%, rgba(255,255,255,1) 62%, rgba(255,255,255,0.75) 78%, rgba(255,255,255,0.20) 92%, transparent 100%)',
-          maskImage:
-            'radial-gradient(circle var(--reveal-radius, 0px) at var(--reveal-x, -999px) var(--reveal-y, -999px), rgba(255,255,255,1) 0%, rgba(255,255,255,1) 62%, rgba(255,255,255,0.75) 78%, rgba(255,255,255,0.20) 92%, transparent 100%)',
-        }}
+        className={`absolute inset-0 pointer-events-none z-10 glass-about-reveal${isForced ? ' is-forced' : ''}`}
+        style={{ zIndex: 2 }}
       />
+
+      {/* ── Organic Liquid Flame SVG Filter, Mask & Perimeter Glow Ring ── */}
+      <svg
+        className="absolute inset-0 pointer-events-none w-full h-full"
+        style={{ zIndex: 15, overflow: 'visible' }}
+        aria-hidden="true"
+        focusable="false"
+      >
+        <defs>
+          <filter
+            id="glassAmoebaDistort"
+            x="-60%"
+            y="-60%"
+            width="220%"
+            height="220%"
+            colorInterpolationFilters="sRGB"
+          >
+            <feTurbulence
+              type="turbulence"
+              baseFrequency="0.013"
+              numOctaves="2"
+              seed="4"
+              result="noise"
+            >
+              <animate
+                attributeName="baseFrequency"
+                dur="12s"
+                values="0.009;0.018;0.012;0.009"
+                repeatCount="indefinite"
+              />
+            </feTurbulence>
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noise"
+              scale="60"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+          <mask id="glassAmoebaMask">
+            <g filter="url(#glassAmoebaDistort)">
+              <circle className="glass-about-mask-circle" fill="#ffffff" />
+            </g>
+          </mask>
+        </defs>
+        {!isForced && (
+          <g className="glass-about-edge-glow">
+            <circle
+              className="glass-about-edge-circle"
+              filter="url(#glassAmoebaDistort)"
+              style={{
+                opacity: 'calc(clamp(0, (var(--reveal-radius, 0px) - 20px) / 100, 1))',
+                transition: 'opacity 0.25s ease-out',
+              }}
+            />
+          </g>
+        )}
+      </svg>
 
       {/* ── Layer 3: Main Content (Direct Typography, Left-Aligned with zero overlap) ── */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-5 sm:px-8 md:px-10 lg:px-12 pt-12 sm:pt-16 pb-6 flex flex-col justify-between flex-1">

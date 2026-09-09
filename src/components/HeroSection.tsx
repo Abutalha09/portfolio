@@ -103,7 +103,7 @@ interface HeroSectionProps {
 /* ─── Component ─────────────────────────────────── */
 export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => {
   const [activeNav, setActiveNav] = useState('HOME');
-  const [countersStarted, setCountersStarted] = useState(false);
+  const [countersStarted, setCountersStarted] = useState(() => !animate || (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches));
 
   /* Refs for entrance targets */
   const bgTextRef = useRef<HTMLSpanElement>(null);
@@ -147,7 +147,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ animate = false }) => 
         { opacity: 1, x: 0, y: 0, scale: 1, scaleX: 1, skewY: 0 },
         { duration: 0 }
       );
-      setCountersStarted(true);
       return;
     }
 
