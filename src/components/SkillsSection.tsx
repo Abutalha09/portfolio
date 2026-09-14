@@ -95,7 +95,7 @@ const SkillRow: React.FC<{ skill: SkillData; index: number }> = ({ skill, index 
 export const SkillsSection: React.FC = () => {
   return (
     <section
-      className="w-full px-4 sm:px-8 md:px-10 py-20 sm:py-28 relative overflow-hidden"
+      className="w-full px-4 sm:px-8 md:px-10 pt-10 sm:pt-14 pb-20 sm:pb-28 relative overflow-hidden"
       style={{ background: 'var(--bg-primary)', color: 'var(--text-dark)' }}
     >
       <KineticBackWord>Stack</KineticBackWord>
